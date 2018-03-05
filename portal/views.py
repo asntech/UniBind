@@ -94,7 +94,13 @@ def search(request):
 
 	if has_pvalue:
 		folders = queryset.values_list('folder', flat=True).distinct()
-		folders = FactorData.objects.values_list('folder', flat=True).filter(folder__in=folders).exclude(adj_centrimo_pvalue__in=['NS','NA'])
+		folders = FactorData.objects.values_list('folder', flat=True).filter(folder__in=folders).exclude(adj_centrimo_pvalue__in=['NS','NA']).distinct()
+		queryset = queryset.filter(folder__in=folders)
+
+	#filter based on peak caller
+	if peak_caller and peak_caller !='' and peak_caller !='all':
+		folders = queryset.values_list('folder', flat=True).distinct()
+		folders = FactorData.objects.values_list('folder', flat=True).filter(folder__in=folders, peak_caller=peak_caller).distinct()
 		queryset = queryset.filter(folder__in=folders)
 
 	##paginate the queryset
