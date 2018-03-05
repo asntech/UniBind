@@ -1,0 +1,97 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Documentation
+{% endblock %}
+
+{% block content_header %}
+ UniBind documentation
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">Docs</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+            
+        <div class="col-md-8 col-lg-8 col-xs-12">
+
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-book"></i> UniBind Documentation</h3>
+              <p class="pull-right"><em>Last updated: </em></p>
+
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+              <!-- code folding -->
+
+              
+          
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+      <div class="col-md-4 col-lg-4 col-xs-6">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-list"></i> Table of contents</h3>
+
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <div id="TOC">
+              <ul>
+
+              <li><a href="/faq">FAQ</a></li>
+              <li><a href="/contact-us">Contact</a></li>
+              </ul>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        
+        
+  </div>
+
+    {% block javascript %}
+      <script>
+
+              // add bootstrap table styles to pandoc tables
+              $(document).ready(function () {
+                $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+              });
+
+              </script>
+
+              <!-- dynamically load mathjax for compatibility with self-contained -->
+              <script>
+                (function () {
+                  var script = document.createElement("script");
+                  script.type = "text/javascript";
+                  script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+                  document.getElementsByTagName("head")[0].appendChild(script);
+                })();
+              </script>
+
+        <script>
+        $(document).ready(function () {
+          window.buildTabsets("TOC");
+        });
+        </script>
+
+    {% endblock %}
+
+  
+
+{% endblock %}

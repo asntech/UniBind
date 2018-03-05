@@ -1,0 +1,57 @@
+{% extends "rest_framework/api_base.html" %}
+{% load static %}
+{% load rest_framework %}
+
+{% block title %}
+RESTful Live API
+{% endblock %}
+
+{% block content_header %}
+Contact Us
+{% endblock %}
+      
+{% block breadcrumb %}
+  <ol class="breadcrumb">
+
+  <li><a href="/api/"><i class="fa fa-home"></i> Home</a></li>
+  <li><a href="#"> Contact us</a></li>
+  </ol>
+{% endblock %}
+
+
+{% block content %}
+
+ <div class="row">
+
+  <div class="col-md-12 col-lg-12 col-xs-12">
+        <div class="box box-primary">
+           
+        <!-- /.box-header -->
+        <div class="box-body">
+
+        For technical issues about the JASPAR REST API please contact: <br>
+        <ul>
+            
+            <li>
+                <a href="https://asntech.github.io/" target="_blank">Aziz Khan</a>: aziz.khan AT ncmm.uio.no
+            </li>
+            <li>
+                <a href="https://mathelierlab.com/" target="_blank">Anthony Mathelier</a>: anthony.mathelier AT ncmm.uio.no
+            </li>
+        </ul>
+       
+
+        <hr>
+
+        <p>For questions about JASPAR database please contact us <a href="/contact-us" target="_blank">here </a> </p>
+            
+        </div>
+        </div>
+    </div>
+  
+</div>
+
+{% endblock %}
+
+
+

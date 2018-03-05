@@ -1,0 +1,23 @@
+    <div class="box-tools pull-left">
+              <form action="{{ request.get_full_path }}" method="GET" id="page_size_form" class="form-inline">
+                Display 
+                <select name="page_size" id="page_size" class="form-control">
+                  <option value="10" {% if request.GET.page_size == '10' %} selected{% endif %}>10</option>
+                  <option value="25" {% if request.GET.page_size == '25' %} selected{% endif %}>25</option>
+                  <option value="50" {% if request.GET.page_size == '50' %} selected{% endif %}>50</option>
+                  <option value="100" {% if request.GET.page_size == '100' %} selected{% endif %}>100</option>
+                  <option value="250" {% if request.GET.page_size == '250' %} selected{% endif %}>250</option>
+                   <!--
+                  <option value="500" {% if request.GET.page_size == '500' %} selected{% endif %}>500</option>
+                  <option value="1000" {% if request.GET.page_size == '1000' %} selected{% endif %}>1000</option>
+                  -->
+                </select>   profiles
+
+                {% for key, value in request.GET.items %}
+                 {% if key != 'page_size' %}
+                    <input type="hidden" name="{{ key }}" value="{{ value }}">
+                  {% endif %}
+                {% endfor %}
+
+            </form>
+        </div>

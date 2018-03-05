@@ -1,0 +1,184 @@
+Using the PfM: MA0093.2.pfm for folder storage/mathelierarea/processed/marius/ENCODE/results/DNA_shaped_BG/ENCSR000BGI_GM12878_USF1 with the transcription factor USF1
+/usr/lib64/python2.7/site-packages/scipy/sparse/coo.py:181: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  if np.rank(M) != 2:
+/usr/lib64/python2.7/site-packages/scipy/sparse/coo.py:198: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  if np.rank(self.data) != 1 or np.rank(self.row) != 1 or np.rank(self.col) != 1:
+/usr/lib64/python2.7/site-packages/scipy/sparse/compressed.py:132: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  if np.rank(self.data) != 1 or np.rank(self.indices) != 1 or np.rank(self.indptr) != 1:
+[06:20:16] src/c_api/c_api.cc:264: num_row=9029
+/usr/lib64/python2.7/site-packages/scipy/sparse/coo.py:181: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  if np.rank(M) != 2:
+/usr/lib64/python2.7/site-packages/scipy/sparse/coo.py:198: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  if np.rank(self.data) != 1 or np.rank(self.row) != 1 or np.rank(self.col) != 1:
+/usr/lib64/python2.7/site-packages/scipy/sparse/compressed.py:132: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  if np.rank(self.data) != 1 or np.rank(self.indices) != 1 or np.rank(self.indptr) != 1:
+[07:58:06] src/c_api/c_api.cc:264: num_row=9029
+/usr/lib64/python2.7/site-packages/scipy/sparse/coo.py:181: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  if np.rank(M) != 2:
+/usr/lib64/python2.7/site-packages/scipy/sparse/coo.py:198: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  if np.rank(self.data) != 1 or np.rank(self.row) != 1 or np.rank(self.col) != 1:
+/usr/lib64/python2.7/site-packages/scipy/sparse/compressed.py:132: VisibleDeprecationWarning: `rank` is deprecated; use the `ndim` attribute or function instead. To find the rank of a matrix see `numpy.linalg.matrix_rank`.
+  if np.rank(self.data) != 1 or np.rank(self.indices) != 1 or np.rank(self.indptr) != 1:
+[09:41:43] src/c_api/c_api.cc:264: num_row=9029
+Using the PfM: MA0093.2.pfm for folder storage/mathelierarea/processed/marius/ENCODE/results/DNA_shaped_BG/ENCSR000BGI_GM12878_USF1 with the transcription factor USF1
+Traceback (most recent call last):
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 226, in <module>
+    arguments.func(arguments)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 194, in tffm_train_classifier
+    fg_hits = find_tffm_hits(argu.tffm_file, argu.fg_fasta, argu.tffm_kind)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 60, in find_tffm_hits
+    tffm.scan_sequences(seq_file, only_best=True) if hit]
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/TFFM-master/tffm_module.py", line 329, in scan_sequences
+    sequence_list = utils.parse_fasta(seq_file)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/TFFM-master/utils.py", line 42, in parse_fasta
+    assert(os.path.isfile(fasta_file))
+AssertionError
+Traceback (most recent call last):
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 226, in <module>
+    arguments.func(arguments)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 205, in pssm_train_classifier
+    fg_hits = find_pssm_hits(pssm, argu.fg_fasta)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 32, in find_pssm_hits
+    for record in Bio.SeqIO.parse(seq_file, "fasta", generic_dna):
+  File "/usr/lib64/python2.7/site-packages/Bio/SeqIO/__init__.py", line 592, in parse
+    with as_handle(handle, mode) as fp:
+  File "/usr/lib64/python2.7/contextlib.py", line 17, in __enter__
+    return self.gen.next()
+  File "/usr/lib64/python2.7/site-packages/Bio/File.py", line 87, in as_handle
+    with open(handleish, mode, **kwargs) as fp:
+IOError: [Errno 2] No such file or directory: '/storage/mathelierarea/processed/marius/ENCODE/results/DNA_shaped_BG/ENCSR000BGI_GM12878_USF1/BCP_USF1_peaks_50bp.fa'
+Traceback (most recent call last):
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 226, in <module>
+    arguments.func(arguments)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 216, in binary_train_classifier
+    fg_hits = find_pssm_hits(pssm, argu.fg_fasta)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 32, in find_pssm_hits
+    for record in Bio.SeqIO.parse(seq_file, "fasta", generic_dna):
+  File "/usr/lib64/python2.7/site-packages/Bio/SeqIO/__init__.py", line 592, in parse
+    with as_handle(handle, mode) as fp:
+  File "/usr/lib64/python2.7/contextlib.py", line 17, in __enter__
+    return self.gen.next()
+  File "/usr/lib64/python2.7/site-packages/Bio/File.py", line 87, in as_handle
+    with open(handleish, mode, **kwargs) as fp:
+IOError: [Errno 2] No such file or directory: '/storage/mathelierarea/processed/marius/ENCODE/results/DNA_shaped_BG/ENCSR000BGI_GM12878_USF1/BCP_USF1_peaks_50bp.fa'
+Traceback (most recent call last):
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 226, in <module>
+    arguments.func(arguments)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 141, in tffm_apply_classifier
+    hits = find_tffm_hits(argu.tffm_file, argu.in_fasta, argu.tffm_kind)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 60, in find_tffm_hits
+    tffm.scan_sequences(seq_file, only_best=True) if hit]
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/TFFM-master/tffm_module.py", line 329, in scan_sequences
+    sequence_list = utils.parse_fasta(seq_file)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/TFFM-master/utils.py", line 42, in parse_fasta
+    assert(os.path.isfile(fasta_file))
+AssertionError
+Traceback (most recent call last):
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 226, in <module>
+    arguments.func(arguments)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 155, in pssm_apply_classifier
+    hits = find_pssm_hits(pssm, argu.in_fasta)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 32, in find_pssm_hits
+    for record in Bio.SeqIO.parse(seq_file, "fasta", generic_dna):
+  File "/usr/lib64/python2.7/site-packages/Bio/SeqIO/__init__.py", line 592, in parse
+    with as_handle(handle, mode) as fp:
+  File "/usr/lib64/python2.7/contextlib.py", line 17, in __enter__
+    return self.gen.next()
+  File "/usr/lib64/python2.7/site-packages/Bio/File.py", line 87, in as_handle
+    with open(handleish, mode, **kwargs) as fp:
+IOError: [Errno 2] No such file or directory: '/storage/mathelierarea/processed/marius/ENCODE/results/DNA_shaped_BG/ENCSR000BGI_GM12878_USF1/BCP_USF1_peaks_500bp.fa'
+Traceback (most recent call last):
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 226, in <module>
+    arguments.func(arguments)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 169, in binary_apply_classifier
+    hits = find_pssm_hits(pssm, argu.in_fasta)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 32, in find_pssm_hits
+    for record in Bio.SeqIO.parse(seq_file, "fasta", generic_dna):
+  File "/usr/lib64/python2.7/site-packages/Bio/SeqIO/__init__.py", line 592, in parse
+    with as_handle(handle, mode) as fp:
+  File "/usr/lib64/python2.7/contextlib.py", line 17, in __enter__
+    return self.gen.next()
+  File "/usr/lib64/python2.7/site-packages/Bio/File.py", line 87, in as_handle
+    with open(handleish, mode, **kwargs) as fp:
+IOError: [Errno 2] No such file or directory: '/storage/mathelierarea/processed/marius/ENCODE/results/DNA_shaped_BG/ENCSR000BGI_GM12878_USF1/BCP_USF1_peaks_500bp.fa'
+Using the PfM: MA0093.2.pfm for folder storage/mathelierarea/processed/marius/ENCODE/results/DNA_shaped_BG/ENCSR000BGI_GM12878_USF1 with the transcription factor USF1
+Traceback (most recent call last):
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 226, in <module>
+    arguments.func(arguments)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 194, in tffm_train_classifier
+    fg_hits = find_tffm_hits(argu.tffm_file, argu.fg_fasta, argu.tffm_kind)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 60, in find_tffm_hits
+    tffm.scan_sequences(seq_file, only_best=True) if hit]
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/TFFM-master/tffm_module.py", line 329, in scan_sequences
+    sequence_list = utils.parse_fasta(seq_file)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/TFFM-master/utils.py", line 42, in parse_fasta
+    assert(os.path.isfile(fasta_file))
+AssertionError
+Traceback (most recent call last):
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 226, in <module>
+    arguments.func(arguments)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 205, in pssm_train_classifier
+    fg_hits = find_pssm_hits(pssm, argu.fg_fasta)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 32, in find_pssm_hits
+    for record in Bio.SeqIO.parse(seq_file, "fasta", generic_dna):
+  File "/usr/lib64/python2.7/site-packages/Bio/SeqIO/__init__.py", line 592, in parse
+    with as_handle(handle, mode) as fp:
+  File "/usr/lib64/python2.7/contextlib.py", line 17, in __enter__
+    return self.gen.next()
+  File "/usr/lib64/python2.7/site-packages/Bio/File.py", line 87, in as_handle
+    with open(handleish, mode, **kwargs) as fp:
+IOError: [Errno 2] No such file or directory: '/storage/mathelierarea/processed/marius/ENCODE/results/DNA_shaped_BG/ENCSR000BGI_GM12878_USF1/HOMER_USF1_peaks_50bp.fa'
+Traceback (most recent call last):
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 226, in <module>
+    arguments.func(arguments)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 216, in binary_train_classifier
+    fg_hits = find_pssm_hits(pssm, argu.fg_fasta)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 32, in find_pssm_hits
+    for record in Bio.SeqIO.parse(seq_file, "fasta", generic_dna):
+  File "/usr/lib64/python2.7/site-packages/Bio/SeqIO/__init__.py", line 592, in parse
+    with as_handle(handle, mode) as fp:
+  File "/usr/lib64/python2.7/contextlib.py", line 17, in __enter__
+    return self.gen.next()
+  File "/usr/lib64/python2.7/site-packages/Bio/File.py", line 87, in as_handle
+    with open(handleish, mode, **kwargs) as fp:
+IOError: [Errno 2] No such file or directory: '/storage/mathelierarea/processed/marius/ENCODE/results/DNA_shaped_BG/ENCSR000BGI_GM12878_USF1/HOMER_USF1_peaks_50bp.fa'
+Traceback (most recent call last):
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 226, in <module>
+    arguments.func(arguments)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 141, in tffm_apply_classifier
+    hits = find_tffm_hits(argu.tffm_file, argu.in_fasta, argu.tffm_kind)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 60, in find_tffm_hits
+    tffm.scan_sequences(seq_file, only_best=True) if hit]
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/TFFM-master/tffm_module.py", line 329, in scan_sequences
+    sequence_list = utils.parse_fasta(seq_file)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/TFFM-master/utils.py", line 42, in parse_fasta
+    assert(os.path.isfile(fasta_file))
+AssertionError
+Traceback (most recent call last):
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 226, in <module>
+    arguments.func(arguments)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 155, in pssm_apply_classifier
+    hits = find_pssm_hits(pssm, argu.in_fasta)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 32, in find_pssm_hits
+    for record in Bio.SeqIO.parse(seq_file, "fasta", generic_dna):
+  File "/usr/lib64/python2.7/site-packages/Bio/SeqIO/__init__.py", line 592, in parse
+    with as_handle(handle, mode) as fp:
+  File "/usr/lib64/python2.7/contextlib.py", line 17, in __enter__
+    return self.gen.next()
+  File "/usr/lib64/python2.7/site-packages/Bio/File.py", line 87, in as_handle
+    with open(handleish, mode, **kwargs) as fp:
+IOError: [Errno 2] No such file or directory: '/storage/mathelierarea/processed/marius/ENCODE/results/DNA_shaped_BG/ENCSR000BGI_GM12878_USF1/HOMER_USF1_peaks_500bp.fa'
+Traceback (most recent call last):
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 226, in <module>
+    arguments.func(arguments)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 169, in binary_apply_classifier
+    hits = find_pssm_hits(pssm, argu.in_fasta)
+  File "/storage/mathelierarea/processed/marius/ENCODE/src/DNAshapedTFBS-master/DNAshapedTFBS.py", line 32, in find_pssm_hits
+    for record in Bio.SeqIO.parse(seq_file, "fasta", generic_dna):
+  File "/usr/lib64/python2.7/site-packages/Bio/SeqIO/__init__.py", line 592, in parse
+    with as_handle(handle, mode) as fp:
+  File "/usr/lib64/python2.7/contextlib.py", line 17, in __enter__
+    return self.gen.next()
+  File "/usr/lib64/python2.7/site-packages/Bio/File.py", line 87, in as_handle
+    with open(handleish, mode, **kwargs) as fp:
+IOError: [Errno 2] No such file or directory: '/storage/mathelierarea/processed/marius/ENCODE/results/DNA_shaped_BG/ENCSR000BGI_GM12878_USF1/HOMER_USF1_peaks_500bp.fa'

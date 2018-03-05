@@ -1,0 +1,281 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% block title %}
+A uniformly processed database of transcription factor binding sites
+{% endblock %}
+
+{% block content_header %}
+{% endblock %}
+      
+{% block breadcrumb %}
+{% endblock %}
+
+{% block main_header %} {% endblock %}
+
+{% block content %}
+
+  {% block stylesheets %}
+    <style type="text/css">
+  
+
+.jumbotron-billboard .img {
+    margin-bottom: 0px;
+    opacity: 0.2;
+    color: #fff;
+    background: #fff url("{% static 'img/TF.png' %}") center center;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    overflow: hidden;
+
+    position:absolute;
+    top:0;left:0;
+    z-index:1;
+}
+.jumbotron {position:relative;padding:50px;
+  border-radius: 8px;
+  border: 4px;
+  border-color: #fff;
+  border-style: solid;
+}
+.jumbotron .container {z-index:2;
+ position:relative;
+  z-index:2;
+}
+  </style>
+
+  {% endblock %}
+
+
+    <div class="row">
+    
+    {% include "portal/quick_search.html" %}
+
+    </div>
+
+  
+    <div class="row">
+
+      <div class="col-md-6 col-lg-6 col-xs-12">
+        
+        <div class="box box-info">
+            <div class="box-header">
+              <h3 class="box-title"><i class="fa fa-info"></i> What is UniBind?</h3>
+              </div>
+          <div class="box-body" id="jaspar-core">
+
+
+          <b>UniBind</b> is a comprehensive database of transcription factor binding sites predicted through uniform processing of thousands of ChIP-seq datasets by using three different peak callers and five different prediction models.
+
+          <p>
+            <img class="img-responsive img-rounded" src="{% static 'img/chipeat.png' %}" width="100%">
+          </p>
+          </div>
+          </div>
+        </div>
+
+         <div class="col-md-6 col-lg-6 col-xs-12">
+
+          <div class="jumbotron jumbotron-billboard">
+            <div class="img"></div>
+              <div class="container">
+                  <div class="row">
+                      <div class="col-lg-12">
+                          <h2 align="center">A uniformly processed database of transcription factor binding sites</h2>
+                          <h5 align="center"><a href="/about">Read more </a></h5> <br>
+                          <p align="center"><a class="btn btn-md btn-danger" id="jaspar-tour" href="#" role="button"><i class="fa fa-play"></i> Interactive tour</a></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-pencil-square-o"></i> Citing UniBind</h3>
+              <div class="pull-right">
+                   <a href="https://www.ncbi.nlm.nih.gov/pubmed/" target="_blank"><i class="ai ai-pubmed"></i> PubMed </a> 
+                   | <a href="https://doi.org/" target="_blank"><i class="fa fa-external-link"></i> Journal </a>
+                   | <a href="#" target="_blank"> <i class="fa fa-file-pdf-o"></i> PDF </a>
+              </div>
+            </div>
+            <div class="box-body">
+           Gheorghe, M. et al. UniBind: A uniformly processed database of transcription factor binding sites, doi: <a href="#" target="_blank">  </a>
+         
+            </div>
+          </div>
+
+         
+      </div>    
+      </div>
+
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>{{ datasets }}</h3>
+
+              <p>ChIP-seq datasets</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-database"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+              More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>{{ cell_lines|length }}</h3>
+
+              <p>Cell lines & Tissues</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-heart"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+              More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>{{ tf_names|length }}</h3>
+
+              <p>Transcription Factors</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-link"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+              More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>{{ prediction_models|length }}</h3>
+
+              <p>Prediction models</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-link"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+              More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+      <!-- /.row -->
+      <!-- /.row -->
+
+    {% block javascript %}
+     <script type="text/javascript">
+      $('#jaspar-tour').click(function(){
+        var tour = {
+          id: 'jaspar-home',
+          showPrevButton: true,
+          scrollDuration: 700,
+          steps: [
+            {
+              title: 'Welcome to UniBind',
+              content: 'UniBind is a database of uniformly processed transcription factor binding sites.',
+              target: 'unibind-search',
+              placement: 'bottom',
+              xOffset: "center",
+              arrowOffset: "center",
+              onNext: function() {
+                $('#unibind-search').val('JUND');
+              }
+            },
+
+            {
+              title: 'Search UniBind database',
+              content: "You can search UniBind by TF name or dataset identifiers or any other keyword.",
+              target: 'unibind-search',
+              placement: 'bottom',
+              ultipage: true,
+              onNext: function() {
+                window.location = '/search?q=JUND';
+              }
+            },
+
+            {
+              title: 'Search JASPAR database',
+              content: "You can search by TF name or ID, species, taxon, UniProt ID or any other keyword.",
+              target: 'unibind-search',
+              placement: 'bottom',
+              onNext: function() {
+                $('ul#api-pulldown').toggle(200);
+              }
+            },
+
+            {
+              title: 'Profile Inference ',
+              content: 'Input a TF protein sequence to infer JASPAR TF binding profile(s).',
+              target: 'profile-inference',
+              placement: 'bottom',
+              multipage: true,
+              onNext: function() {
+                window.location = '/search?q=Gata3&collection=all&tax_group=all&version=all&type=all';
+              }
+            },
+            
+            {
+              title: 'Programmatic access',
+              content: 'Access JASPAR data programmatically through RESTful API',
+              target: 'jaspar-api',
+              placement: 'top',
+            },
+            {
+              title: 'Profile Inference ',
+              content: 'Input a TF protein sequence to infer JASPAR TF binding profile(s).',
+              target: 'profile-inference',
+              placement: 'bottom',
+              multipage: true,
+              onNext: function() {
+                window.location = '/matrix/MA0037.2';
+              }
+            },
+            {
+              title: 'Profile summary',
+              content: 'Browse JASPAR <strong>CORE</strong> database for different taxon groups',
+              target: 'matrix-detail',
+              placement: 'bottom',
+            },
+            {
+              title: "Matrix summary",
+              content: "Matrix summary page",
+              target: "matrix-detail",
+              placement: "bottom",
+              xOffset: "center",
+              arrowOffset: "center"
+            }
+          ]
+        }
+       if(hopscotch.getState() === "jaspar-home:4") {
+        hopscotch.startTour(tour, 4);
+       }else{
+        hopscotch.startTour(tour, 0);
+       }
+
+      });
+    </script>
+    {% endblock %}
+
+  {% endblock %}

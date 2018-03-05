@@ -1,0 +1,69 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% block title %}
+Download data  
+{% endblock %}
+
+{% block content_header %}
+ Download data
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">Downloads</li>
+{% endblock %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-md-12">
+      <h4><i class="fa fa-download"> </i>Model wise download </h4>
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs" id="detailTabs">
+              {% for model in models %}
+              <li class="{% if forloop.counter == 1 %} active {% endif %}"><a href="#{{ model }}" data-toggle="tab">{{ model }}</a></li>
+              {% endfor %}
+              
+            </ul>
+            <div class="tab-content">
+              {% for model in models %}
+              <div class="{% if forloop.counter == 1 %} active {% endif %} tab-pane" id="{{ model }}">
+                <p>
+                  <h4>Download data for model: <b>{{ model }}</b></h4>
+                  <div class="nav-tabs-custom">
+                  <ul class="nav nav-tabs" id="detailTabs-peakcallers">
+                    {% for peak_caller in peak_callers %}
+                    <li class="{% if forloop.counter == 1 %} active {% endif %}"><a href="#{{ model }}-{{ peak_caller }}" data-toggle="tab">{{ peak_caller }}</a></li>
+                    {% endfor %}
+                    
+                  </ul>
+                  <div class="tab-content">
+                    {% for peak_caller in peak_callers %}
+                    <div class="{% if forloop.counter == 1 %} active {% endif %} tab-pane" id="{{ model }}-{{ peak_caller }}">
+                     
+                    <div class="row">
+                      <div class="col-md-12">
+                    
+                        {{ model }}-{{ peak_caller }}
+                      </div>
+
+                    </div>
+                    </div>                    
+                    {% endfor %}
+                  </div>
+                  <!-- /.tab-content -->
+                  </div>
+                </p>
+              </div>
+              {% endfor %}
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- /.nav-tabs-custom -->
+      </div>   
+        <!-- /.col -->
+      </div>
+
+{% endblock %}

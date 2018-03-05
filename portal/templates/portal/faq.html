@@ -1,0 +1,81 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Frequently Asked Questions
+{% endblock %}
+
+{% block content_header %}
+ FAQ
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">FAQ</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+            
+        <div class="col-md-8">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-question"></i> Frequently Asked Questions</h3>
+
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+              <div id="how-do-i-cite-unibind">
+              <h4 >How do I cite UniBind?</h4>
+              
+              <p>Gheorghe, M. et al. UniBind: A uniformly processed database of transcription factor binding sites, doi
+              </p>
+              </div>
+             
+            
+            
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+        <div class="col-md-4 col-lg-4 col-xs-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-list"></i> List of questions </h3>
+
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <div id="TOC">
+              <ul>
+              <li><a href="#how-do-i-cite-unibind">How do I cite UniBind?</a></li>
+              
+               </ul>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+
+    </div>
+
+    {% block javascript %}
+      
+        <script>
+        $(document).ready(function () {
+          window.buildTabsets("TOC");
+        });
+        </script>
+
+    {% endblock %}
+
+  
+
+{% endblock %}

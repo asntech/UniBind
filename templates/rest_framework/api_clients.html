@@ -1,0 +1,381 @@
+{% extends "rest_framework/api_base.html" %}
+{% load static %}
+{% load rest_framework %}
+
+{% block title %}
+RESTful API Clients
+{% endblock %}
+
+{% block content_header %}
+API Clients
+{% endblock %}
+
+      
+{% block breadcrumb %}
+  <ol class="breadcrumb">
+
+  <li><a href="/api/"><i class="fa fa-home"></i> Home</a></li>
+    <li><a href="#"> Clients</a></li>
+  </ol>
+{% endblock %}
+
+
+{% block content %}
+
+<p>API clients handles the underlying details of how network requests are made and how responses are decoded.
+
+We are using <a href="http://www.coreapi.org/" target="_blank"> Core API </a> which is a format-independent Document Object Model for representing Web APIs. It's recommended to use below Core API clients for more robust and meaningful way to interact with your JASPAR API rather than constructing HTTP GET requests and decoding responses.
+</p> 
+
+<p><b>Currently, Core API  provides three clients: 
+  <ul>
+    <li><a href="#commandline"> Command line client</a></li>
+    <li><a href="#python"> Python client</a></li>
+    <li><a href="#javascript"> JavaScript client</a></li>
+  </ul>
+</b></p>
+
+<p>Further, you can interact with JASPAR API using <b><a href="#sample_calls">Sample calls</a></b> provided below.</p>
+
+ <div class="row">
+    <div class="col-md-12 col-lg-12 col-xs-12">
+    <div class="box box-primary">
+       <div class="box-header with-border">
+        <h3 class="box-title" id="commandline"><i class="fa fa-terminal"> </i> Command line client</h3>
+       </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+<pre># Install the command line client
+$ pip install coreapi-cli
+</pre>
+
+<pre class="pre-scrollable prettyprint linenums">
+# Load the schema document
+$ coreapi get {{ request.get_api_host }}docs
+
+# Interact with the API endpoint
+$ coreapi action matrix list -p page=... -p page_size=... -p search=... -p order=... -p collection=... -p name=... -p tax_group=... -p tax_id=... -p tf_class=... -p tf_family=... -p data_type=... -p version=... -p release=...
+
+# For example
+coreapi action matrix list -p collection=CORE -p tax_group=vertebrates -p version=latest -p name=SMAD3
+</pre>
+    </div>
+    </div>
+</div>
+ 
+</div>
+
+ <div class="row">
+    <div class="col-md-12 col-lg-12 col-xs-12">
+    <div class="box box-primary">
+       <div class="box-header with-border">
+        <h3 class="box-title" id="python"><i class="fa fa-code"> </i> Python client</h3>
+       </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+    <pre class="prettyprint">
+# Install the Python client library
+$ pip install coreapi</pre>
+<pre class="pre-scrollable prettyprint linenums">
+import coreapi
+
+# Initialize a client & load the schema document
+client = coreapi.Client()
+schema = client.get("{{ request.get_api_host }}docs")
+
+# Interact with the API endpoint
+action = ["matrix", "list"]
+params = {
+    "page": ...,
+    "page_size": ...,
+    "search": ...,
+    "order": ...,
+    "collection": ...,
+    "name": ...,
+    "tax_group": ...,
+    "tax_id": ...,
+    "tf_class": ...,
+    "tf_family": ...,
+    "data_type": ...,
+    "version": ...,
+    "release": ...,
+}
+result = client.action(schema, action, params=params)
+
+# For example
+params = {
+    "collection": 'CORE',
+    "name": 'SMAD3',
+    "tax_group": 'vertebrates',
+    "version": 'latest',
+    "release": '2018',
+}
+result = client.action(schema, action, params=params)
+
+</pre>
+    </div>
+    </div>
+</div>
+ 
+</div>
+
+ <div class="row">
+    <div class="col-md-12 col-lg-12 col-xs-12">
+    <div class="box box-primary">
+       <div class="box-header with-border">
+        <h3 class="box-title" id="javascript"><i class="fa fa-code"> </i> JavaScript client</h3>
+       </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+    <pre class="pre-scrollable prettyprint linenums" data-language="javascript"><code><span class="c">&lt;!-- Load the JavaScript client library --&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ request.get_host }}static/rest_framework/js/coreapi-0.1.0.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ request.get_api_host }}docs/schema.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre>
+
+Interact with API.
+<pre class="pre-scrollable prettyprint linenums">
+var coreapi = window.coreapi  // Loaded by `coreapi.js`
+var schema = window.schema    // Loaded by `schema.js`
+
+// Initialize a client
+var client = new coreapi.Client()
+
+// Interact with the API endpoint
+var action = ["matrix", "list"]
+var params = {
+    page: ...,
+    page_size: ...,
+    search: ...,
+    order: ...,
+    collection: ...,
+    name: ...,
+    tax_group: ...,
+    tax_id: ...,
+    tf_class: ...,
+    tf_family: ...,
+    data_type: ...,
+    version: ...,
+    release: ...,
+}
+client.action(schema, action, params).then(function(result) {
+    // Return value is in 'result'
+})
+</pre>
+
+     </div>
+    </div>
+</div>
+
+
+  <div class="col-md-12" id="sample_calls">
+
+      <div class="box box-primary">
+       <div class="box-header with-border">
+        <h3 class="box-title" id="commandline"><i class="fa fa-file"> </i> Sample calls</h3>
+       </div>
+       </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+
+      <p>These are sample calls to API from different languages. You can create the query url by using our <a href="/api/v1/live-api"> <b> Live API</b></a></p> 
+
+          <div class="nav-tabs">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#ajax" data-toggle="tab">Ajax</a></li>
+              <li><a href="#python23" data-toggle="tab">Python</a></li>
+              <li><a href="#perl" data-toggle="tab">Perl</a></li>
+              <li><a href="#ruby" data-toggle="tab">Ruby</a></li>
+              <li><a href="#r" data-toggle="tab">R</a></li>
+              <li><a href="#java" data-toggle="tab">Java</a></li>
+              <li><a href="#curl" data-toggle="tab">curl</a></li>
+              <!--
+              <li><a href="#wget" data-toggle="tab">wget</a></li>
+            -->
+            </ul>
+            <div class="tab-content">
+            
+              <div class="active tab-pane" id="ajax">
+              <pre class="pre-scrollable prettyprint linenums">
+$.ajax({
+    url: '{{ request.get_api_host }}matrix?format=jsonp',
+    dataType: 'jsonp',
+    jsonp: false,
+    jsonpCallback: 'callback',
+    success: function(data){
+        //Use data and do something
+    },
+});
+</pre>
+
+              </div>
+
+              <div class="tab-pane" id="python23">
+              <pre class="pre-scrollable prettyprint linenums">
+import requests, sys
+ 
+query_url = "{{ request.get_api_host }}matrix?format=json"
+ 
+result = requests.get(query_url)
+ 
+if not result.ok:
+  r.raise_for_status()
+  sys.exit()
+ 
+decoded = result.json()
+print(repr(decoded))
+
+              </pre>
+              </div>
+
+              <div class="tab-pane" id="perl">
+              <pre class="pre-scrollable prettyprint linenums">
+use strict;
+use warnings;
+ 
+use HTTP::Tiny;
+ 
+my $http = HTTP::Tiny->new();
+ 
+my $server = '{{ request.get_api_host }}';
+my $ext = 'matrix?format=json';
+my $response = $http->get($server.$ext, {
+  headers => { 'Content-type' => 'application/json' }
+});
+ 
+die "Failed!\n" unless $response->{success};
+ 
+ 
+use JSON;
+use Data::Dumper;
+if(length $response->{content}) {
+  my $hash = decode_json($response->{content});
+  local $Data::Dumper::Terse = 1;
+  local $Data::Dumper::Indent = 1;
+  print Dumper $hash;
+  print "\n";
+}
+              </pre>
+              </div>
+
+              <div class="tab-pane" id="ruby">
+              <pre class="pre-scrollable prettyprint linenums">
+require 'net/http'
+require 'uri'
+ 
+server='{{ request.get_api_host }}'
+path = 'matrix?format=json'
+ 
+url = URI.parse(server)
+http = Net::HTTP.new(url.host, url.port)
+ 
+request = Net::HTTP::Get.new(path, {'Content-Type' => 'application/json'})
+ 
+response = http.request(request)
+ 
+if response.code != "200"
+  puts "Invalid response: #{response.code}"
+  puts response.body
+  exit
+end
+ 
+require 'rubygems'
+require 'json'
+require 'yaml'
+ 
+result = JSON.parse(response.body)
+puts YAML::dump(result)
+              </pre>
+              </div>
+
+              <div class="tab-pane" id="r">
+              <pre class="pre-scrollable prettyprint linenums">
+library(jsonlite)
+url <- "{{ request.get_api_host }}matrix?format=json"
+
+result <- fromJSON(url)
+#create a dataframe
+df <- result$results
+
+              </pre>
+              </div>
+
+              <div class="tab-pane" id="java">
+              <pre class="pre-scrollable prettyprint linenums">
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.HttpURLConnection;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.io.Reader;
+ 
+public class JASPARRest {
+ 
+  public static void main(String[] args) throws Exception {
+    String server = "{{ request.get_api_host }}";
+    String ext = "matrix?format=json";
+    URL url = new URL(server + ext);
+ 
+    URLConnection connection = url.openConnection();
+    HttpURLConnection httpConnection = (HttpURLConnection)connection;
+    
+    httpConnection.setRequestProperty("Content-Type", "application/json");
+    
+    InputStream response = connection.getInputStream();
+    int responseCode = httpConnection.getResponseCode();
+ 
+    if(responseCode != 200) {
+      throw new RuntimeException("Response code was not 200. Detected response was "+responseCode);
+    }
+ 
+    String output;
+    Reader reader = null;
+    try {
+      reader = new BufferedReader(new InputStreamReader(response, "UTF-8"));
+      StringBuilder builder = new StringBuilder();
+      char[] buffer = new char[8192];
+      int read;
+      while ((read = reader.read(buffer, 0, buffer.length)) > 0) {
+        builder.append(buffer, 0, read);
+      }
+      output = builder.toString();
+    } 
+    finally {
+        if (reader != null) try {
+          reader.close(); 
+        } catch (IOException logOrIgnore) {
+          logOrIgnore.printStackTrace();
+        }
+    }
+    System.out.println(output);
+  }
+}
+              </pre>
+
+              </div>
+
+              <div class="tab-pane" id="curl">
+              <pre class="pre-scrollable prettyprint linenums">
+curl '{{ request.get_api_host }}matrix?format=json' -H 'Content-type:application/json'
+              </pre>
+              </div>
+              <!--
+              <div class="tab-pane" id="wget">
+              <pre class="pre-scrollable prettyprint linenums">
+wget -q --header='Content-type:application/json' '{{ request.get_api_host }}matrix?format=json'  -O -
+              </pre>
+              </div>
+            -->
+
+            </div>
+          </div>
+        </div>
+ 
+</div>
+</div>
+
+{% endblock %}
+
+
+

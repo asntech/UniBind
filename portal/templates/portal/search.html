@@ -1,0 +1,268 @@
+{% extends 'portal/base.html' %}
+{% load static %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block content_header %}
+ Search
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">search</li>
+{% endblock %}
+
+{% block content %}
+
+  <div class="row">
+  {% include "portal/quick_search.html" %}
+
+  </div>
+
+  {% if request.GET.q or request.GET.q == '' or request.view == 'versions' %}
+  <div class="row">
+  
+    <div class="col-xs-12 col-md-12 col-xl-12">
+          <div class="box box-success">
+            <div class="box-header">
+              <h3 class="box-title"> <b>{{ pages.paginator.count }} </b> datasets found</h3>
+
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body">
+
+               {% include "portal/pagination_size.html" %}
+
+            {% if pages|length == 0 or pages == None %}
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <i class="icon fa fa-info"></i> Please use the above search box to find dataset(s) of TFs you are interested in.
+            </div> 
+            {% endif %}
+
+              <table id="search_table" class="table table-responsive table-bordered table-hover" width="100%">
+
+                <thead>
+                <tr>
+                  <th id="factor_summary">TF Name</th>
+                  <th>Cell-type/tissue</th>
+                  <th>Biological condition</th>
+                  <th>Data source</th>
+                  <th>Identifier</th>
+                  <th>JASPAR ID</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for factor in pages %}
+                  <tr>                  
+                  <td><b><a href="/factor/{{ factor.folder }}">{{ factor.tf_name }}</a></b></td>
+                  <td>{{ factor.cell_line }}</td>
+                  <td> {{ factor.biological_condition }}</td>
+                  <td>{{ factor.data_source }}</td>
+                  <td><a href="
+
+                    {% if factor.data_source == 'ENCODE' %}
+                    https://www.encodeproject.org/experiments/{{ factor.identifier }}/
+
+                    {% elif factor.data_source == 'AE' %}
+                    https://www.ebi.ac.uk/arrayexpress/search.html?query={{ factor.identifier }}
+
+                    {% elif factor.data_source == 'GEO' %}
+                    https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc={{ factor.identifier }}
+
+                    {% else %}
+
+                    #
+
+                    {% endif %}
+
+                    " target="_blank"> {{ factor.identifier }} </a> </td>
+
+                  <td><a href="http://jaspar.genereg.net/matrix/{{ factor.jaspar_id }}.{{ factor.jaspar_version }}" target="_blank">{{ factor.jaspar_id }}.{{ factor.jaspar_version }}</a> </td>                   
+                </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                
+                </tfoot>
+              </table> 
+
+               <span class="pull-left"> Showing <b>{{ pages|length }} </b> datasets of page  <b>{{ pages.number }}</b> from  <b>{{ pages.paginator.num_pages }}</b> pages
+              </span>
+
+               <ul class="pagination pull-right">
+
+                {% if pages.has_previous %}
+                      <li><a href="?page={{ pages.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"><i class="fa fa-chevron-left" aria-hidden="true"></i> Previous</a></li>
+                  {% else %}
+                      <li class="disabled"><span><i class="fa fa-chevron-left" aria-hidden="true"></i></span></li>
+                  {% endif %}
+
+                  {% if pages.number|add:'-4' > 1 %}
+                      <li><a href="?page={{ pages.number|add:'-5' }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">&hellip;</a></li>
+                  {% endif %}
+
+                  {% for i in pages.paginator.page_range %}
+                      {% if pages.number == i %}
+                          <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                      {% elif i > pages.number|add:'-5' and i < pages.number|add:'5' %}
+                          <li><a href="?page={{ i }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ i }}</a></li>
+                      {% endif %}
+                  {% endfor %}
+
+                  {% if pages.paginator.num_pages > pages.number|add:'4' %}
+                      <li><a href="?page={{ pages.number|add:'5' }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">&hellip;</a></li>
+                  {% endif %}
+
+                  {% if pages.has_next %}
+                      <li><a href="?&page={{ pages.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
+                  {% else %}
+                      <li class="disabled"><span><i class="fa fa-chevron-right" aria-hidden="true"></i></span></li>
+                  {% endif %}
+                </ul>           
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+         <!-- /.box -->
+      </div>
+            
+  </div>
+{% endif %}
+
+  {% block javascript %}
+
+
+<script type="text/javascript">
+      $('#fill').click(
+    function(){
+        $('#scan_sequence').val($(this).val());
+          }
+      );
+
+      $("#page_size").change(function() {
+        $("#page_size_form").submit();
+      });
+  </script>
+   
+   <script>
+  
+        var tour = {
+          id: 'jaspar-home',
+          showPrevButton: true,
+          scrollDuration: 700,
+          steps: [
+            
+            {
+              title: 'Browse JASPAR CORE',
+              content: 'Browse JASPAR <strong>CORE</strong> database for different taxon groups',
+              target: 'jaspar-core',
+              placement: 'top',
+            },
+            {
+              title: 'Search JASPAR database',
+              content: "You can search by TF name or ID, species, taxon, UniProt ID or any other keyword.",
+              target: 'search',
+              placement: 'bottom',
+            },
+            
+            {
+              title: 'Search results table',
+              content: 'A list of profiles found for your search criteria.',
+              target: 'search_table',
+              placement: 'top',
+              xOffset: "center",
+              arrowOffset: "left",
+              onNext: function() {
+
+                //$('#check-all').iCheck('check');
+                //$('#analysis_form').submit();
+                //$( "#cart_submit" ).trigger( "click" );
+                //$('form:#cart_submit').submit();
+                
+              }
+            },
+      
+            {
+              title: "View profile summary and versions",
+              content: "View a detailed profile summary and versions page.",
+              target: "factor_summary",
+              placement: "bottom",
+              multipage: true,
+              onNext: function() {
+                window.location = '/factor/ENCSR000BGK_HepG2_JUND/';
+              }
+            },
+             {
+              title: "TFFM and more details",
+              content: "ChIP-seq centrality, detailed and first order TFFM, and more info.",
+              target: "more-details",
+              placement: "top",
+              xOffset: "center",
+              arrowOffset: "center",
+             
+            },
+            {
+              title: "Thanks!",
+              content: "Thanks for taking the JASPAR tour. You can read more about JASPAR <a href='/about'>here</a>.",
+              target: "demo-end",
+              placement: "bottom",
+              xOffset: "center",
+              arrowOffset: "center"
+            }
+          ]
+        }
+       if(hopscotch.getState() === "jaspar-home:2") {
+        hopscotch.startTour(tour, 2);
+       }else{
+        //hopscotch.startTour(tour, 0);
+       }
+
+    </script>
+
+  {% endblock %}
+
+  {% block datatable %}
+    <script>
+      $(function () {
+        $('#search_table').DataTable({
+          "paging": false,
+          "lengthChange": false,
+          "searching": true,
+         // "ordering": true,
+          "info": false,
+          "autoWidth": true,
+          "bProcessing": true,
+          "bScrollInfinite": true,
+          "fixedHeader": false,
+          "bLengthChange": false,
+
+          //'select': {
+           //     style:    'multi+shift',
+               // selector: ':first-child'
+           // },
+           
+          //"lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+          "searchHighlight": true,
+          "order": [[ 0, "asc" ]],
+          "responsive": true,               
+          //"sScrollY": "100%",
+         
+          "oLanguage": {
+                         "sSearch": "Filter:",
+                         "sLengthMenu": "Display _MENU_ datasets",
+                       },
+          'dom': 'lfrtipB',
+            'buttons': [
+            'copy', 'csv'
+               ],
+          });
+        });
+      </script>
+    {% endblock %}
+  
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "rest_framework/api_base.html" %}
+{% load static %}
+{% load rest_framework %}
+
+{% block title %}
+JASPAR RESTful API
+{% endblock %}
+
+{% block content_header %}
+ 
+{% endblock %}
+      
+{% block breadcrumb %}
+
+{% endblock %}
+
+
+{% block content %}
+
+ <div class="row">
+    <div class="col-md-12">
+
+    <!-- Server down notification -->
+    <!--
+      <div class="alert alert-danger alert-dismissible">
+         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+           <b>Note:</b> Our server will be down for maintenance from Thursday (13/07/2017) 14:00 (GMT+2) to Friday (14/07/2017) 12:00 (GMT+2).
+     </div>
+
+     -->
+
+ 	  <div class="jumbotron">
+ 	    <h2 class="display-3" align="center">Welcome to </h2>
+        <h1 class="display-3" align="center">{<font style="color:#dd4b39"><b>JASPAR</b></font> RESTful API}</h1>
+        <p class="lead" align="center">This API provides easy-to-use REST web interface to query/retrieve matrix profile data from the latest version of JASPAR database. The API comes with a human browsable interface and also programmatic interface, which return the results in eight different formats, including <code>json</code>, <code>jsonp</code>, <code>jaspar</code>, <code>meme</code>, <code>transfac</code>, <code>pfm</code>, <code>yaml</code> and <code>bed</code>.</p>
+        <p align="center"><a class="btn btn-lg btn-success" href="/api/v1/matrix" role="button">Try it Now</a> 
+        <a class="btn btn-lg btn-info" href="/api/v1/live-api/" role="button">Live API</a>
+        </p>
+     <!--
+        <div class="alert alert-danger alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <i class="icon fa fa-alert"></i> This is a beta version of JASPAR REST API. Please <a href="/contact-us"> contact us </a> if you'd like to integrate our API in your pipeline/resource.
+        </div>
+      -->
+      </div>
+
+     <div class="panel panel-info">
+     <div class=panel-heading> <h3 class=panel-title> <i class="icon fa fa-globe"></i> Read more about JASPAR and JASPAR RESTful API</h3> </div>
+     <div class=panel-body>
+     <ul>
+     <li>Khan, A. and Mathelier, A. JASPAR RESTful API: accessing JASPAR data from any programming language. Bioinformatics, 2017, doi: <a href="https://doi.org/10.1093/bioinformatics/btx804" target="_blank"> 10.1093/bioinformatics/btx804</a>
+     </li>
+
+     <li>Khan, A. et al. JASPAR 2018: update of the open-access database of transcription factor binding profiles and its web framework. Nucleic Acids Res. 2018; 46:D260–D266, doi: <a href="https://doi.org/10.1093/nar/gkx1126" target="_blank"> 10.1093/nar/gkx1126 </a> 
+     </li>
+
+     </ul>
+</div>
+     </div>
+
+
+    </div>
+
+</div>
+{% endblock %}
+
+
+

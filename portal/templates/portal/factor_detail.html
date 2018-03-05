@@ -1,0 +1,463 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    {{ factor.tf_name }} - {{ factor.cell_line }} -  detail
+{% endblock %}
+
+{% block content_header %}
+Detailed information of <b>{{ factor.tf_name }} </b>
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">TF > {{ factor.tf_name }}</li>
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="row">
+        <div class="col-md-8">
+          <div class="box box-primary">
+            <div class="box-header">
+              <h3 class="box-title">TF summary</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover" id="matrix-detail">
+              <tr id="profile-detail">
+                <td><b>TF Name:</b>  </td>
+                <td>{{ factor.tf_name }}</td>
+              
+                <td><b>Cell-type/Tissue: </b> </td>
+                <td>{{ factor.cell_line }}</td>
+              </tr>
+
+              <tr>
+                <td><b>Biological condition:</b>  </td>
+                <td>{{ factor.biological_condition }}</td>
+              
+                <td><b>JASPAR ID:</b>  </td>
+                <td>{{ factor.jaspar_id }}.{{ factor.jaspar_version }}</td>
+              </tr>
+
+              <tr>
+                <td><b>Data source:</b>  </td>
+                <td>{{ factor.data_source }}</td>
+              
+                <td><b>Identifier:</b>  </td>
+                <td>{{ factor.identifier }}</td>
+              </tr>
+              
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+    
+
+        <div class="col-md-4">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">External links</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+               <a href="http://jaspar.genereg.net/matrix/{{ factor.jaspar_id }}.{{ factor.jaspar_version }}" target="_blank">
+                 <img src="{% static 'img/jaspar_logo.png' %}" height="30px"> </a> &nbsp;&nbsp;&nbsp;&nbsp;
+
+              <a href="http://tagc.univ-mrs.fr/remap/factor.php?TF={{ factor.tf_name }}&page=overview" target="_blank">
+                 <img src="{% static 'img/remap_v2_logo.png' %}" height="30px"> </a> &nbsp;&nbsp;&nbsp;&nbsp;
+                 <br><br>
+     
+              <a href="http://www.genecards.org/cgi-bin/carddisp.pl?gene={{ factor.tf_name }}" target="_blank">
+              <img src="{% static 'img/genecards_logo.png' %}" height="30px"> 
+              </a>
+                          
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+      
+    </div>
+
+ {% if factor_details %}
+  <div class="row">
+    <div class="col-xs-12 col-md-12 col-xl-12">
+          <div class="box box-success">
+            <div class="box-header">
+              <h3 class="box-title">  Statistical details</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="search_table" class="table table-responsive table-bordered table-hover" width="100%">
+                <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Peak caller</th>
+                  <th>Model detail</th>
+                  <th>Distance threshold</th>
+                  <th>Score threshold</th>
+                  <th>Adj p-value</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for factor_detail in factor_details %}
+                  <tr>                  
+                  <td>{{ factor_detail.prediction_model }}</td>
+                  <td>{{ factor_detail.peak_caller }}</td>
+                  <td>{{ factor_detail.model_detail }}</td>
+                  <td>{{ factor_detail.distance_threshold }}</td>
+                  <td>{{ factor_detail.score_threshold }}</td>
+                  <td>{{ factor_detail.adj_centrimo_pvalue }}</td>
+                  
+                </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                </tfoot>
+              </table> 
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+         <!-- /.box -->
+      </div>
+            
+  </div>
+{% endif %}
+
+    <div class="row">
+
+    <div class="col-md-12">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs" id="detailTabs">
+              {% for model in models %}
+              <li class="{% if forloop.counter == 1 %} active {% endif %}"><a href="#{{ model }}" data-toggle="tab">{{ model }}</a></li>
+              {% endfor %}
+              
+            </ul>
+            <div class="tab-content">
+              {% for model in models %}
+              <div class="{% if forloop.counter == 1 %} active {% endif %} tab-pane" id="{{ model }}">
+                <p>
+                  <h4>Peak caller(s) for model: <b>{{ model }}</b></h4>
+                  <div class="nav-tabs-custom">
+                  <ul class="nav nav-tabs" id="detailTabs-peakcallers">
+                    {% for peak_caller in peak_callers %}
+                    <li class="{% if forloop.counter == 1 %} active {% endif %}"><a href="#{{ model }}-{{ peak_caller }}" data-toggle="tab">{{ peak_caller }}</a></li>
+                    {% endfor %}
+                    
+                  </ul>
+                  <div class="tab-content">
+                    {% for peak_caller in peak_callers %}
+                    <div class="{% if forloop.counter == 1 %} active {% endif %} tab-pane" id="{{ model }}-{{ peak_caller }}">
+                     
+                    <div class="row">
+                     <div class="col-md-4">
+                    <div class="box box-solid">
+                      <div class="box-header with-border">
+                        <i class="fa fa-download"></i>
+                        <h3 class="box-title">Data download</h3>
+                      </div>
+                      <!-- /.box-header -->
+                      <div class="box-body">
+                        <div class="box-body table-responsive no-padding">
+                        
+                        <p>
+                        <a href="#" target="_blank">
+                         <button type="button" class="btn btn-primary"><i class="fa fa-file-code-o"> </i> Download XML</button> </a>
+                        <a href="#" target="_blank">
+                          <button type="button" class="btn btn-primary"><i class="fa fa-file-o"> </i> Download PDF </button></a>
+                        </p>
+                        </div>
+                      </div>
+                      <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-md-8">
+                    <div class="box box-solid">
+                      <div class="box-header with-border">
+                        <i class="fa fa-image"></i>
+                        <h3 class="box-title">Summary plots</h3>
+                        <div class="box-tools pull-right">
+                        <a href="{% static "" %}data/{{ model|lower }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_peaks_MA0093.2.pfm.{{ model|lower }}.pwm.score.ext.png" target="_blank">
+                          <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> Download</button>
+                        </a>
+                        </div>
+                      </div>
+                      <!-- /.box-header -->
+                      <div class="box-body">                      
+                      <img class="img-responsive" src="{% static "" %}data/{{ model|lower }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_peaks_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.pfm.{{ model|lower }}.pwm.score.ext.png">
+                      <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                  </div>
+                  <!-- ./col -->
+                </div>
+                    </div>
+                    </div>                    
+                    {% endfor %}
+                  </div>
+                  <!-- /.tab-content -->
+                  </div>
+                </p>
+              </div>
+              {% endfor %}
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- /.nav-tabs-custom -->
+      </div>   
+        <!-- /.col -->
+      </div>
+
+  {% if factors %}
+  <div class="row">
+    <div class="col-xs-12 col-md-12 col-xl-12">
+          <div class="box box-success">
+            <div class="box-header">
+              <h3 class="box-title"> <b>{{ factors|length }} </b> datasets found for the same TF (<b>{{ factor.tf_name }}</b>) in other cell-types/tissues</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="search_table2" class="table table-responsive table-bordered table-hover" width="100%">
+                <thead>
+                <tr>
+                  <th>TF Name</th>
+                  <th>Cell line</th>
+                  <th>Biological condition</th>
+                  <th>Data source</th>
+                  <th>Identifier</th>
+                  <th>JASPAR ID</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for factor in factors %}
+                  <tr>                  
+                  <td><b><a href="/factor/{{ factor.folder }}">{{ factor.tf_name }}</a></b></td>
+                  <td>{{ factor.cell_line }}</td>
+                  <td> {{ factor.biological_condition }}</td>
+                  <td>{{ factor.data_source }}</td>
+                  <td><a href="
+                    {% if factor.data_source == 'ENCODE' %}
+                    https://www.encodeproject.org/experiments/{{ factor.identifier }}/
+                    {% elif factor.data_source == 'AE' %}
+                    https://www.ebi.ac.uk/arrayexpress/search.html?query={{ factor.identifier }}
+                    {% elif factor.data_source == 'GEO' %}
+                    https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc={{ factor.identifier }}
+                    {% else %}
+                    #
+                    {% endif %}
+                    " target="_blank"> {{ factor.identifier }} </a> </td>
+                  <td><a href="http://jaspar.genereg.net/matrix/{{ factor.jaspar_id }}.{{ factor.jaspar_version }}" target="_blank">{{ factor.jaspar_id }}.{{ factor.jaspar_version }}</a> </td>                   
+                </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                </tfoot>
+              </table> 
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+         <!-- /.box -->
+      </div>
+            
+  </div>
+{% endif %}
+
+    {% block javascript %}
+
+      <script>
+  
+        var tour = {
+          id: 'jaspar-home',
+          showPrevButton: true,
+          scrollDuration: 700,
+          steps: [
+            {
+              title: 'Search JASPAR database',
+              content: "You can search by TF name or ID, species, taxon, UniProt ID or any other keyword.",
+              target: 'search',
+              placement: 'bottom',
+            },
+            {
+              title: 'Browse JASPAR CORE',
+              content: 'Browse JASPAR <strong>CORE</strong> database for different taxon groups',
+              target: 'jaspar-core',
+              placement: 'top',
+            },
+              {
+              title: 'Browse Collections',
+              content: 'Browse the JASPAR collections',
+              target: 'jaspar-browse',
+              placement: 'bottom',
+            },
+            {
+
+            },
+            {
+
+            },
+            {
+              title: 'Profile Inference ',
+              content: 'Input a TF protein sequence for which to look for a JASPAR TF binding profile.',
+              target: 'profile-inference',
+              placement: 'bottom',
+              multipage: true,
+              onNext: function() {
+                window.location = '/matrix/MA0037.2';
+              }
+            },
+            {
+              title: 'Profile summary',
+              content: 'A detail summary box of individual profile',
+              target: 'profile-detail',
+              placement: 'right',
+              //xOffset: "center",
+              arrowOffset: "left",
+            },
+             {
+              title: 'Frequency Matrix',
+              content: 'Position frequency matrix (PFM) of the profile with download and reverse complement options.',
+              target: 'frequency-matrix',
+              placement: 'left',
+              arrowOffset: "right",
+            },
+            {
+              title: "Profile versions",
+              content: "Version(s) information of matrix profile (MA0037).",
+              target: "version_table",
+              placement: "bottom",
+              onNext: function() {
+
+                $('#detailTabs a[href="#tfmm_first_order"]').tab('show') 
+
+              }
+             
+            },
+             {
+              title: "TFFM and more details",
+              content: "ChIP-seq centrality, detailed and first order TFFM, and more info.",
+              target: "more-details",
+              placement: "top",
+              xOffset: "center",
+              arrowOffset: "center",
+             
+            },
+            {
+              title: "Thanks!",
+              content: "Thanks for taking the JASPAR tour. You can read more about JASPAR <a href='/about'>here</a>.",
+              target: "demo-end",
+              placement: "bottom",
+              xOffset: "center",
+              arrowOffset: "center"
+            }
+          ]
+        }
+       if(hopscotch.getState() === "jaspar-home:6") {
+        hopscotch.startTour(tour, 6);
+       }else{
+        //hopscotch.startTour(tour, 0);
+       }
+
+    </script>
+
+    {% endblock %}
+
+
+     {% block datatable %}
+    <script>
+      $(function () {
+        $('#search_table').DataTable({
+          "paging": true,
+          "lengthChange": true,
+          "searching": true,
+         // "ordering": true,
+          "info": false,
+          "autoWidth": true,
+          "bProcessing": true,
+          "bScrollInfinite": true,
+          "fixedHeader": false,
+          "bLengthChange": true,
+
+          //'select': {
+           //     style:    'multi+shift',
+               // selector: ':first-child'
+           // },
+           
+          //"lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+          "searchHighlight": true,
+          "order": [[ 1, "asc" ]],
+          "responsive": true,               
+          //"sScrollY": "100%",
+         
+          "oLanguage": {
+                         "sSearch": "Filter:",
+                         "sLengthMenu": "Display _MENU_ datasets",
+                       },
+          'dom': 'lfrtipB',
+            'buttons': [
+            'copy', 'csv'
+               ],
+          });
+        });
+      </script>
+
+      <script>
+      $(function () {
+        $('#search_table2').DataTable({
+          "paging": true,
+          "lengthChange": true,
+          "searching": true,
+         // "ordering": true,
+          "info": false,
+          "autoWidth": true,
+          "bProcessing": true,
+          "bScrollInfinite": true,
+          "fixedHeader": false,
+          "bLengthChange": true,
+
+          //'select': {
+           //     style:    'multi+shift',
+               // selector: ':first-child'
+           // },
+           
+          //"lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+          "searchHighlight": true,
+          "order": [[ 1, "asc" ]],
+          "responsive": true,               
+          //"sScrollY": "100%",
+         
+          "oLanguage": {
+                         "sSearch": "Filter:",
+                         "sLengthMenu": "Display _MENU_ datasets",
+                       },
+          'dom': 'lfrtipB',
+            'buttons': [
+            'copy', 'csv'
+               ],
+          });
+        });
+      </script>
+    {% endblock %}
+
+{% endblock %}

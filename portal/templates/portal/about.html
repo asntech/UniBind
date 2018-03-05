@@ -1,0 +1,252 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    About
+{% endblock %}
+
+{% block content_header %}
+ About UniBind
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">About</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+            
+        <div class="col-md-8 col-lg-8 col-xs-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">What is UniBind?</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                      <b>UniBind</b> is a comprehensive database of transcription factor binding sites predicted through uniform processing of thousands of ChIP-seq datasets by using three different peak callers (MACS, BCP and HOMER) and five different prediction models (PWM, DiMO, TFFM, DNAShape and Energy).
+
+                      <p>
+            <img class="img-responsive img-rounded" src="{% static 'img/chipeat.png' %}" width="100%">
+          </p>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+       <div class="col-md-4 col-lg-4 col-xs-12">
+
+        <div class="box box-danger">
+            <div class="box-header with-border">
+              <h3 class="box-title">Statistics</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="chart-responsive">
+                    <canvas id="JASPARstats" height="150"></canvas>
+                  </div>
+                  <!-- ./chart-responsive -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-4">
+                  <ul class="chart-legend clearfix">
+                    <li><i class="fa fa-circle-o text-red"></i> Vertebrates </li>
+                    <li><i class="fa fa-circle-o text-green"></i> Plants</li>
+                    <li><i class="fa fa-circle-o text-yellow"></i> Insects</li>
+                    <li><i class="fa fa-circle-o text-aqua"></i> Nematodes</li>
+                    <li><i class="fa fa-circle-o text-light-blue"></i> Fungi</li>
+                    <li><i class="fa fa-circle-o text-gray"></i> Urochordates</li>
+                  </ul>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+          </div>
+          </div>
+      
+
+    </div>
+
+  {% block javascript %}
+  <script src="{% static 'plugins/chartjs/Chart.min.js' %}"></script>
+
+  <script type="text/javascript">
+       $(function () {
+
+      'use strict';
+
+
+      //-------------
+      //- PIE CHART -
+      //-------------
+      // Get context with jQuery - using jQuery's .get() method.
+      var pieChartCanvas = $("#JASPARstats").get(0).getContext("2d");
+      var pieChart = new Chart(pieChartCanvas);
+      
+      var PieData = [
+        {
+          value: {{ vertibrates }},
+          color: "#f56954",
+          highlight: "#f56954",
+          label: "Vertebrates"
+        },
+        {
+          value: {{ plants }},
+          color: "#00a65a",
+          highlight: "#00a65a",
+          label: "Plants"
+        },
+        {
+          value: {{ insects }},
+          color: "#f39c12",
+          highlight: "#f39c12",
+          label: "Insects"
+        },
+        {
+          value: {{ nematodes }},
+          color: "#00c0ef",
+          highlight: "#00c0ef",
+          label: "Nematodes"
+        },
+        {
+          value: {{ fungi }},
+          color: "#3c8dbc",
+          highlight: "#3c8dbc",
+          label: "Fungi"
+        },
+        {
+          value: {{ urochordates }},
+          color: "#d2d6de",
+          highlight: "#d2d6de",
+          label: "Urochordates"
+        }
+      ];
+    
+    var pieOptions = {
+    //Boolean - Whether we should show a stroke on each segment
+    segmentShowStroke: true,
+    //String - The colour of each segment stroke
+    segmentStrokeColor: "#fff",
+    //Number - The width of each segment stroke
+    segmentStrokeWidth: 1,
+    //Number - The percentage of the chart that we cut out of the middle
+    percentageInnerCutout: 50, // This is 0 for Pie charts
+    //Number - Amount of animation steps
+    animationSteps: 100,
+    //String - Animation easing effect
+    animationEasing: "easeOutBounce",
+    //Boolean - Whether we animate the rotation of the Doughnut
+    animateRotate: true,
+    //Boolean - Whether we animate scaling the Doughnut from the centre
+    animateScale: false,
+    //Boolean - whether to make the chart responsive to window resizing
+    responsive: true,
+    // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+    maintainAspectRatio: false,
+    //String - A legend template
+    legendTemplate: "",
+    //String - A tooltip template
+    tooltipTemplate: "<%=value %> <%=label%> profiles"
+  };
+      //Create pie or douhnut chart
+      // You can switch between pie and douhnut using the method below.
+      pieChart.Doughnut(PieData, pieOptions);
+      //-----------------
+      //- END PIE CHART -
+      //-----------------
+
+
+    });
+  
+  </script>
+
+<script type="text/javascript">
+  
+  $(function () {
+
+  
+    var lineChartData = {
+      labels: ["2004", "2006", "2008", "2010", "2014", "2016", "2018"],
+      datasets: [
+        {
+          label: "non-redundant",
+          fillColor: "rgba(60,141,188,0.9)",
+          strokeColor: "rgba(60,141,188,0.8)",
+          pointColor: "#3b8bba",
+          pointStrokeColor: "rgba(60,141,188,1)",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(60,141,188,1)",
+          data: [111, 123, 137, 457, 593, 1082, 1404]
+
+        }
+      ]
+    };
+
+    var lineChartOptions = {
+      //Boolean - If we should show the scale at all
+      showScale: true,
+      //Boolean - Whether grid lines are shown across the chart
+      scaleShowGridLines: false,
+      //String - Colour of the grid lines
+      scaleGridLineColor: "rgba(0,0,0,.05)",
+      //Number - Width of the grid lines
+      scaleGridLineWidth: 1,
+      //Boolean - Whether to show horizontal lines (except X axis)
+      scaleShowHorizontalLines: true,
+      //Boolean - Whether to show vertical lines (except Y axis)
+      scaleShowVerticalLines: true,
+      //Boolean - Whether the line is curved between points
+      bezierCurve: true,
+      //Number - Tension of the bezier curve between points
+      bezierCurveTension: 0.3,
+      //Boolean - Whether to show a dot for each point
+      pointDot: false,
+      //Number - Radius of each point dot in pixels
+      pointDotRadius: 4,
+      //Number - Pixel width of point dot stroke
+      pointDotStrokeWidth: 1,
+      //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+      pointHitDetectionRadius: 20,
+      //Boolean - Whether to show a stroke for datasets
+      datasetStroke: true,
+      //Number - Pixel width of dataset stroke
+      datasetStrokeWidth: 2,
+      //Boolean - Whether to fill the dataset with a color
+      datasetFill: true,
+      //String - A legend template
+      legendTemplate: "",
+       //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+      maintainAspectRatio: true,
+      //Boolean - whether to make the chart responsive to window resizing
+      responsive: true
+    };
+
+    var lineChartCanvas = $("#lineChart").get(0).getContext("2d");
+    var lineChart = new Chart(lineChartCanvas);
+    lineChartOptions.datasetFill = false;
+    lineChart.Line(lineChartData, lineChartOptions);
+  });
+  </script>
+
+
+  {% endblock %}
+
+{% endblock %}

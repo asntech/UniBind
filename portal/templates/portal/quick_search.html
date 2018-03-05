@@ -1,0 +1,130 @@
+{% load bootstrap %}
+
+<div class="col-md-12 col-lg-12 col-xs-12">
+<div class="box box-info">
+					 
+<div class="box-body">
+	<form id="quick_search" method="get" action="/search">
+		<div class="input-group input-group-lg">
+			<input type="text" id="unibind-search" value="{{ request.GET.q }}" class="form-control" autocomplete="off" name="q" placeholder="Search UniBind database..." data-toggle="tooltip" data-placement="bottom" title="You can search by TF name, JASPAR ID, cell-line, or any other keyword."/> 
+			<span class="input-group-btn">
+			<button class="btn btn-info btn-flat" type="submit">Search <i class="fa fa-search"></i></button>
+			</span>
+			</div> 
+			<div class="form-group">                                     
+			<b>Examples:</b>
+			<a href="/search?q=JUND">JUND</a>,
+			<a href="/search?q=K562"> K562</a>,
+			<a href="/search?q=ENCODE"> ENCODE</a>,
+			<a href="/search?q=ENCSR000BGI"> ENCSR000BGI</a>,
+			<a href="/search?q=MA0492.1"> MA0492.1</a>
+			<a role="button" class="pull-right" data-toggle="collapse" href="#advanced-search" aria-expanded="false" aria-controls="advanced-search"><strong>Advanced Options</strong></a>
+			</div>
+
+			<div class="collapse {% if request.GET.advanced == 'true' %} in {% endif %}" id="advanced-search">
+			<hr>
+
+			<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-5">
+			<div class="form-group">
+				<label class="col-sm-3 control-label" for="tf_name">TF Name: </label>
+				<div class="col-sm-9">
+
+					<select name="tf_name" class="form-control">
+						<option value="all"> All TFs</option>
+						{% for tf in tf_names %}
+						<option value="{{ tf.tf_name }}" {% if request.GET.tf_name == tf.tf_name %} selected {% endif %}> {{ tf.tf_name }}</option>
+						{% endfor %}
+					</select>
+
+				</div>
+			</div>
+			</div>
+			<div class="col-sm-5">
+			<div class="form-group">
+				<label class="col-sm-3 control-label" for="cell_line">Cell-line: </label>
+				<div class="col-sm-9">
+					<select name="cell_line" class="form-control">
+						<option value="all"> All cell-lines</option>
+						{% for cell_line in cell_lines %}
+						<option value="{{ cell_line.cell_line }}" {% if request.GET.cell_line == cell_line.cell_line %} selected {% endif %}> {{ cell_line.cell_line }}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			</div>
+			<div class="col-sm-1"></div>
+			</div>
+		
+			<br>
+			<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-5">
+			<div class="form-group">
+				<label class="col-sm-3 control-label" for="model">Prediction model: </label>
+				<div class="col-sm-9">
+					<select name="model" class="form-control">
+						<option value="all" {% if request.GET.model == "all" %} selected {% endif %}> All models</option>
+						{% for prediction_model in prediction_models %}
+						<option value="{{ prediction_model.prediction_model }}" {% if request.GET.model == prediction_model.prediction_model %} selected {% endif %}> {{ prediction_model.prediction_model }}</option>
+						{% endfor %}
+					</select>
+
+				</div>
+			</div>
+			</div>
+			<div class="col-sm-5">
+			<div class="form-group">
+																															 
+				<label class="col-sm-3 control-label" for="peak_caller">Peak caller: </label>
+				<div class="col-sm-9">
+					<select name="peak_caller" class="form-control">
+						<option value="all"> All peak callers</option>
+						{% for peak_caller in peak_callers %}
+						<option value="{{ peak_caller.peak_caller }}" {% if request.GET.peak_caller == peak_caller.peak_caller %} selected {% endif %}> {{ peak_caller.peak_caller }}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			</div>
+			<div class="col-sm-1"></div>
+			</div>
+
+			<br>
+			<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-5">
+			<div class="form-group">
+				<label class="col-sm-3 control-label" for="source">Data source: </label>
+				<div class="col-sm-9">
+					<select name="source" class="form-control">
+						<option value="all"> All sources</option>
+						{% for source in sources %}
+						<option value="{{ source.data_source }}" {% if request.GET.source == source.data_source %} selected {% endif %}> {{ source.data_source }}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			</div>
+			<div class="col-sm-5">
+			<div class="form-group">
+				
+																															 
+				<label class="col-sm-3 control-label" for="has_pvalue">P-value </label>
+				<div class="col-sm-9">
+					<input type="checkbox" class="form-control flat-red" name="has_pvalue" value="1" {% if request.GET.has_pvalue == "1" %} checked {% endif %}>  Has significant centrality p-value?
+				</div>
+			
+			</div>
+			</div>
+			<div class="col-sm-1"></div>
+			</div>
+			<input type="hidden" name="advanced" value="true">
+																										
+			<hr>
+		</div>
+	</form>
+</div>          
+</div>                                                             
+</div>
