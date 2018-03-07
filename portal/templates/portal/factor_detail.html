@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-    {{ factor.tf_name }} - {{ factor.cell_line }} -  detail
+    {{ factor.tf_name }} - {{ factor.cell_line }} - TFBS
 {% endblock %}
 
 {% block content_header %}
@@ -96,51 +96,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
       
     </div>
 
- {% if factor_details %}
-  <div class="row">
-    <div class="col-xs-12 col-md-12 col-xl-12">
-          <div class="box box-success">
-            <div class="box-header">
-              <h3 class="box-title">  Statistical details</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="search_table" class="table table-responsive table-bordered table-hover" width="100%">
-                <thead>
-                <tr>
-                  <th>Model</th>
-                  <th>Peak caller</th>
-                  <th>Model detail</th>
-                  <th>Distance threshold</th>
-                  <th>Score threshold</th>
-                  <th>Adj p-value</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for factor_detail in factor_details %}
-                  <tr>                  
-                  <td>{{ factor_detail.prediction_model }}</td>
-                  <td>{{ factor_detail.peak_caller }}</td>
-                  <td>{{ factor_detail.model_detail }}</td>
-                  <td>{{ factor_detail.distance_threshold }}</td>
-                  <td>{{ factor_detail.score_threshold }}</td>
-                  <td>{{ factor_detail.adj_centrimo_pvalue }}</td>
-                  
-                </tr>
-                {% endfor %}
-                </tbody>
-                <tfoot>
-                </tfoot>
-              </table> 
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-         <!-- /.box -->
-      </div>
-            
-  </div>
-{% endif %}
+
 
     <div class="row">
 
@@ -228,6 +184,51 @@ Detailed information of <b>{{ factor.tf_name }} </b>
       </div>   
         <!-- /.col -->
       </div>
+   {% if factor_details %}
+  <div class="row">
+    <div class="col-xs-12 col-md-12 col-xl-12">
+          <div class="box box-success">
+            <div class="box-header">
+              <h3 class="box-title">  Statistical details</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="search_table" class="table table-responsive table-bordered table-hover" width="100%">
+                <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Peak caller</th>
+                  <th>Model detail</th>
+                  <th>Distance threshold</th>
+                  <th>Score threshold</th>
+                  <th>Adj p-value</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for factor_detail in factor_details %}
+                  <tr>                  
+                  <td>{{ factor_detail.prediction_model }}</td>
+                  <td>{{ factor_detail.peak_caller }}</td>
+                  <td>{{ factor_detail.model_detail }}</td>
+                  <td>{{ factor_detail.distance_threshold }}</td>
+                  <td>{{ factor_detail.score_threshold }}</td>
+                  <td>{{ factor_detail.adj_centrimo_pvalue }}</td>
+                  
+                </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                </tfoot>
+              </table> 
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+         <!-- /.box -->
+      </div>
+            
+  </div>
+{% endif %}
 
   {% if factors %}
   <div class="row">
