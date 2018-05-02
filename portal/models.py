@@ -41,7 +41,9 @@ class FactorData(models.Model):
         ('PWM', 'PWM'),
         ('DiMO','DiMO'),
         ('TFFM', 'TFFM'),
-        ('DNAShaped', 'DNAShaped'),
+        ('DNAShaped_4bits', 'DNAShaped_4bits'),
+        ('DNAShaped_pssm', 'DNAShaped_pssm'),
+        ('DNAShaped_tffm', 'DNAShaped_tffm'),
         ('NRG', 'NRG')
     )
 
@@ -52,7 +54,7 @@ class FactorData(models.Model):
         )
     peak_caller = models.CharField(max_length=16, blank=False, choices=peakcaller_choices) 
     prediction_model = models.CharField(max_length=16, blank=False, choices=model_choices) 
-    model_detail = models.CharField(max_length=150)
+    model_detail = models.CharField(blank=True, max_length=150)
     folder = models.ForeignKey(Factor, to_field='folder', db_column='folder')
     distance_threshold = models.CharField(max_length=16)
     score_threshold = models.CharField(max_length=16) 

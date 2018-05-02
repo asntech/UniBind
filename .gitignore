@@ -16,3 +16,4 @@ build/
 UniBind.sql
 tests/report/
 bin
+static/data

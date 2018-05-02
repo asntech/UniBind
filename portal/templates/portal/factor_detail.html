@@ -40,7 +40,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
               </tr>
 
               <tr>
-                <td><b>Biological condition:</b>  </td>
+                <td><b>Condition/Source:</b>  </td>
                 <td>{{ factor.biological_condition }}</td>
               
                 <td><b>JASPAR ID:</b>  </td>
@@ -96,8 +96,6 @@ Detailed information of <b>{{ factor.tf_name }} </b>
       
     </div>
 
-
-
     <div class="row">
 
     <div class="col-md-12">
@@ -106,7 +104,6 @@ Detailed information of <b>{{ factor.tf_name }} </b>
               {% for model in models %}
               <li class="{% if forloop.counter == 1 %} active {% endif %}"><a href="#{{ model }}" data-toggle="tab">{{ model }}</a></li>
               {% endfor %}
-              
             </ul>
             <div class="tab-content">
               {% for model in models %}
@@ -118,12 +115,10 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                     {% for peak_caller in peak_callers %}
                     <li class="{% if forloop.counter == 1 %} active {% endif %}"><a href="#{{ model }}-{{ peak_caller }}" data-toggle="tab">{{ peak_caller }}</a></li>
                     {% endfor %}
-                    
                   </ul>
                   <div class="tab-content">
                     {% for peak_caller in peak_callers %}
                     <div class="{% if forloop.counter == 1 %} active {% endif %} tab-pane" id="{{ model }}-{{ peak_caller }}">
-                     
                     <div class="row">
                      <div class="col-md-4">
                     <div class="box box-solid">
@@ -134,7 +129,6 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                       <!-- /.box-header -->
                       <div class="box-body">
                         <div class="box-body table-responsive no-padding">
-                        
                         <p>
                         <a href="#" target="_blank">
                          <button type="button" class="btn btn-primary"><i class="fa fa-file-code-o"> </i> Download XML</button> </a>
@@ -154,14 +148,14 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                         <i class="fa fa-image"></i>
                         <h3 class="box-title">Summary plots</h3>
                         <div class="box-tools pull-right">
-                        <a href="{% static "" %}data/{{ model|lower }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_peaks_MA0093.2.pfm.{{ model|lower }}.pwm.score.ext.png" target="_blank">
+                        <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_peaks_MA0093.2.pfm.{{ model|lower }}.png" target="_blank">
                           <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> Download</button>
                         </a>
                         </div>
                       </div>
                       <!-- /.box-header -->
                       <div class="box-body">                      
-                      <img class="img-responsive" src="{% static "" %}data/{{ model|lower }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_peaks_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.pfm.{{ model|lower }}.pwm.score.ext.png">
+                      <img class="img-responsive" src="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_peaks_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.pfm.{{ model|lower }}.png">
                       <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
@@ -244,7 +238,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                 <tr>
                   <th>TF Name</th>
                   <th>Cell line</th>
-                  <th>Biological condition</th>
+                  <th>Biological condition/Source</th>
                   <th>Data source</th>
                   <th>Identifier</th>
                   <th>JASPAR ID</th>
@@ -374,8 +368,8 @@ Detailed information of <b>{{ factor.tf_name }} </b>
             }
           ]
         }
-       if(hopscotch.getState() === "jaspar-home:6") {
-        hopscotch.startTour(tour, 6);
+       if(hopscotch.getState() === "jaspar-home:5") {
+        hopscotch.startTour(tour, 5);
        }else{
         //hopscotch.startTour(tour, 0);
        }

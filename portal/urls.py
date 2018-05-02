@@ -20,8 +20,8 @@ urlpatterns = [
     
     #API documentation
     url(r'^api/$', views.api_documentation, name='api_documentation'),
-    
-    url(r'^factor/(?P<factor_id>[\w.]+)/$', views.factor_detail, name='factor_detail'),
+
+    url(r'^factor/(?P<factor_id>[\w.\-]+)/$', views.factor_detail, name='factor_detail'),
 
     url(r'^blog/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[0-9]{2})/(?P<slug>[\w-]+)$', views.post_details, name='post_details'),
     url(r'^blog/$', views.post_list, name='post_list'),

@@ -134,6 +134,11 @@ def factor_detail(request, factor_id):
 	similar_factors = Factor.objects.filter(tf_name=factor.tf_name).exclude(folder=factor_id).order_by('tf_name')
 
 	models = factor_details.values_list('prediction_model', flat=True).distinct().order_by('prediction_model')
+	#models = factor_details.values_list('prediction_model', flat=True).distinct()
+	mlists = models
+	morder=[4,0,1,2,3]
+	models = [ mlists[i] for i in morder]
+		
 	peak_callers = factor_details.values_list('peak_caller', flat=True).distinct().order_by('-peak_caller')
 
 	context = {
