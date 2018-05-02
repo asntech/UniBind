@@ -135,9 +135,9 @@ def factor_detail(request, factor_id):
 
 	models = factor_details.values_list('prediction_model', flat=True).distinct().order_by('prediction_model')
 	#models = factor_details.values_list('prediction_model', flat=True).distinct()
-	mlists = models
-	morder=[4,0,1,2,3]
-	models = [ mlists[i] for i in morder]
+	#mlists = models
+	#morder=[4,1,0,2,3]
+	#models = [ mlists[i] for i in morder]
 		
 	peak_callers = factor_details.values_list('peak_caller', flat=True).distinct().order_by('-peak_caller')
 
