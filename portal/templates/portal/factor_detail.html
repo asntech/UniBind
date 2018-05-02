@@ -132,23 +132,26 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                         <p>
                           {% if model == 'DNAshaped' %}
 
-                          <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_4bits.tfbs" target="_blank">
+                          <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_4bits.tfbs">
                               <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> TFBS 4bits</button>
                             </a>
-                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_pssm.tfbs" target="_blank">
+                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_pssm.tfbs">
                               <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> TFBS PWM</button>
                             </a>
-                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_tffm-fo.tfbs" target="_blank">
+                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_tffm-fo.tfbs">
                               <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> TFBS TFFM</button>
                             </a>
                           {% else %}
 
-                          <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model|lower }}.tfbs" target="_blank">
-                              <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> TFBS</button>
+                          <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model|lower }}.tfbs">
+                              <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> Download TFBSs</button>
                             </a>
-                        
-                        
+
                         {% endif %}
+
+                        <hr>
+                          <a href="{% static "" %}data/peaks/{{ peak_caller|lower }}/{{ factor.folder }}/{{ factor.folder }}_peaks.narrowPeak">
+                              <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> Download Peaks </button>
                         </p>
                         </div>
                       </div>
@@ -160,7 +163,6 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                   <div class="col-md-8">
                     
                       {% if model == 'DNAshaped' %}
-
 
                        <div class="box-group" id="accordion">
                          <div class="panel box box-warning">
