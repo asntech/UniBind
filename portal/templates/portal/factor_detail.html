@@ -143,23 +143,97 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                   </div>
                   <!-- ./col -->
                   <div class="col-md-8">
-                    <div class="box box-solid">
+                    
+                      {% if model == 'DNAshaped' %}
+
+
+                       <div class="box-group" id="accordion">
+                         <div class="panel box box-warning">
+                          <div class="box-header with-border">
+                            <h4 class="box-title">
+                              <a data-toggle="collapse" data-parent="#accordion" href="#4bits">
+                                 <i class="fa fa-image"></i> DNAshaped+4bits
+                              </a>
+                            </h4>
+
+                            <div class="box-tools pull-right">
+                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_4bits.png" target="_blank">
+                              <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> Download</button>
+                            </a>
+                            </div>
+                            
+                          </div>
+                          <div id="4bits" class="panel-collapse collapse in">
+                            <div class="box-body">
+                              <img class="img-responsive" src="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_4bits.png">
+                                                    
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="panel box box-warning">
+                          <div class="box-header with-border">
+                            <h4 class="box-title">
+                              <a data-toggle="collapse" data-parent="#accordion" href="#pwm">
+                                <i class="fa fa-image"></i> DNAshaped+PWM
+                              </a>
+                            </h4>
+                             <div class="box-tools pull-right">
+                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_pssm.png" target="_blank">
+                              <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> Download</button>
+                            </a>
+                            </div>
+
+                          </div>
+                          <div id="pwm" class="panel-collapse collapse">
+                            <div class="box-body">
+                              <img class="img-responsive" src="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_pssm.png">
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="panel box box-warning">
+                          <div class="box-header with-border">
+                            <h4 class="box-title">
+                              <a data-toggle="collapse" data-parent="#accordion" href="#tffm">
+                                <i class="fa fa-image"></i> DNAshaped+TFFM
+                              </a>
+                            </h4>
+                             <div class="box-tools pull-right">
+                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_tffm.png" target="_blank">
+                              <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> Download</button>
+                            </a>
+                            </div>
+
+                          </div>
+                          <div id="tffm" class="panel-collapse collapse">
+                            <div class="box-body">
+                              <img class="img-responsive" src="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_tffm.png">
+                            </div>
+                          </div>
+                        </div>
+
+                       </div>
+
+                      {% else %}
+                      <div class="box box box-warning">
                       <div class="box-header with-border">
                         <i class="fa fa-image"></i>
                         <h3 class="box-title">Summary plots</h3>
                         <div class="box-tools pull-right">
-                        <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_peaks_MA0093.2.pfm.{{ model|lower }}.png" target="_blank">
+                        <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}.png" target="_blank">
                           <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> Download</button>
                         </a>
                         </div>
                       </div>
                       <!-- /.box-header -->
                       <div class="box-body">                      
-                      <img class="img-responsive" src="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model|lower }}.png">
+                      <img class="img-responsive" src="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ mode }}.png">
                       <!-- /.box-body -->
                     </div>
+                    </div>
                     <!-- /.box -->
-                  </div>
+                    {% endif %}
                   <!-- ./col -->
                 </div>
                     </div>
