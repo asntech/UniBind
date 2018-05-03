@@ -133,13 +133,15 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                           {% if model == 'DNAshaped' %}
 
                           <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_4bits.tfbs">
-                              <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> TFBS 4bits</button>
+                              <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> Download TFBS 4bits</button>
                             </a>
+                            <br><br>
                             <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_pssm.tfbs">
-                              <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> TFBS PWM</button>
+                              <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> Download TFBS PWM</button>
                             </a>
+                            <br><br>
                             <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_tffm-fo.tfbs">
-                              <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> TFBS TFFM</button>
+                              <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> Download TFBS TFFM</button>
                             </a>
                           {% else %}
 
