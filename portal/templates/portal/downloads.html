@@ -19,7 +19,7 @@ Download data
 
   <div class="row">
     <div class="col-md-12">
-      <h4><i class="fa fa-download"> </i>Model wise download </h4>
+      <h4><i class="fa fa-download"> </i> Download TFBSs and cis-regulatory modules (CRMs) per model </h4>
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs" id="detailTabs">
               {% for model in models %}
@@ -46,7 +46,25 @@ Download data
                     <div class="row">
                       <div class="col-md-12">
                     
-                        {{ model }}-{{ peak_caller }}
+                        Download data for prediction model <b>{{ model }}</b> and peak-caller <b>{{ peak_caller }}</b>
+
+                        
+                        <h4>Download TFBSs:</h4>
+                        <p>
+
+                        <a href="{% static "" %}data/bulk/all_tfbs_{{ peak_caller|lower }}.tar.gz"><h5><i class="fa fa-download"> </i> All TFBSs (in BED format)</h5></a>
+                        <a href="{% static "" %}data/bulk/all_tfbs_per_tf_{{ peak_caller|lower }}.tar.gz"><h5><i class="fa fa-download"> </i> TFBSs per TF (in BED format)</h5></a>
+                        <a href="{% static "" %}data/bulk/all_tfbs_sequences_per_tf_{{ peak_caller|lower }}.tar.gz"><h5><i class="fa fa-download"> </i> FASTA files for the TFBSs per TF</h5></a>
+                        </p>
+                        <hr>
+
+                        <h4>Download cis-regulatory modules (CRMs):</h4>
+                        <p>
+
+                        <a href="{% static "" %}data/bulk/all_peaks_{{ peak_caller|lower }}.tar.gz"><h5><i class="fa fa-download"> </i> All Peaks (in BED format)</h5></a>
+                        <a href="{% static "" %}data/bulk/all_peaks_per_tf_{{ peak_caller|lower }}.tar.gz"><h5><i class="fa fa-download"> </i> Peaks per TF (in BED format)</h5></a>
+                        </p>
+
                       </div>
 
                     </div>
@@ -64,6 +82,7 @@ Download data
           <!-- /.nav-tabs-custom -->
       </div>   
         <!-- /.col -->
+        
       </div>
 
 {% endblock %}
