@@ -283,11 +283,12 @@ def about(request):
 	'''
 	setattr(request, 'view', 'about')
 
-	#count the number of profiles in each taxonomic group
-	
-	context = {
-	
+	datasets = Factor.objects.all().count()
+
+	context ={
+	'datasets': datasets,
 	}
+	context.update(_get_advanced_search_data())
 
 	return render(request, 'portal/about.html', context)
 
