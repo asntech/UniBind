@@ -1,14 +1,14 @@
 {% load bootstrap %}
 
 <div class="col-md-12 col-lg-12 col-xs-12">
-<div class="box box-info">
+<div class="box box-success">
 					 
 <div class="box-body">
 	<form id="quick_search" method="get" action="/search">
 		<div class="input-group input-group-lg">
 			<input type="text" id="unibind-search" value="{{ request.GET.q }}" class="form-control" autocomplete="off" name="q" placeholder="Search UniBind database..." data-toggle="tooltip" data-placement="bottom" title="You can search by TF name, JASPAR ID, cell-line, or any other keyword."/> 
 			<span class="input-group-btn">
-			<button class="btn btn-info btn-flat" type="submit">Search <i class="fa fa-search"></i></button>
+			<button class="btn btn-success btn-flat" type="submit">Search <i class="fa fa-search"></i></button>
 			</span>
 			</div> 
 			<div class="form-group">                                     

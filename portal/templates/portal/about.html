@@ -20,18 +20,19 @@
     <div class="row">
             
         <div class="col-md-8 col-lg-8 col-xs-12">
-          <div class="box box-primary">
+          <div class="box box-success">
             <div class="box-header with-border">
               <h3 class="box-title">What is UniBind?</h3>
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
               </div>
               </div>
             <!-- /.box-header -->
             <div class="box-body">
-                      <b>UniBind</b> is a comprehensive database of transcription factor binding sites predicted through uniform processing of thousands of ChIP-seq datasets by using three different peak callers (MACS, BCP and HOMER) and five different prediction models (PWM, DiMO, TFFM, DNAShape and Energy).
+              <p class="lead"> 
+                      <b>UniBind</b> is a comprehensive map of direct transcription factor (TF) – DNA interactions in the human genome. These interactions were derived by uniformly processing thousands of ChIP-seq data sets from the raw reads to high confidence TF binding site predictions. The <a href="https://bitbucket.org/CBGR/chip-eat" target="_blank"> <b>ChIP-eat</b></a> data processing pipeline was specifically developed and used in this scope, which is illustrated in the figure below. After aligning the raw reads to the hg38 version of the human genome, the MACS2 peak caller was used to identify genomic regions of interest, and four different prediction models, varying from simple to complex, were used to derive TF binding sites. These models include DiMO-optimized position weight matrices, transcription factor flexible models, DNA shape features, and binding energy models. An entropy-based algorithm was used on each set of predictions, to automatically delineate an enrichment zone containing direct TF – DNA interactions, supported by both strong computational evidence and strong experimental evidence. The UniBind database hosts the complete set of TFBS predictions from each prediction model, as well as the models themselves, the original ChIP-seq peaks, and the cis-regulatory modules derived from the direct TF – DNA interactions. All the data is publicly available. For further details, please refer to the associated publication: (DOI: ).
+                  </p>
 
                       <p>
             <img class="img-responsive img-rounded" src="{% static 'img/chipeat.png' %}" width="100%">
@@ -44,14 +45,13 @@
 
        <div class="col-md-4 col-lg-4 col-xs-12">
 
-        <div class="box box-danger">
+        <div class="box box-success">
             <div class="box-header with-border">
               <h3 class="box-title">Statistics</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
               </div>
             </div>
             <!-- /.box-header -->
@@ -59,14 +59,90 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="chart-responsive">
-                    <canvas id="JASPARstats" height="150"></canvas>
+                    <canvas id="Unibindstats" height="150"></canvas>
                   </div>
                   <!-- ./chart-responsive -->
                 </div>
                 <!-- /.col -->
-                <div class="col-md-4">
-                  
-                </div>
+                 <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>{{ datasets }}</h3>
+
+              <p>ChIP-seq datasets</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-database"></i>
+            </div>
+             <!--
+            <a href="/search?q=" class="small-box-footer">
+              More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          -->
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>{{ cell_lines|length }}</h3>
+
+              <p>Cell lines & Tissues</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-heart"></i>
+            </div>
+            <!--
+            <a href="#" class="small-box-footer">
+              More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          -->
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>{{ tf_names|length }}</h3>
+
+              <p>Transcription Factors</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-link"></i>
+            </div>
+             <!--
+            <a href="#" class="small-box-footer">
+              More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          -->
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>{{ prediction_models|length }}</h3>
+
+              <p>Prediction models</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-link"></i>
+            </div>
+             <!--
+            <a href="#" class="small-box-footer">
+              More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          -->
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
                 <!-- /.col -->
               </div>
               <!-- /.row -->
@@ -91,7 +167,7 @@
       //- PIE CHART -
       //-------------
       // Get context with jQuery - using jQuery's .get() method.
-      var pieChartCanvas = $("#JASPARstats").get(0).getContext("2d");
+      var pieChartCanvas = $("#Unibindstats").get(0).getContext("2d");
       var pieChart = new Chart(pieChartCanvas);
       
       var PieData = [

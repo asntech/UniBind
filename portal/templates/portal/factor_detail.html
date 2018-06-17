@@ -20,7 +20,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
 
     <div class="row">
         <div class="col-md-8">
-          <div class="box box-primary">
+          <div class="box box-success">
             <div class="box-header">
               <h3 class="box-title">TF summary</h3>
               <div class="box-tools pull-right">
@@ -64,7 +64,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
     
 
         <div class="col-md-4">
-          <div class="box box-primary">
+          <div class="box box-success">
             <div class="box-header with-border">
               <h3 class="box-title">External links</h3>
 
@@ -133,27 +133,27 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                           {% if model == 'DNAshaped' %}
 
                           <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_4bits.tfbs">
-                              <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> Download TFBS 4bits</button>
+                              <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> Download TFBS 4bits</button>
                             </a>
                             <br><br>
                             <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_pssm.tfbs">
-                              <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> Download TFBS PWM</button>
+                              <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> Download TFBS PWM</button>
                             </a>
                             <br><br>
                             <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_tffm-fo.tfbs">
-                              <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> Download TFBS TFFM</button>
+                              <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> Download TFBS TFFM</button>
                             </a>
                           {% else %}
 
                           <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model|lower }}.tfbs">
-                              <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> Download TFBSs</button>
+                              <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> Download TFBSs</button>
                             </a>
 
                         {% endif %}
 
                         <hr>
                           <a href="{% static "" %}data/peaks/{{ peak_caller|lower }}/{{ factor.folder }}/{{ factor.folder }}_peaks.narrowPeak">
-                              <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> Download Peaks </button>
+                              <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> Download Peaks </button>
                         </p>
                         </div>
                       </div>
@@ -167,7 +167,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                       {% if model == 'DNAshaped' %}
 
                        <div class="box-group" id="accordion">
-                         <div class="panel box box-warning">
+                         <div class="panel box box-success">
                           <div class="box-header with-border">
                             <h4 class="box-title">
                               <a data-toggle="collapse" data-parent="#accordion" href="#4bits">
@@ -177,7 +177,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
 
                             <div class="box-tools pull-right">
                             <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_4bits.png" target="_blank">
-                              <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> Download</button>
+                              <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> Download</button>
                             </a>
                             </div>
                             
@@ -190,7 +190,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                           </div>
                         </div>
                         
-                        <div class="panel box box-warning">
+                        <div class="panel box box-success">
                           <div class="box-header with-border">
                             <h4 class="box-title">
                               <a data-toggle="collapse" data-parent="#accordion" href="#pwm">
@@ -199,7 +199,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                             </h4>
                              <div class="box-tools pull-right">
                             <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_pssm.png" target="_blank">
-                              <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> Download</button>
+                              <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> Download</button>
                             </a>
                             </div>
 
@@ -211,7 +211,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                           </div>
                         </div>
 
-                        <div class="panel box box-warning">
+                        <div class="panel box box-success">
                           <div class="box-header with-border">
                             <h4 class="box-title">
                               <a data-toggle="collapse" data-parent="#accordion" href="#tffm">
@@ -220,7 +220,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                             </h4>
                              <div class="box-tools pull-right">
                             <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_tffm-fo.png" target="_blank">
-                              <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> Download</button>
+                              <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> Download</button>
                             </a>
                             </div>
 
@@ -235,13 +235,13 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                        </div>
 
                       {% else %}
-                      <div class="box box box-warning">
+                      <div class="box box box-success">
                       <div class="box-header with-border">
                         <i class="fa fa-image"></i>
                         <h3 class="box-title">Summary plots</h3>
                         <div class="box-tools pull-right">
                         <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model|lower }}.png" target="_blank">
-                          <button type="button" class="btn btn-primary"><i class="fa fa-download"> </i> Download</button>
+                          <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> Download</button>
                         </a>
                         </div>
                       </div>
