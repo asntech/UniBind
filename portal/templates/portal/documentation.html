@@ -29,11 +29,11 @@
               </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <h3 id="UniBind"> <i class="fa fa-question"></i> What is UniBind?</h3>
+              <h3 id="UniBind"> <i class="fa fa-question-circle"></i> What is UniBind?</h3>
               <hr>
-              <b>UniBind</b> is a comprehensive map of direct transcription factor (TF) – DNA interactions in the human genome. These interactions were derived by uniformly processing thousands of ChIP-seq data sets from the raw reads to high confidence TF binding site predictions. The <a href="https://bitbucket.org/CBGR/chip-eat" target="_blank"> <b>ChIP-eat</b></a> data processing pipeline was specifically developed and used in this scope, which is illustrated in figure below. After aligning the raw reads to the hg38 version of the human genome, the MACS2 peak caller was used to identify genomic regions of interest, and four different prediction models, varying from simple to complex, were used to derive TF binding sites. These models include DiMO-optimized position weight matrices, transcription factor flexible models, DNA shape features, and binding energy models. An entropy-based algorithm was used on each set of predictions, to automatically delineate an enrichment zone containing direct TF – DNA interactions, supported by both strong computational evidence and strong experimental evidence. The UniBind database hosts the complete set of TFBS predictions from each prediction model, as well as the models themselves, the original ChIP-seq peaks, and the cis-regulatory modules derived from the direct TF – DNA interactions. All the data is publicly available. For further details, please refer to the associated publication: (DOI: ).
+              <b>UniBind</b> is a comprehensive map of direct transcription factor (TF) – DNA interactions in the human genome. These interactions were derived by uniformly processing thousands of ChIP-seq data sets from the raw reads to high confidence TF binding site predictions. The <a href="https://bitbucket.org/CBGR/chip-eat" target="_blank"> <b>ChIP-eat</b></a> data processing pipeline was specifically developed and used in this scope, which is illustrated in figure below. After aligning the raw reads to the hg38 version of the human genome, the MACS2 peak caller was used to identify genomic regions of interest, and four different prediction models, varying from simple to complex, were used to derive TF binding sites. These models include DiMO-optimized position weight matrices, transcription factor flexible models, DNA shape features, and binding energy models. An entropy-based algorithm was used on each set of predictions, to automatically delineate an enrichment zone containing direct TF – DNA interactions, supported by both strong computational evidence and strong experimental evidence. The UniBind database hosts the complete set of TFBS predictions from each prediction model, as well as the models themselves, the original ChIP-seq peaks, and the cis-regulatory modules derived from the direct TF – DNA interactions. All the data is publicly available. For further details, please refer to the associated publication.
               
-              <h3 id="dataprocess"><i class="fa fa-data"></i> How was the data processed?</h3>
+              <h3 id="dataprocess"><i class="fa fa-database"></i> How was the data processed?</h3>
               <hr>
               <p>
               The entire collection of ChIP-seq datasets was processed through the ChIP-eat data processing pipeline. ChIP-eat was specifically developed for the uniform processing of ChIP-seq data. This pipeline is publicly available at <a href="https://bitbucket.org/CBGR/chip-eat/" target="_blank">https://bitbucket.org/CBGR/chip-eat/</a> for download and implementation, and it consists of three main parts:
@@ -52,11 +52,11 @@ and <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3389974/" target="_bla
                </p>
               <img class="img-responsive img-rounded center-block" src="{% static 'img/chipeat.png' %}" width="90%">
 
-              <h3 id="UniBindhost"><i class="fa fa-search"></i> What data does UniBind host?</h3>
+              <h3 id="UniBindhost"><i class="fa fa-server"></i> What data does UniBind host?</h3>
               <hr>
               <p>The UniBind database contains millions of transcription factor (TF) binding site (TFBS) predictions across the human genome. These predictions were derived from the uniform processing of 1,983 publicly available ChIP-seq datasets accounting for 232 distinct TFs in 346 cell lines. For each ChIP-seq dataset, the user can download the following: the set of predicted direct TF-DNA interactions, in <a href="https://genome.ucsc.edu/FAQ/FAQformat.html" target="_blank">BED6</a> format, and in <a href="https://en.wikipedia.org/wiki/FASTA_format" target="_blank">FASTA </a> format, the initial set of ChIP-seq peaks, a visual representation of the delineated enrichment zone, and the trained prediction model used. For each ChIP-seq dataset present in UniBind, four prediction models were used (see previous section) and the data is available for download for each of the four models individually.</p>
 
-              <h3 id="UniBindentry"><i class="fa fa-search"></i> What does each entry in UniBind contain?</h3>
+              <h3 id="UniBindentry"><i class="fa fa-file"></i> What does each entry in UniBind contain?</h3>
               <hr>
               <p>When searching/clicking on one transcription factor (TF) or one ChIP-seq dataset of interest, a page will be displayed with all the information available. A summary part is at the top of the page describing what cell line, TF, data source and <a href="http://jaspar2018.genereg.net/" target="_blank">JASPAR</a> profile was used in the prediction models. The user is also provided with external links pointing for more details about this entry’s components.</p>
               <p>On the middle section of the page, all the prediction models used for this database entry are displayed in a tabbed layout. Download buttons are also available in this section from where the user can obtain the set of TF binding site predictions and/or the original set of ChIP-seq peaks. At the bottom of this section, a plot consisting of four panels is displayed to give a visual representation of the data through the selected prediction model. Please see next section on how to interpret these plots.</p>
@@ -69,8 +69,7 @@ and <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3389974/" target="_bla
               <p>The user can download the set of transcription factor binding sites (TFBSs), the initial ChIP-seq peaks, and the trained prediction models for each of the datasets individually by navigating to the UniBind entry of interest. If the user wants to download the available data in bulk, this can be done through the <a href="/downloads">Download</a> section of the UniBind database. This section allows the user to download the cis-regulatory modules derived using the entire set of TFBS predictions.</p>
 
 
-
-              <h3 id="centrality"><i class="fa fa-search"></i> How to interpret the enrichment zone and centrality p-value?</h3>
+              <h3 id="centrality"><i class="fa fa-align-center"></i> How to interpret the enrichment zone and centrality p-value?</h3>
               <hr>
               <p> 
               <img class="img-responsive img-rounded center-block" src="{% static 'img/example_plot.png' %}" width="90%">

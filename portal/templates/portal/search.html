@@ -152,7 +152,7 @@
    <script>
   
         var tour = {
-          id: 'jaspar-home',
+          id: 'unibind-home',
           showPrevButton: true,
           scrollDuration: 700,
           steps: [
@@ -172,24 +172,16 @@
             
             {
               title: 'Search results table',
-              content: 'A list of profiles found for your search criteria.',
+              content: 'A list of datasets found for your search criteria.',
               target: 'search_table',
               placement: 'top',
               xOffset: "center",
               arrowOffset: "left",
-              onNext: function() {
-
-                //$('#check-all').iCheck('check');
-                //$('#analysis_form').submit();
-                //$( "#cart_submit" ).trigger( "click" );
-                //$('form:#cart_submit').submit();
-                
-              }
             },
       
             {
-              title: "View profile summary and versions",
-              content: "View a detailed profile summary and versions page.",
+              title: "View details",
+              content: "View a detailed summary & download data.",
               target: "factor_summary",
               placement: "bottom",
               multipage: true,
@@ -208,7 +200,7 @@
             },
             {
               title: "Thanks!",
-              content: "Thanks for taking the JASPAR tour. You can read more about JASPAR <a href='/about'>here</a>.",
+              content: "Thanks for taking the UniBind tour. You can read more about UniBind <a href='/about'>here</a>.",
               target: "demo-end",
               placement: "bottom",
               xOffset: "center",
@@ -216,7 +208,7 @@
             }
           ]
         }
-       if(hopscotch.getState() === "jaspar-home:2") {
+       if(hopscotch.getState() === "unibind-home:2") {
         hopscotch.startTour(tour, 2);
        }else{
         //hopscotch.startTour(tour, 0);

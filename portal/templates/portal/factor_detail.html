@@ -18,7 +18,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
 {% block content %}
 
 
-    <div class="row">
+    <div class="row" id="demo-end">
         <div class="col-md-8">
           <div class="box box-success">
             <div class="box-header">
@@ -30,8 +30,8 @@ Detailed information of <b>{{ factor.tf_name }} </b>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
-              <table class="table table-hover" id="matrix-detail">
-              <tr id="profile-detail">
+              <table class="table table-hover" id="profile-detail">
+              <tr>
                 <td><b>TF Name:</b>  </td>
                 <td>{{ factor.tf_name }}</td>
               
@@ -279,7 +279,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
               <h3 class="box-title">  Statistical details</h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="box-body" id="statistical-details">
               <table id="search_table" class="table table-responsive table-bordered table-hover" width="100%">
                 <thead>
                 <tr>
@@ -325,7 +325,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
               <h3 class="box-title"> <b>{{ factors|length }} </b> datasets found for the same TF (<b>{{ factor.tf_name }}</b>) in other cell-types/tissues</h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="box-body" id="similar-datasets">
               <table id="search_table2" class="table table-responsive table-bordered table-hover" width="100%">
                 <thead>
                 <tr>
@@ -377,83 +377,69 @@ Detailed information of <b>{{ factor.tf_name }} </b>
       <script>
   
         var tour = {
-          id: 'jaspar-home',
+          id: 'unibind-home',
           showPrevButton: true,
           scrollDuration: 700,
           steps: [
-            {
-              title: 'Search JASPAR database',
-              content: "You can search by TF name or ID, species, taxon, UniProt ID or any other keyword.",
-              target: 'search',
-              placement: 'bottom',
-            },
             {
               title: 'Browse JASPAR CORE',
               content: 'Browse JASPAR <strong>CORE</strong> database for different taxon groups',
               target: 'jaspar-core',
               placement: 'top',
             },
-              {
-              title: 'Browse Collections',
-              content: 'Browse the JASPAR collections',
-              target: 'jaspar-browse',
+            {
+              title: 'Search JASPAR database',
+              content: "You can search by TF name or ID, species, taxon, UniProt ID or any other keyword.",
+              target: 'search',
               placement: 'bottom',
             },
+            
             {
-
+              title: 'Search results table',
+              content: 'A list of datasets found for your search criteria.',
+              target: 'search_table',
+              placement: 'top',
+              xOffset: "center",
+              arrowOffset: "left",
             },
+      
             {
-
-            },
-            {
-              title: 'Profile Inference ',
-              content: 'Input a TF protein sequence for which to look for a JASPAR TF binding profile.',
-              target: 'profile-inference',
-              placement: 'bottom',
-              multipage: true,
-              onNext: function() {
-                window.location = '/matrix/MA0037.2';
-              }
-            },
-            {
-              title: 'Profile summary',
-              content: 'A detail summary box of individual profile',
+              title: 'Data Summary',
+              content: 'A detail summary of TF and dataset.',
               target: 'profile-detail',
               placement: 'right',
               //xOffset: "center",
               arrowOffset: "left",
             },
              {
-              title: 'Frequency Matrix',
-              content: 'Position frequency matrix (PFM) of the profile with download and reverse complement options.',
-              target: 'frequency-matrix',
-              placement: 'left',
-              arrowOffset: "right",
+              title: 'Model predictions',
+              content: 'View/Download predicted TFBSs, peaks and summary plots.',
+              target: 'detailTabs',
+              placement: 'top',
+              //arrowOffset: "left",
             },
             {
-              title: "Profile versions",
-              content: "Version(s) information of matrix profile (MA0037).",
-              target: "version_table",
-              placement: "bottom",
-              onNext: function() {
-
-                $('#detailTabs a[href="#tfmm_first_order"]').tab('show') 
-
-              }
-             
-            },
-             {
-              title: "TFFM and more details",
+              title: "Statistical details",
               content: "ChIP-seq centrality, detailed and first order TFFM, and more info.",
-              target: "more-details",
+              target: "statistical-details",
               placement: "top",
               xOffset: "center",
               arrowOffset: "center",
              
             },
             {
+              title: "Related datasets",
+              content: "Datasets for JUND TF in other cell-types/tissues.",
+              target: "similar-datasets",
+              placement: "top",
+              xOffset: "center",
+              arrowOffset: "center",
+              
+            },
+             
+            {
               title: "Thanks!",
-              content: "Thanks for taking the JASPAR tour. You can read more about JASPAR <a href='/about'>here</a>.",
+              content: "Thanks for taking the UniBind tour. You can read more about UniBind <a href='/about'>here</a>.",
               target: "demo-end",
               placement: "bottom",
               xOffset: "center",
@@ -461,8 +447,8 @@ Detailed information of <b>{{ factor.tf_name }} </b>
             }
           ]
         }
-       if(hopscotch.getState() === "jaspar-home:5") {
-        hopscotch.startTour(tour, 5);
+       if(hopscotch.getState() === "unibind-home:4") {
+        hopscotch.startTour(tour, 4);
        }else{
         //hopscotch.startTour(tour, 0);
        }
