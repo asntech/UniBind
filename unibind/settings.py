@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'e2sd^q-0bl-nhl^rnr633259_@ddq7!q07$q!fzdelbaja04da'
+SECRET_KEY = ''
 
 ADMINS = [('Aziz', 'azez.khan@gmail.com'),]
 
@@ -110,8 +110,8 @@ DATABASES = {
         #'ENGINE': 'django.db.backends.mysql',
         #'NAME': 'UniBind',
         ##If you are using MySQL engine, please fill the follwoing details. sqlite doesn't need these
-        #'USER': 'root',
-        #'PASSWORD': 'root',
+        #'USER': '',
+        #'PASSWORD': '',
         #'HOST': '/Applications/MAMP/tmp/mysql/mysql.sock',
         #'PORT': '',
     }
@@ -143,7 +143,7 @@ EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-SEND_TO_EMAIL = ['unibind.team@gmail.com', 'aziz.khan@ncmm.uio.no']
+SEND_TO_EMAIL = ['azez.khan@gmail.com', 'aziz.khan@ncmm.uio.no']
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
