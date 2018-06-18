@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
+SECRET_KEY = 'e2sd^q-0bl-nhl^rnr633259_@ddq7!q07$q!fzdelbaja04da'
 
 ADMINS = [('Aziz', 'azez.khan@gmail.com'),]
 
