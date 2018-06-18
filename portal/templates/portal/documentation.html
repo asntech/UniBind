@@ -41,12 +41,13 @@
                 <li>aligning and filtering raw ChIP-seq data, </li>
                 <li>calling ChIP-seq peaks, </li>
                 <li>training the TFBS computational models and </li>
-                <li>(iv)  automatically defining the enrichment zone in the landscape <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4082612/" target="_blank">plots</a> to predict TFBSs</li>
-                <li>Four TFBS computation models are provided: PWMs, optimized with <a href="https://www.ncbi.nlm.nih.gov/pubmed/24369152" target="_blank">DiMO</a>, <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3764009/" target="_blank">TFFM</a>,
-<a href="https://www.cell.com/cell-systems/abstract/S2405-4712(16)30218-6" target="_blank">DNAshaped</a>, 
-and <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3389974/" target="_blank">binding energy models </a>).</li>
-
+                <li>automatically defining the enrichment zone in the landscape <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4082612/" target="_blank">plots</a> to predict TFBSs</li>
               </ol>
+                Four TFBS computation models are provided: PWMs, optimized with <a href="https://www.ncbi.nlm.nih.gov/pubmed/24369152" target="_blank">DiMO</a>, <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3764009/" target="_blank">TFFM</a>,
+<a href="https://www.cell.com/cell-systems/abstract/S2405-4712(16)30218-6" target="_blank">DNAshaped</a>, 
+and <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3389974/" target="_blank">binding energy models </a>).
+
+             
                  Only the ChIP-seq datasets for which a TF binding profile for the targeted TF was available in  <a href="http://jaspar2018.genereg.net/" target="_blank">JASPAR</a> were used for TFBS predictions. The enrichment zone containing high confidence direct TF-DNA interactions was automatically defined for each data set using an entropy-based algorithm. The diagram below illustrates the processing steps.
                </p>
               <img class="img-responsive img-rounded center-block" src="{% static 'img/chipeat.png' %}" width="90%">
