@@ -7,6 +7,7 @@ temp/*
 __pycache__
 MANIFEST
 dist/
+unibind/settings.py
 docs/_build/
 docs/locale/
 node_modules/
