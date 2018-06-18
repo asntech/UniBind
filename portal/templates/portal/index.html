@@ -84,7 +84,7 @@ A uniformly processed database of transcription factor binding sites
                       <div class="col-lg-12">
                           <h2 align="center">A uniformly processed database of transcription factor binding sites</h2>
                           <h5 align="center"><a href="/about">Read more about UniBind</a></h5> <br>
-                          <p align="center"><a class="btn btn-md btn-success" id="unibind-tour" href="#" role="button"><i class="fa fa-play"></i> Interactive tour</a></p>
+                          <p align="center"><a class="btn btn-md btn-success" id="unibind-tour" href="#" role="button"><i class="fa fa-play"></i> UniBind Interactive Tour</a></p>
                       </div>
                   </div>
               </div>
@@ -225,57 +225,16 @@ A uniformly processed database of transcription factor binding sites
             {
               title: 'Search UniBind database',
               content: "You can search by TF name or ID, species, taxon, UniProt ID or any other keyword.",
-              target: 'unibind-search',
+              target: 'advanced-search',
               placement: 'bottom',
               onNext: function() {
                 $('ul#api-pulldown').toggle(200);
               }
-            },
-
-            {
-              title: 'Profile Inference ',
-              content: 'Input a TF protein sequence to infer JASPAR TF binding profile(s).',
-              target: 'profile-inference',
-              placement: 'bottom',
-              multipage: true,
-              onNext: function() {
-                window.location = '/search?q=Gata3&collection=all&tax_group=all&version=all&type=all';
-              }
-            },
-            
-            {
-              title: 'Programmatic access',
-              content: 'Access JASPAR data programmatically through RESTful API',
-              target: 'jaspar-api',
-              placement: 'top',
-            },
-            {
-              title: 'Profile Inference ',
-              content: 'Input a TF protein sequence to infer JASPAR TF binding profile(s).',
-              target: 'profile-inference',
-              placement: 'bottom',
-              multipage: true,
-              onNext: function() {
-                window.location = '/matrix/MA0037.2';
-              }
-            },
-            {
-              title: 'Profile summary',
-              content: 'Browse JASPAR <strong>CORE</strong> database for different taxon groups',
-              target: 'matrix-detail',
-              placement: 'bottom',
-            },
-            {
-              title: "Matrix summary",
-              content: "Matrix summary page",
-              target: "matrix-detail",
-              placement: "bottom",
-              xOffset: "center",
-              arrowOffset: "center"
             }
+      
           ]
         }
-       if(hopscotch.getState() === "jaspar-home:4") {
+       if(hopscotch.getState() === "unibind-home:4") {
         hopscotch.startTour(tour, 4);
        }else{
         hopscotch.startTour(tour, 0);

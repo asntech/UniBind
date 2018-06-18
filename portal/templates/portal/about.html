@@ -58,84 +58,130 @@
             <div class="box-body">
 
                <!-- Small boxes (Stat box) -->
-      <div class="row">
-        <div class="col-lg-12 col-xs-12">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h3>{{ datasets }}</h3>
+            <div class="row">
+              <div class="col-lg-12 col-xs-12">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                  <div class="inner">
+                    <h3>{{ datasets }}</h3>
 
-              <p>ChIP-seq datasets</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-database"></i>
-            </div>
-             <!--
-            <a href="/search?q=" class="small-box-footer">
-              More info <i class="fa fa-arrow-circle-right"></i>
-            </a>
-          -->
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-12 col-xs-12">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>{{ cell_lines|length }}</h3>
+                    <p>ChIP-seq datasets</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fa fa-database"></i>
+                  </div>
+                   <!--
+                  <a href="/search?q=" class="small-box-footer">
+                    More info <i class="fa fa-arrow-circle-right"></i>
+                  </a>
+                -->
+                </div>
+              </div>
+              <!-- ./col -->
+              <div class="col-lg-12 col-xs-12">
+                <!-- small box -->
+                <div class="small-box bg-green">
+                  <div class="inner">
+                    <h3>{{ cell_lines|length }}</h3>
 
-              <p>Cell lines & Tissues</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-heart"></i>
-            </div>
-            <!--
-            <a href="#" class="small-box-footer">
-              More info <i class="fa fa-arrow-circle-right"></i>
-            </a>
-          -->
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-12 col-xs-12">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>{{ tf_names|length }}</h3>
+                    <p>Cell lines & Tissues</p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-heart"></i>
+                  </div>
+                  <!--
+                  <a href="#" class="small-box-footer">
+                    More info <i class="fa fa-arrow-circle-right"></i>
+                  </a>
+                -->
+                </div>
+              </div>
+              <!-- ./col -->
+              <div class="col-lg-12 col-xs-12">
+                <!-- small box -->
+                <div class="small-box bg-yellow">
+                  <div class="inner">
+                    <h3>{{ tf_names|length }}</h3>
 
-              <p>Transcription Factors</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-link"></i>
-            </div>
-             <!--
-            <a href="#" class="small-box-footer">
-              More info <i class="fa fa-arrow-circle-right"></i>
-            </a>
-          -->
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-12 col-xs-12">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <h3>{{ prediction_models|length }}</h3>
+                    <p>Transcription Factors</p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-link"></i>
+                  </div>
+                   <!--
+                  <a href="#" class="small-box-footer">
+                    More info <i class="fa fa-arrow-circle-right"></i>
+                  </a>
+                -->
+                </div>
+              </div>
+              <!-- ./col -->
+              <div class="col-lg-12 col-xs-12">
+                <!-- small box -->
+                <div class="small-box bg-red">
+                  <div class="inner">
+                    <h3>{{ prediction_models|length }}</h3>
 
-              <p>Prediction models</p>
+                    <p>Prediction models</p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-link"></i>
+                  </div>
+                   <!--
+                  <a href="#" class="small-box-footer">
+                    More info <i class="fa fa-arrow-circle-right"></i>
+                  </a>
+                -->
+                </div>
+              </div>
+              <!-- ./col -->
             </div>
-            <div class="icon">
-              <i class="ion ion-link"></i>
+              
+
+
+              <!-- /.row -->
             </div>
-             <!--
-            <a href="#" class="small-box-footer">
-              More info <i class="fa fa-arrow-circle-right"></i>
-            </a>
-          -->
+            <!-- /.box-body -->
           </div>
-        </div>
-        <!-- ./col -->
-      </div>
+          </div>
+
+           <div class="col-md-4 col-lg-4 col-xs-12">
+
+        <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Data analysis pipeline</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+               <!-- Small boxes (Stat box) -->
+            <div class="row">
+              <div class="col-lg-12 col-xs-12">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                  <div class="inner">
+                    <h3>ChIP-eat</h3>
+
+                    <p>The data processing pipeline</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fa fa-sitemap"></i>
+                  </div>
+                   
+                  <a href="https://bitbucket.org/CBGR/chip-eat" class="small-box-footer">
+                    Get the source code  <i class="fa fa-bitbucket"></i>
+                  </a>
+             
+                </div>
+              </div>
+       
+              <!-- ./col -->
+            </div>
               
 
 
@@ -148,168 +194,6 @@
 
     </div>
 
-  {% block javascript %}
-  <script src="{% static 'plugins/chartjs/Chart.min.js' %}"></script>
-
-  <script type="text/javascript">
-       $(function () {
-
-      'use strict';
-
-
-      //-------------
-      //- PIE CHART -
-      //-------------
-      // Get context with jQuery - using jQuery's .get() method.
-      var pieChartCanvas = $("#Unibindstats").get(0).getContext("2d");
-      var pieChart = new Chart(pieChartCanvas);
-      
-      var PieData = [
-        {
-          value: {{ vertibrates }},
-          color: "#f56954",
-          highlight: "#f56954",
-          label: "Vertebrates"
-        },
-        {
-          value: {{ plants }},
-          color: "#00a65a",
-          highlight: "#00a65a",
-          label: "Plants"
-        },
-        {
-          value: {{ insects }},
-          color: "#f39c12",
-          highlight: "#f39c12",
-          label: "Insects"
-        },
-        {
-          value: {{ nematodes }},
-          color: "#00c0ef",
-          highlight: "#00c0ef",
-          label: "Nematodes"
-        },
-        {
-          value: {{ fungi }},
-          color: "#3c8dbc",
-          highlight: "#3c8dbc",
-          label: "Fungi"
-        },
-        {
-          value: {{ urochordates }},
-          color: "#d2d6de",
-          highlight: "#d2d6de",
-          label: "Urochordates"
-        }
-      ];
-    
-    var pieOptions = {
-    //Boolean - Whether we should show a stroke on each segment
-    segmentShowStroke: true,
-    //String - The colour of each segment stroke
-    segmentStrokeColor: "#fff",
-    //Number - The width of each segment stroke
-    segmentStrokeWidth: 1,
-    //Number - The percentage of the chart that we cut out of the middle
-    percentageInnerCutout: 50, // This is 0 for Pie charts
-    //Number - Amount of animation steps
-    animationSteps: 100,
-    //String - Animation easing effect
-    animationEasing: "easeOutBounce",
-    //Boolean - Whether we animate the rotation of the Doughnut
-    animateRotate: true,
-    //Boolean - Whether we animate scaling the Doughnut from the centre
-    animateScale: false,
-    //Boolean - whether to make the chart responsive to window resizing
-    responsive: true,
-    // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-    maintainAspectRatio: false,
-    //String - A legend template
-    legendTemplate: "",
-    //String - A tooltip template
-    tooltipTemplate: "<%=value %> <%=label%> profiles"
-  };
-      //Create pie or douhnut chart
-      // You can switch between pie and douhnut using the method below.
-      pieChart.Doughnut(PieData, pieOptions);
-      //-----------------
-      //- END PIE CHART -
-      //-----------------
-
-
-    });
   
-  </script>
-
-<script type="text/javascript">
-  
-  $(function () {
-
-  
-    var lineChartData = {
-      labels: ["2004", "2006", "2008", "2010", "2014", "2016", "2018"],
-      datasets: [
-        {
-          label: "non-redundant",
-          fillColor: "rgba(60,141,188,0.9)",
-          strokeColor: "rgba(60,141,188,0.8)",
-          pointColor: "#3b8bba",
-          pointStrokeColor: "rgba(60,141,188,1)",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(60,141,188,1)",
-          data: [111, 123, 137, 457, 593, 1082, 1404]
-
-        }
-      ]
-    };
-
-    var lineChartOptions = {
-      //Boolean - If we should show the scale at all
-      showScale: true,
-      //Boolean - Whether grid lines are shown across the chart
-      scaleShowGridLines: false,
-      //String - Colour of the grid lines
-      scaleGridLineColor: "rgba(0,0,0,.05)",
-      //Number - Width of the grid lines
-      scaleGridLineWidth: 1,
-      //Boolean - Whether to show horizontal lines (except X axis)
-      scaleShowHorizontalLines: true,
-      //Boolean - Whether to show vertical lines (except Y axis)
-      scaleShowVerticalLines: true,
-      //Boolean - Whether the line is curved between points
-      bezierCurve: true,
-      //Number - Tension of the bezier curve between points
-      bezierCurveTension: 0.3,
-      //Boolean - Whether to show a dot for each point
-      pointDot: false,
-      //Number - Radius of each point dot in pixels
-      pointDotRadius: 4,
-      //Number - Pixel width of point dot stroke
-      pointDotStrokeWidth: 1,
-      //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
-      pointHitDetectionRadius: 20,
-      //Boolean - Whether to show a stroke for datasets
-      datasetStroke: true,
-      //Number - Pixel width of dataset stroke
-      datasetStrokeWidth: 2,
-      //Boolean - Whether to fill the dataset with a color
-      datasetFill: true,
-      //String - A legend template
-      legendTemplate: "",
-       //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-      maintainAspectRatio: true,
-      //Boolean - whether to make the chart responsive to window resizing
-      responsive: true
-    };
-
-    var lineChartCanvas = $("#lineChart").get(0).getContext("2d");
-    var lineChart = new Chart(lineChartCanvas);
-    lineChartOptions.datasetFill = false;
-    lineChart.Line(lineChartData, lineChartOptions);
-  });
-  </script>
-
-
-  {% endblock %}
 
 {% endblock %}
