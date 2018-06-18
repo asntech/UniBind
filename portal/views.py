@@ -138,7 +138,8 @@ def factor_detail(request, factor_id):
 	mlists = models
 	#BEM, DNAshaped, DiMO, PWM, TFFM
 	morder=[1,2,3,4,0]
-	models = [ mlists[i] for i in morder]
+	if len(morder) == len(mlists):
+		models = [ mlists[i] for i in morder]
 		
 	peak_callers = factor_details.values_list('peak_caller', flat=True).distinct().order_by('-peak_caller')
 

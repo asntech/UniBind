@@ -28,8 +28,8 @@ class Factor(models.Model):
     cell_line = models.CharField(max_length=255)
     biological_condition = models.CharField(max_length=255, blank=True)
     identifier = models.CharField(max_length=16)
-    jaspar_id = models.CharField(max_length=16, blank=True) 
-    jaspar_version = models.CharField(max_length=1, blank=True)
+    #jaspar_id = models.CharField(max_length=16, blank=True) 
+    #jaspar_version = models.CharField(max_length=1, blank=True)
     folder = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
@@ -56,6 +56,8 @@ class FactorData(models.Model):
     prediction_model = models.CharField(max_length=16, blank=False, choices=model_choices) 
     model_detail = models.CharField(blank=True, max_length=150)
     folder = models.ForeignKey(Factor, to_field='folder', db_column='folder')
+    jaspar_id = models.CharField(max_length=16, blank=True) 
+    jaspar_version = models.CharField(max_length=1, blank=True)
     distance_threshold = models.CharField(max_length=16)
     score_threshold = models.CharField(max_length=16) 
     adj_centrimo_pvalue = models.CharField(max_length=16)  
