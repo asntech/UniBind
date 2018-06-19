@@ -286,6 +286,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                   <th>Model</th>
                   <th>Peak caller</th>
                   <th>Model detail</th>
+                  <th>JASPAR ID</th>
                   <th>Enrichment Zone</th>
                   <th>Score threshold</th>
                   <th>Centrality p-value</th>
@@ -297,6 +298,9 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                   <td>{{ factor_detail.prediction_model }}</td>
                   <td>{{ factor_detail.peak_caller }}</td>
                   <td>{{ factor_detail.model_detail }}</td>
+                  <td>
+                  {% if factor_detail.jaspar_id %}{{ factor_detail.jaspar_id }}.{{ factor_detail.jaspar_version }}{% endif %}
+                  </td>
                   <td>{{ factor_detail.distance_threshold }}</td>
                   <td>{{ factor_detail.score_threshold }}</td>
                   <td>{{ factor_detail.adj_centrimo_pvalue }}</td>
