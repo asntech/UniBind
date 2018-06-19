@@ -37,6 +37,8 @@ class Migration(migrations.Migration):
                 ('prediction_model', models.CharField(choices=[('PWM', 'PWM'), ('DiMO', 'DiMO'), ('TFFM', 'TFFM'), ('DNAShaped', 'DNAShaped'), ('NRG', 'NRG')], max_length=16)),
                 ('model_detail', models.CharField(max_length=150)),
                 ('folder', models.CharField(max_length=255)),
+                ('jaspar_id', models.CharField(blank=True, max_length=16)),
+                ('jaspar_version', models.CharField(blank=True, max_length=1)),
                 ('distance_threshold', models.CharField(max_length=16)),
                 ('score_threshold', models.CharField(max_length=16)),
                 ('adj_centrimo_pvalue', models.CharField(max_length=16)),

@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'portal.apps.PortalConfig',
     'debug_toolbar',
-    'rest_framework',
+    #'rest_framework',
     'django_filters',
     'bootstrapform',
     #'restapi.v1',
@@ -108,12 +108,12 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'UniBind.sqlite3'),
         ##For MySQL we only need to add name string. For example
         #'ENGINE': 'django.db.backends.mysql',
-        #'NAME': 'UniBind',
+        #'NAME': 'unibind',
         ##If you are using MySQL engine, please fill the follwoing details. sqlite doesn't need these
-        #'USER': '',
-        #'PASSWORD': '',
+        #'USER': 'root',
+        #'PASSWORD': 'root',
         #'HOST': '/Applications/MAMP/tmp/mysql/mysql.sock',
-        #'PORT': '',
+        #'PORT': '3306',
     }
 }
 

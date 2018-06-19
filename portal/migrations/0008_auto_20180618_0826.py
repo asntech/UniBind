@@ -12,14 +12,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='factor',
-            name='jaspar_id',
-        ),
-        migrations.RemoveField(
-            model_name='factor',
-            name='jaspar_version',
-        ),
         migrations.AddField(
             model_name='factordata',
             name='jaspar_id',
