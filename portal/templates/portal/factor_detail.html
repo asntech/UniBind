@@ -303,7 +303,13 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                   </td>
                   <td>{{ factor_detail.distance_threshold }}</td>
                   <td>{{ factor_detail.score_threshold }}</td>
-                  <td>{{ factor_detail.adj_centrimo_pvalue }}</td>
+                  <td>
+                    {% if factor_detail.adj_centrimo_pvalue == 'NA' %}
+                    NS
+                    {% else %}
+                      {{ factor_detail.adj_centrimo_pvalue }}
+                    {% endif %}
+                  </td>
                   
                 </tr>
                 {% endfor %}
