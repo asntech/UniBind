@@ -137,7 +137,7 @@ def factor_detail(request, factor_id):
 	models = factor_details.values_list('prediction_model', flat=True).distinct()
 	mlists = models
 	#BEM, DNAshaped, DiMO, PWM, TFFM
-	morder=[1,2,3,4,0]
+	morder=[1,2,3,0]
 	if len(morder) == len(mlists):
 		models = [ mlists[i] for i in morder]
 		
@@ -182,7 +182,7 @@ def download_data(request):
 	models = FactorData.objects.all().values_list('prediction_model', flat=True).distinct()
 	mlists = models
 	#BEM, DNAshaped, DiMO, PWM, TFFM
-	morder=[1,2,3,4,0]
+	morder=[1,2,3,0]
 	models = [ mlists[i] for i in morder]
 
 	peak_callers = FactorData.objects.all().values_list('peak_caller', flat=True).distinct().order_by('-peak_caller')
