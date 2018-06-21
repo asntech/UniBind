@@ -195,11 +195,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                               <button type="button" class="btn btn-info"><i class="fa fa-download"> </i> Trained Model</button>
                             </a>
                         </p>
-                        {% if tar_file_name %}
-                        <script type="text/javascript">
-                          location.replace('/temp/{{ tar_file_name }}');  
-                        </script>
-                        {% endif %}
+                        
                         </div>
                       </div>
                       <!-- /.box-body -->
@@ -580,5 +576,11 @@ Detailed information of <b>{{ factor.tf_name }} </b>
         });
       </script>
     {% endblock %}
+
+    {% if tar_file_name %}
+      <script type="text/javascript">
+        location.replace('/temp/{{ tar_file_name }}');  
+      </script>
+    {% endif %}
 
 {% endblock %}
