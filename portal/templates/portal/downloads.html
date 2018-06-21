@@ -23,30 +23,30 @@ Download data
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs" id="detailTabs">
               {% for model in models %}
-              <li class="{% if forloop.counter == 1 %} active {% endif %}"><a href="#{{ model }}" data-toggle="tab">{{ model }}</a></li>
+              <li class="{% if forloop.counter == 1 %} active {% endif %}"><a href="#{% if model == 'DiMO' %}PWM{% else %}{{ model }}{% endif %}" data-toggle="tab">{% if model == 'DiMO' %} PWM {% else %}{{ model }}{% endif %}</a></li>
               {% endfor %}
               
             </ul>
             <div class="tab-content">
               {% for model in models %}
-              <div class="{% if forloop.counter == 1 %} active {% endif %} tab-pane" id="{{ model }}">
+              <div class="{% if forloop.counter == 1 %} active {% endif %} tab-pane" id="{% if model == 'DiMO' %}PWM{% else %}{{ model }}{% endif %}">
                 <p>
-                  <h4>Download data for model: <b>{{ model }}</b></h4>
+                  <h4>Download data for model: <b>{% if model == 'DiMO' %} PWM {% else %}{{ model }}{% endif %}</b></h4>
                   <div class="nav-tabs-custom">
                   <ul class="nav nav-tabs" id="detailTabs-peakcallers">
                     {% for peak_caller in peak_callers %}
-                    <li class="{% if forloop.counter == 1 %} active {% endif %}"><a href="#{{ model }}-{{ peak_caller }}" data-toggle="tab">{{ peak_caller }}</a></li>
+                    <li class="{% if forloop.counter == 1 %} active {% endif %}"><a href="#{% if model == 'DiMO' %}PWM{% else %}{{ model }}{% endif %}-{{ peak_caller }}" data-toggle="tab">{{ peak_caller }}</a></li>
                     {% endfor %}
                     
                   </ul>
                   <div class="tab-content">
                     {% for peak_caller in peak_callers %}
-                    <div class="{% if forloop.counter == 1 %} active {% endif %} tab-pane" id="{{ model }}-{{ peak_caller }}">
+                    <div class="{% if forloop.counter == 1 %} active {% endif %} tab-pane" id="{% if model == 'DiMO' %}PWM{% else %}{{ model }}{% endif %}-{{ peak_caller }}">
                      
                     <div class="row">
                       <div class="col-md-12">
                     
-                        Download TFBSs for prediction model <b>{{ model }}</b> and peak-caller <b>{{ peak_caller }}</b>
+                        Download TFBSs for prediction model <b>{% if model == 'DiMO' %} PWM {% else %}{{ model }}{% endif %}</b> and peak-caller <b>{{ peak_caller }}</b>
 
                         <hr>
                         <p>
