@@ -97,19 +97,21 @@ Detailed information of <b>{{ factor.tf_name }} </b>
     </div>
 
     <div class="row">
-
+      
     <div class="col-md-12">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs" id="detailTabs">
               {% for model in models %}
-              <li class="{% if forloop.counter == 1 %} active {% endif %}"><a href="#{{ model }}" data-toggle="tab">{{ model }}</a></li>
+              <li class="{% if forloop.counter == 1 %} active {% endif %}"><a href="#{% if model == 'DiMO' %}PWM{% else %}{{ model }}{% endif %}" data-toggle="tab">{% if model == 'DiMO' %} PWM {% else %}{{ model }}{% endif %}</a></li>
               {% endfor %}
             </ul>
             <div class="tab-content">
               {% for model in models %}
-              <div class="{% if forloop.counter == 1 %} active {% endif %} tab-pane" id="{{ model }}">
+              <div class="{% if forloop.counter == 1 %} active {% endif %} tab-pane" id="{% if model == 'DiMO' %}PWM{% else %}{{ model }}{% endif %}">
                 <p>
-                  <h4>Peak caller(s) for model: <b>{{ model }}</b></h4>
+                  <h4>Peak caller(s) for model: <b>
+                  {% if model == 'DiMO' %} PWM {% else %}{{ model }}{% endif %}
+                </b></h4>
                   <div class="nav-tabs-custom">
                   <ul class="nav nav-tabs" id="detailTabs-peakcallers">
                     {% for peak_caller in peak_callers %}
@@ -120,45 +122,89 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                     {% for peak_caller in peak_callers %}
                     <div class="{% if forloop.counter == 1 %} active {% endif %} tab-pane" id="{{ model }}-{{ peak_caller }}">
                     <div class="row">
-                     <div class="col-md-4">
+
+                    <div class="col-md-4">
+                    
                     <div class="box box-solid">
                       <div class="box-header with-border">
                         <i class="fa fa-download"></i>
-                        <h3 class="box-title">Data download</h3>
+                        <h3 class="box-title"> Download TFBSs & Peaks</h3>
                       </div>
                       <!-- /.box-header -->
                       <div class="box-body">
                         <div class="box-body table-responsive no-padding">
+                          <p>Download TFBSs in BED and FASTA format</p>
                         <p>
                           {% if model == 'DNAshaped' %}
 
-                          <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_4bits.tfbs">
-                              <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> Download TFBS 4bits</button>
+                           <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_4bits.tfbs.bed">
+                              <button type="button" class="btn btn-info"><i class="fa fa-download"> </i> TFBSs 4bits (BED)</button>
+                            </a>
+
+                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_4bits.tfbs.fa">
+                              <button type="button" class="btn btn-success"><i class="fa fa-download"> </i> TFBSs 4bits (FASTA)</button>
+                            </a>
+
+                            <br><br>
+                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_pssm.tfbs.bed">
+                              <button type="button" class="btn btn-info"><i class="fa fa-download"> </i> TFBSs PWM (BED)</button>
+                            </a>
+                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_pssm.tfbs.bed">
+                              <button type="button" class="btn btn-success"><i class="fa fa-download"> </i> TFBSs PWM (FASTA)</button>
                             </a>
                             <br><br>
-                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_pssm.tfbs">
-                              <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> Download TFBS PWM</button>
+                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_tffm-fo.tfbs.bed">
+                              <button type="button" class="btn btn-info"><i class="fa fa-download"> </i> TFBSs TFFM (BED)</button>
                             </a>
-                            <br><br>
-                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_tffm-fo.tfbs">
-                              <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> Download TFBS TFFM</button>
+                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_tffm-fo.tfbs.fa">
+                              <button type="button" class="btn btn-success"><i class="fa fa-download"> </i> TFBSs TFFM (FASTA)</button>
                             </a>
                           {% else %}
 
-                          <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model|lower }}.tfbs">
-                              <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> Download TFBSs</button>
+                          <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model|lower }}.tfbs.bed">
+                              <button type="button" class="btn btn-info"><i class="fa fa-download"> </i> TFBSs in BED</button>
+                            </a>
+
+                          <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model|lower }}.tfbs.fa">
+                              <button type="button" class="btn btn-success"><i class="fa fa-download"> </i> TFBSs in FASTA</button>
                             </a>
 
                         {% endif %}
 
                         <hr>
+                        <p>Download peaks in BED format</p>
                           <a href="{% static "" %}data/peaks/{{ peak_caller|lower }}/{{ factor.folder }}/{{ factor.folder }}_peaks.narrowPeak">
                               <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> Download Peaks </button>
+                            </a>
                         </p>
                         </div>
                       </div>
                       <!-- /.box-body -->
                     </div>
+                    <div class="box box-solid">
+                      <div class="box-header with-border">
+                        <i class="fa fa-download"></i>
+                        <h3 class="box-title">Download trained model</h3>
+                      </div>
+                      <!-- /.box-header -->
+                      <div class="box-body">
+                        <div class="box-body table-responsive no-padding">
+                        <p>Download trained prediction models</p>
+                        <p>
+                         <a href="?mtrain={{ model|lower }}">
+                              <button type="button" class="btn btn-info"><i class="fa fa-download"> </i> Trained Model</button>
+                            </a>
+                        </p>
+                        {% if tar_file_name %}
+                        <script type="text/javascript">
+                          location.replace('{% static "" %}temp/{{ tar_file_name }}');  
+                        </script>
+                        {% endif %}
+                        </div>
+                      </div>
+                      <!-- /.box-body -->
+                    </div>
+
                     <!-- /.box -->
                   </div>
                   <!-- ./col -->
@@ -177,7 +223,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
 
                             <div class="box-tools pull-right">
                             <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_4bits.png" target="_blank">
-                              <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> Download</button>
+                              <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> </button>
                             </a>
                             </div>
                             
@@ -199,7 +245,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                             </h4>
                              <div class="box-tools pull-right">
                             <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_pssm.png" target="_blank">
-                              <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> Download</button>
+                              <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> </button>
                             </a>
                             </div>
 
@@ -220,7 +266,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                             </h4>
                              <div class="box-tools pull-right">
                             <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_tffm-fo.png" target="_blank">
-                              <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> Download</button>
+                              <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> </button>
                             </a>
                             </div>
 
@@ -241,7 +287,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                         <h3 class="box-title">Summary plots</h3>
                         <div class="box-tools pull-right">
                         <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model|lower }}.png" target="_blank">
-                          <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> Download</button>
+                          <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> </button>
                         </a>
                         </div>
                       </div>
@@ -295,7 +341,9 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                 <tbody>
                 {% for factor_detail in factor_details %}
                   <tr>                  
-                  <td>{{ factor_detail.prediction_model }}</td>
+                  <td>{% if factor_detail.prediction_model == 'DiMO' %} PWM {% else %}{{ factor_detail.prediction_model }}{% endif %}
+
+                  </td>
                   <td>{{ factor_detail.peak_caller }}</td>
                   <td>{{ factor_detail.model_detail }}</td>
                   <td>

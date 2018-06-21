@@ -143,12 +143,25 @@ def factor_detail(request, factor_id):
 		
 	peak_callers = factor_details.values_list('peak_caller', flat=True).distinct().order_by('-peak_caller')
 
+	model_name = request.GET.get('mtrain', None)
+	if model_name and model_name != '':
+		#Create a zip file
+		tar_file_name = 'UniBind_trained_model_'+model_name+'_'+_get_current_date()+'.tar.gz'
+		tar_file_path = TEMP_DIR+'/'+tar_file_name
+		target_path = BASE_DIR+'/static/data/'+model_name+'/'+factor_id
+
+		cmd = "tar --exclude='"+target_path+"/*.bed' --exclude='"+target_path+"/*.fa' --exclude='"+target_path+"/*.png' -zcf "+tar_file_path+" "+target_path
+		os.system(cmd)
+	else:
+		tar_file_name = None
+
 	context = {
 		'factor': factor,
 		'factor_details': factor_details,
 		'models': models,
 		'peak_callers': peak_callers,
 		'factors': similar_factors,
+		'tar_file_name': tar_file_name,
 	}
 
 	return render(request, 'portal/factor_detail.html', context)					

@@ -13,10 +13,10 @@
 			</div> 
 			<div class="form-group">                                     
 			<b>Examples:</b>
-			<a href="/search?q=JUND">JUND</a>,
+			<a href="/search?q=SRF">SRF</a>,
 			<a href="/search?q=K562"> K562</a>,
 			<a href="/search?q=ENCODE"> ENCODE</a>,
-			<a href="/search?q=ENCSR000BGI"> ENCSR000BGI</a>,
+			<a href="/search?q=ENCSR000BLV"> ENCSR000BLV</a>,
 			<a href="/search?q=MA0492.1"> MA0492.1</a>
 			<a role="button" class="pull-right" data-toggle="collapse" href="#advanced-search" aria-expanded="false" aria-controls="advanced-search"><strong>Advanced Options</strong></a>
 			</div>
@@ -43,7 +43,7 @@
 			</div>
 			<div class="col-sm-5">
 			<div class="form-group">
-				<label class="col-sm-3 control-label" for="cell_line">Cell-line: </label>
+				<label class="col-sm-3 control-label" for="cell_line">Cell-line/Tissue: </label>
 				<div class="col-sm-9">
 					<select name="cell_line" class="form-control">
 						<option value="all"> All cell-lines</option>
@@ -111,9 +111,9 @@
 			<div class="form-group">
 				
 																															 
-				<label class="col-sm-3 control-label" for="has_pvalue">P-value </label>
+				<label class="col-sm-3 control-label" for="has_pvalue">Centrality </label>
 				<div class="col-sm-9">
-					<input type="checkbox" class="form-control flat-red" name="has_pvalue" value="1" {% if request.GET.has_pvalue == "1" %} checked {% endif %}>  Has significant centrality p-value?
+					<input type="checkbox" class="form-control flat-red" name="has_pvalue" value="1" {% if request.GET.has_pvalue == "1" %} checked {% endif %}>  Has significant centrality?
 				</div>
 			
 			</div>
