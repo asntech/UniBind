@@ -221,7 +221,13 @@ A map of direct TF-DNA interactions in the human genome
             },
 
             {
-              
+              title: 'Search UniBind database',
+              content: "You can search UniBind by TF name or dataset identifiers or any other keyword.",
+              target: 'advanced-search1',
+              placement: 'bottom',
+              onNext: function() {
+                $('ul#api-pulldown').toggle(200);
+              }
             }
       
           ]
