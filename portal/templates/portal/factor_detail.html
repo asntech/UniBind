@@ -33,7 +33,8 @@ Detailed information of <b>{{ factor.tf_name }} </b>
               <table class="table table-hover" id="profile-detail">
               <tr>
                 <td><b>TF Name:</b>  </td>
-                <td>{{ factor.tf_name }}</td>
+                <td>{{ factor.tf_name }}
+                </td>
               
                 <td><b>Cell-type/Tissue: </b> </td>
                 <td>{{ factor.cell_line }}</td>
@@ -137,35 +138,35 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                         <p>
                           {% if model == 'DNAshaped' %}
 
-                           <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_4bits.tfbs.bed">
+                           <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_4bits.tfbs.bed">
                               <button type="button" class="btn btn-info"><i class="fa fa-download"> </i> TFBSs 4bits (BED)</button>
                             </a>
 
-                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_4bits.tfbs.fa">
+                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_4bits.tfbs.fa">
                               <button type="button" class="btn btn-success"><i class="fa fa-download"> </i> TFBSs 4bits (FASTA)</button>
                             </a>
 
                             <br><br>
-                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_pssm.tfbs.bed">
+                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_pssm.tfbs.bed">
                               <button type="button" class="btn btn-info"><i class="fa fa-download"> </i> TFBSs PWM (BED)</button>
                             </a>
-                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_pssm.tfbs.bed">
+                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_pssm.tfbs.bed">
                               <button type="button" class="btn btn-success"><i class="fa fa-download"> </i> TFBSs PWM (FASTA)</button>
                             </a>
                             <br><br>
-                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_tffm-fo.tfbs.bed">
+                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_tffm-fo.tfbs.bed">
                               <button type="button" class="btn btn-info"><i class="fa fa-download"> </i> TFBSs TFFM (BED)</button>
                             </a>
-                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_tffm-fo.tfbs.fa">
+                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_tffm-fo.tfbs.fa">
                               <button type="button" class="btn btn-success"><i class="fa fa-download"> </i> TFBSs TFFM (FASTA)</button>
                             </a>
                           {% else %}
 
-                          <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model|lower }}.tfbs.bed">
+                          <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model|lower }}.tfbs.bed">
                               <button type="button" class="btn btn-info"><i class="fa fa-download"> </i> TFBSs in BED</button>
                             </a>
 
-                          <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model|lower }}.tfbs.fa">
+                          <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model|lower }}.tfbs.fa">
                               <button type="button" class="btn btn-success"><i class="fa fa-download"> </i> TFBSs in FASTA</button>
                             </a>
 
@@ -173,7 +174,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
 
                         <hr>
                         <p>Download peaks in BED format</p>
-                          <a href="{% static "" %}data/peaks/{{ peak_caller|lower }}/{{ factor.folder }}/{{ factor.folder }}_peaks.narrowPeak">
+                          <a href="{% static "" %}data/peaks/{{ peak_caller|lower }}/{{ folder_name }}/{{ folder_name }}_peaks.narrowPeak">
                               <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> Download Peaks </button>
                             </a>
                         </p>
@@ -218,7 +219,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                             </h4>
 
                             <div class="box-tools pull-right">
-                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_4bits.png" target="_blank">
+                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_4bits.png" target="_blank">
                               <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> </button>
                             </a>
                             </div>
@@ -226,7 +227,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                           </div>
                           <div id="4bits" class="panel-collapse collapse in">
                             <div class="box-body">
-                              <img class="img-responsive" src="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_4bits.png">
+                              <img class="img-responsive" src="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_4bits.png">
                                                     
                             </div>
                           </div>
@@ -240,7 +241,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                               </a>
                             </h4>
                              <div class="box-tools pull-right">
-                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_pssm.png" target="_blank">
+                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_pssm.png" target="_blank">
                               <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> </button>
                             </a>
                             </div>
@@ -248,7 +249,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                           </div>
                           <div id="pwm" class="panel-collapse collapse">
                             <div class="box-body">
-                              <img class="img-responsive" src="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_pssm.png">
+                              <img class="img-responsive" src="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_pssm.png">
                             </div>
                           </div>
                         </div>
@@ -261,7 +262,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                               </a>
                             </h4>
                              <div class="box-tools pull-right">
-                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_tffm-fo.png" target="_blank">
+                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_tffm-fo.png" target="_blank">
                               <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> </button>
                             </a>
                             </div>
@@ -269,7 +270,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                           </div>
                           <div id="tffm" class="panel-collapse collapse">
                             <div class="box-body">
-                              <img class="img-responsive" src="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_tffm-fo.png">
+                              <img class="img-responsive" src="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_tffm-fo.png">
                             </div>
                           </div>
                         </div>
@@ -282,14 +283,14 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                         <i class="fa fa-image"></i>
                         <h3 class="box-title">Summary plots</h3>
                         <div class="box-tools pull-right">
-                        <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model|lower }}.png" target="_blank">
+                        <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model|lower }}.png" target="_blank">
                           <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> </button>
                         </a>
                         </div>
                       </div>
                       <!-- /.box-header -->
                       <div class="box-body">                      
-                      <img class="img-responsive" src="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ factor.folder }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model|lower }}.png">
+                      <img class="img-responsive" src="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model|lower }}.png">
                       <!-- /.box-body -->
                     </div>
                     </div>
@@ -394,7 +395,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                 <tbody>
                 {% for factor in factors %}
                   <tr>                  
-                  <td><b><a href="/factor/{{ factor.folder }}">{{ factor.tf_name }}</a></b></td>
+                  <td><b><a href="/factor/{{ folder_name }}">{{ factor.tf_name }}</a></b></td>
                   <td>{{ factor.cell_line }}</td>
                   <td> {{ factor.biological_condition }}</td>
                   <td>{{ factor.data_source }}</td>

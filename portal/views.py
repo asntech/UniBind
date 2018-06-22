@@ -131,6 +131,7 @@ def factor_detail(request, factor_id):
 
 	#factor_details = FactorData.objects.filter(folder=factor_id)
 	factor_details = FactorData.objects.filter(folder__folder__iexact=factor_id)
+	folder_name = factor_details.values_list('folder', flat=True)[0]
 
 
 	similar_factors = Factor.objects.filter(tf_name=factor.tf_name).exclude(folder=factor_id).order_by('tf_name')
@@ -159,6 +160,7 @@ def factor_detail(request, factor_id):
 
 	context = {
 		'factor': factor,
+		'folder_name': folder_name,
 		'factor_details': factor_details,
 		'models': models,
 		'peak_callers': peak_callers,
