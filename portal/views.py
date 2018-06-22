@@ -127,9 +127,11 @@ def factor_detail(request, factor_id):
 	This will show the details of a factor based on factor_id
 	'''
 
-	factor = Factor.objects.get(folder=factor_id)
+	factor = Factor.objects.get(folder__iexact=factor_id)
 
-	factor_details = FactorData.objects.filter(folder=factor_id)
+	#factor_details = FactorData.objects.filter(folder=factor_id)
+	factor_details = FactorData.objects.filter(folder__folder__iexact=factor_id)
+
 
 	similar_factors = Factor.objects.filter(tf_name=factor.tf_name).exclude(folder=factor_id).order_by('tf_name')
 
