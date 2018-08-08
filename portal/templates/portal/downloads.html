@@ -50,9 +50,12 @@ Download data
 
                         <hr>
                         <p>
-                        <a href="{% static "" %}data/bulk/all_tfbs_{{ model|lower }}.tar.gz"><h5><i class="fa fa-download"> </i> All TFBSs (in BED format)</h5></a>
-                        <a href="{% static "" %}data/bulk/all_tfbs_per_tf_{{ model|lower }}.tar.gz"><h5><i class="fa fa-download"> </i> TFBSs per TF (in BED format)</h5></a>
-                        <a href="{% static "" %}data/bulk/all_tfbs_sequences_per_tf_{{ model|lower }}.tar.gz"><h5><i class="fa fa-download"> </i> FASTA files for the TFBSs per TF</h5></a>
+                        <a href="{% static "" %}data/bulk/{{ model|lower }}_tfbs.tar.gz"><h5><i class="fa fa-download"> </i> All TFBSs (in BED format)</h5></a>
+                        <a href="{% static "" %}data/bulk/{{ model|lower }}_tfbs_per_tf.tar.gz"><h5><i class="fa fa-download"> </i> TFBSs per TF (in BED format)</h5></a>
+
+                        <a href="{% static "" %}data/bulk/{{ model|lower }}_tfbs_sequences.tar.gz"><h5><i class="fa fa-download"> </i> FASTA files for the TFBSs</h5></a>
+
+                        <a href="{% static "" %}data/bulk/{{ model|lower }}_tfbs_sequences_per_tf.tar.gz"><h5><i class="fa fa-download"> </i> FASTA files for the TFBSs per TF</h5></a>
                         </p>
 
                       </div>
@@ -77,7 +80,7 @@ Download data
 
           <div class="box box-success">
             <div class="box-header with-border">
-              <h3 class="box-title"><i class="fa fa-download"></i> Download cis-regulatory modules (CRMs)</h3>
+              <h3 class="box-title"><i class="fa fa-download"></i> Download cis-regulatory modules (CRMs) and Peaks</h3>
               </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -85,6 +88,8 @@ Download data
               <p>
                 <a href="{% static "" %}data/bulk/all_crm_per_cell_line.tar.gz"><h5><i class="fa fa-download"> </i> All CRMs per Cell-line (in BED format)</h5></a>
                 <a href="{% static "" %}data/bulk/all_crm.tar.gz"><h5><i class="fa fa-download"> </i> All CRMs (in BED format)</h5></a>
+
+                <a href="{% static "" %}data/bulk/remap2018_peaks_per_tf.tar.gz"><h5><i class="fa fa-download"> </i> All ReMap peaks per TF (in BED format)</h5></a>
               </p>
 
               <!-- code folding -->
