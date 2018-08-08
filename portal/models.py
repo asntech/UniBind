@@ -31,6 +31,7 @@ class Factor(models.Model):
     jaspar_id = models.CharField(max_length=16, blank=True) 
     jaspar_version = models.CharField(max_length=1, blank=True)
     folder = models.CharField(max_length=255, unique=True)
+    total_peaks = models.CharField(max_length=16, blank=True) 
 
     def __str__(self):
         return self.tf_name
@@ -60,7 +61,8 @@ class FactorData(models.Model):
     jaspar_version = models.CharField(max_length=1, blank=True)
     distance_threshold = models.CharField(max_length=16)
     score_threshold = models.CharField(max_length=16) 
-    adj_centrimo_pvalue = models.CharField(max_length=16)  
+    adj_centrimo_pvalue = models.CharField(max_length=16)
+    total_tfbs = models.CharField(max_length=16, blank=True) 
     
 
 #Model for Post table in the database

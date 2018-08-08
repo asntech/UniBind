@@ -173,7 +173,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                         {% endif %}
 
                         <hr>
-                        <p>Download peaks in BED format</p>
+                        <p>Download <strong>{{ factor.total_peaks }} </strong>peaks in BED format</p>
                           <a href="{% static "" %}data/peaks/{{ peak_caller|lower }}/{{ folder_name }}/{{ folder_name }}_peaks.narrowPeak">
                               <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> Download Peaks </button>
                             </a>
@@ -283,14 +283,14 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                         <i class="fa fa-image"></i>
                         <h3 class="box-title">Summary plots</h3>
                         <div class="box-tools pull-right">
-                        <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model|lower }}.png" target="_blank">
+                        <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}{% if factor.data_source == 'ENCODE' %}_{% else %}.{% endif %}{{ model|lower }}.png" target="_blank">
                           <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> </button>
                         </a>
                         </div>
                       </div>
                       <!-- /.box-header -->
                       <div class="box-body">                      
-                      <img class="img-responsive" src="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model|lower }}.png">
+                      <img class="img-responsive" src="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}{% if factor.data_source == 'ENCODE' %}_{% else %}.{% endif %}{{ model|lower }}.png">
                       <!-- /.box-body -->
                     </div>
                     </div>
@@ -331,6 +331,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                   <th>Model detail</th>
                   <th>Model ID</th>
                   <th>Enrichment Zone</th>
+                  <th>TFBSs</th>
                   <th>Score threshold</th>
                   <th>Centrality p-value</th>
                 </tr>
@@ -347,6 +348,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                   {% if factor_detail.jaspar_id %}{{ factor_detail.jaspar_id }}.{{ factor_detail.jaspar_version }}{% endif %}
                   </td>
                   <td>{{ factor_detail.distance_threshold }}</td>
+                  <td>{{ factor_detail.total_tfbs }}</td>
                   <td>{{ factor_detail.score_threshold }}</td>
                   <td>
                     {% if factor_detail.adj_centrimo_pvalue == 'NA' %}
