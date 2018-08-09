@@ -15,6 +15,7 @@ tests/coverage_html/
 tests/.coverage
 build/
 UniBind.sql
+UniBind.sqlite3
 tests/report/
 bin
 temp

@@ -40,7 +40,9 @@
               <h3 id="dataprocess"><i class="fa fa-database"></i> How was the data processed?</h3>
               <hr>
               <p>
-              The entire collection of ChIP-seq data sets was processed through the ChIP-eat data processing pipeline. The complete pipeline designed to process ChIP-seq data sets from raw reads to identification of direct TF-DNA binding events was implemented in the ChIP-eat software with source code freely available at <a href="https://bitbucket.org/CBGR/chip-eat/" target="_blank">https://bitbucket.org/CBGR/chip-eat/</a>. Specifically, ChIP-eat allows for: (i) aligning and filtering raw ChIP-seq data, (ii) calling ChIP-seq peaks, (iii) training the TFBS computational models and (iv) automatically defining the enrichment zone in the landscape  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4082612/" target="_blank">plots</a> to predict TFBSs.
+              The entire collection of ChIP-seq data sets was uniformly processed in <a href="https://academic.oup.com/nar/article/46/D1/D267/4602873" target="_blank">ReMap</a> up to ChIP-seq peak calling. The entire collection of ChIP-seq peaks is also available in the <a href="http://pedagogix-tagc.univ-mrs.fr/remap/" target="_blank">ReMap database</a>. These peaks served as input for the ChIP-eat data processing pipeline. The complete pipeline is designed to uniformly process ChIP-seq data sets, from raw reads to the identification of direct TF-DNA binding events, and it was implemented in the ChIP-eat software with source code freely available at https://bitbucket.org/CBGR/chip-eat/. 
+
+               Specifically, ChIP-eat allows for: (i) aligning and filtering raw ChIP-seq data, (ii) calling ChIP-seq peaks, (iii) training the TFBS computational models and (iv) automatically defining the enrichment zone in the landscape  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4082612/" target="_blank">plots</a> to predict TFBSs.
                 Four TFBS computation models are provided: PWMs, optimized with <a href="https://www.ncbi.nlm.nih.gov/pubmed/24369152" target="_blank">DiMO</a>, <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3764009/" target="_blank">TFFM</a>,
 <a href="https://www.cell.com/cell-systems/abstract/S2405-4712(16)30218-6" target="_blank">DNAshaped</a>, 
 and <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3389974/" target="_blank">binding energy models </a>.
@@ -104,7 +106,7 @@ and <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3389974/" target="_bla
             <div id="TOC">
               <ul>
       
-              <li><a href="#UniBind">How is UniBind?</a></li>
+              <li><a href="#UniBind">What is UniBind?</a></li>
               <li><a href="#dataprocess">How was the data processed?</a></li>
               <li><a href="#UniBindhost">What data does UniBind host?</a></li>
               <li><a href="#UniBindentry">What does each entry in UniBind contain?</a></li>
