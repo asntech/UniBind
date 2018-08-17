@@ -28,7 +28,12 @@ SECRET_KEY = 'e2sd^q-0bl-nhl^rnr633259_@ddq7!q07$q!fzdelbaja04da'
 ADMINS = [('Aziz', 'azez.khan@gmail.com'),]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+SESSION_COOKIE_SECURE = True
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+CSRF_COOKIE_SECURE = True
+X_FRAME_OPTIONS = 'DENY'
 
 ALLOWED_HOSTS = [
     '*'
