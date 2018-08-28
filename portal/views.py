@@ -9,8 +9,6 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q, Max
 from .models import Factor, FactorData, Post
 from itertools import chain
-from operator import attrgetter
-from sets import Set as set
 from .forms import SearchForm, ContactForm
 import os, sys, re
 from django.core.mail import send_mail, BadHeaderError
