@@ -153,7 +153,7 @@ def factor_detail(request, factor_id):
 		target_path = BASE_DIR+'/static/data/macs/'+model_name+'/'+factor_id
 
 		cmd = "tar --exclude='"+target_path+"/*.bed' --exclude='"+target_path+"/*.fa' --exclude='"+target_path+"/*.png' -czf "+tar_file_path+" "+target_path
-		print(cmd)
+
 		os.system(cmd)
 	else:
 		tar_file_name = None
