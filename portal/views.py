@@ -149,7 +149,7 @@ def factor_detail(request, factor_id):
 		#Create a zip file
 		tar_file_name = 'UniBind_trained_model_'+model_name+'_'+_get_current_date()+'.tar.gz'
 		tar_file_path = TEMP_DIR+'/'+tar_file_name
-		target_path = BASE_DIR+'/static/data/'+model_name+'/'+factor_id
+		target_path = BASE_DIR+'/static/data/macs/'+model_name+'/'+factor_id
 
 		cmd = "tar --exclude='"+target_path+"/*.bed' --exclude='"+target_path+"/*.fa' --exclude='"+target_path+"/*.png' -czf -f "+tar_file_path+" "+target_path
 		os.system(cmd)
