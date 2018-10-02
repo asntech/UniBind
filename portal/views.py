@@ -152,7 +152,7 @@ def factor_detail(request, factor_id):
 		tar_file_path = TEMP_DIR+'/'+tar_file_name
 		target_path = BASE_DIR+'/static/data/macs/'+model_name+'/'+factor_id
 
-		cmd = "tar -czf "+tar_file_path+" "+target_path+" --exclude='"+target_path+"/*.bed' --exclude='"+target_path+"/*.fa' --exclude='"+target_path+"/*.png'"
+		cmd = "tar -czf "+tar_file_path+" -C "+target_path+" --exclude='"+target_path+"/*.bed' --exclude='"+target_path+"/*.fa' --exclude='"+target_path+"/*.png'"
 
 		os.system(cmd)
 	else:
