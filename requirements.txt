@@ -1,4 +1,4 @@
-django==1.11
+django==1.11.15
 bootstrap-admin==0.3.7.1
 markdown==2.6.8
 pygments
