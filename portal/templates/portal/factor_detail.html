@@ -45,7 +45,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                 <td>{{ factor.biological_condition }}</td>
               
                 <td><b>JASPAR ID:</b>  </td>
-                <td>{{ factor.jaspar_id }}.{{ factor.jaspar_version }}</td>
+                <td><a href="http://jaspar.genereg.net/matrix/{{ factor.jaspar_id }}.{{ factor.jaspar_version }}" target="_blank">{{ factor.jaspar_id }}.{{ factor.jaspar_version }}</a></td>
               </tr>
 
               <tr>
@@ -53,7 +53,24 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                 <td>{{ factor.data_source }}</td>
               
                 <td><b>Identifier:</b>  </td>
-                <td>{{ factor.identifier }}</td>
+                <td><a href="
+
+                    {% if factor.data_source == 'ENCODE' %}
+                    https://www.encodeproject.org/experiments/{{ factor.identifier }}/
+
+                    {% elif factor.data_source == 'AE' %}
+                    https://www.ebi.ac.uk/arrayexpress/search.html?query={{ factor.identifier }}
+
+                    {% elif factor.data_source == 'GEO' %}
+                    https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc={{ factor.identifier }}
+
+                    {% else %}
+
+                    #
+
+                    {% endif %}
+
+                    " target="_blank"> {{ factor.identifier }} </a></td>
               </tr>
               
               </table>
@@ -345,7 +362,11 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                   <td>{{ factor_detail.peak_caller }}</td>
                   <td>{{ factor_detail.model_detail }}</td>
                   <td>
-                  {% if factor_detail.jaspar_id %}{{ factor_detail.jaspar_id }}.{{ factor_detail.jaspar_version }}{% endif %}
+                  {% if factor_detail.jaspar_id %}
+                  
+                  <a href="http://jaspar.genereg.net/matrix/{{ factor.jaspar_id }}.{{ factor.jaspar_version }}" target="_blank">{{ factor.jaspar_id }}.{{ factor.jaspar_version }}</a>
+
+                  {% endif %}
                   </td>
                   <td>{{ factor_detail.distance_threshold }}</td>
                   <td>{{ factor_detail.total_tfbs }}</td>
