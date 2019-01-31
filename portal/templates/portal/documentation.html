@@ -69,7 +69,13 @@ and <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3389974/" target="_bla
 
               <h3 id="download"><i class="fa fa-download"></i> How can I download the data?</h3>
               <hr>
-              <p>The user can download the set of transcription factor binding sites (TFBSs), the initial ChIP-seq peaks, and the trained prediction models for each of the datasets individually by navigating to the UniBind entry of interest. If the user wants to download the available data in bulk, this can be done through the <a href="/downloads">Download</a> section of the UniBind database. This section allows the user to download the cis-regulatory modules derived using the entire set of TFBS predictions.</p>
+              <p>The user can download the set of transcription factor binding sites (TFBSs), the initial ChIP-seq peaks, and the trained prediction models for each of the datasets individually by navigating to the UniBind entry of interest. If the user wants to download the available data in bulk, this can be done through the <a href="/downloads">Download</a> section of the UniBind database.
+              For the TFBS bulk download, BED and FASTA files are available for each 
+              model. Note that for the DNAshaped model, only the 4bits model is 
+              available for bulk download. In case of TFs with variants (e.g., TFAP2C, 
+              JUND), individual files are available for each variant. The file names 
+              follow the format dataset_cell-line_tf_pfm-id so that the user can trace 
+              back which TFBSs correspond to which variant. This section allows the user to download the cis-regulatory modules derived using the entire set of TFBS predictions.</p>
 
 
               <h3 id="centrality"><i class="fa fa-align-center"></i> How to interpret the enrichment zone and centrality p-value?</h3>
