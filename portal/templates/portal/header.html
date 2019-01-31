@@ -24,10 +24,9 @@
         </li>
         
         <li class="{% if request.view == 'downloads' %}active{% endif %}>"> <a href="/downloads"><i class="fa fa-download"></i> <span>Download</span></a></li>
-        <!--
-        <li class="{% if request.view == 'faq' %}active{% endif %}"><a href="/faq"><i class="fa fa-question-circle"></i> <span>FAQ</span></a></li>
-          !-->
-        <li class="{% if request.view == 'docs' %}active{% endif %}"><a href="/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>           
+     
+        <li class="{% if request.view == 'docs' %}active{% endif %}"><a href="/docs"><i class="fa fa-book"></i> <span>Doc</span></a></li>
+        <li class="{% if request.view == 'changelog' %}active{% endif %}"><a href="/changelog"><i class="fa fa-history"></i> <span>Changelog</span></a></li>         
           </ul>
           
         </div>
