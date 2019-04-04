@@ -134,11 +134,11 @@ def factor_detail(request, factor_id):
 
 	similar_factors = Factor.objects.filter(tf_name=factor.tf_name).exclude(folder=factor_id).order_by('tf_name')
 
-	#models = factor_details.values_list('prediction_model', flat=True).distinct().order_by('prediction_model')
-	models = factor_details.values_list('prediction_model', flat=True).distinct()
+	models = factor_details.values_list('prediction_model', flat=True).distinct().order_by('prediction_model')
+	#models = factor_details.values_list('prediction_model', flat=True).distinct()
 	mlists = models
-	#BEM, DNAshaped, DiMO, PWM, TFFM
-	morder=[1,2,3,0]
+	#BEM, DNAshaped, PWM, TFFM
+	morder=[2,0,3,1]
 	if len(morder) == len(mlists):
 		models = [ mlists[i] for i in morder]
 		
@@ -196,11 +196,11 @@ def download_data(request):
 	'''
 	setattr(request, 'view', 'downloads')
 	
-	#models = FactorData.objects.all().values_list('prediction_model', flat=True).distinct().order_by('prediction_model')
-	models = FactorData.objects.all().values_list('prediction_model', flat=True).distinct()
+	models = FactorData.objects.all().values_list('prediction_model', flat=True).distinct().order_by('prediction_model')
+	#models = FactorData.objects.all().values_list('prediction_model', flat=True).distinct()
 	mlists = models
-	#BEM, DNAshaped, DiMO, PWM, TFFM
-	morder=[1,2,3,0]
+	#BEM, DNAshaped, PWM, TFFM
+	morder=[2,0,3,1]
 	models = [ mlists[i] for i in morder]
 
 	peak_callers = FactorData.objects.all().values_list('peak_caller', flat=True).distinct().order_by('-peak_caller')
