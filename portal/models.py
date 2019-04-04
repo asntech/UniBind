@@ -62,7 +62,7 @@ class FactorData(models.Model):
     distance_threshold = models.CharField(max_length=16)
     score_threshold = models.CharField(max_length=16) 
     adj_centrimo_pvalue = models.CharField(max_length=16)
-    total_tfbs = models.CharField(max_length=16, blank=True) 
+    total_tfbs = models.CharField(max_length=16, blank=True)
     
 
 #Model for Post table in the database
