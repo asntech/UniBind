@@ -18,6 +18,7 @@ from unibind.settings import BASE_DIR, BIN_DIR, TEMP_DIR, TEMP_LIFE, SEND_TO_EMA
 
 from django.views.decorators.cache import cache_page
 
+
 CACHE_TIMEOUT = 60 * 60 * 24 * 1 # cache timeout in seconds
 
 @cache_page(60)
@@ -124,8 +125,8 @@ def factor_detail(request, factor_id):
 	'''
 	This will show the details of a factor based on factor_id
 	'''
-
-	factor = Factor.objects.get(folder__iexact=factor_id)
+	factor = get_object_or_404(Factor, folder__iexact=factor_id)
+	#factor = Factor.objects.get(folder__iexact=factor_id)
 
 	#factor_details = FactorData.objects.filter(folder=factor_id)
 	factor_details = FactorData.objects.filter(folder__folder__iexact=factor_id)
