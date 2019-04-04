@@ -180,11 +180,11 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                           
                           {% else %}
 
-                          <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.{{ model|lower }}.bed">
+                          <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.{% if model == 'DiMO' %}pwm{% else %}{{ model|lower }}{% endif %}.bed">
                               <button type="button" class="btn btn-info"><i class="fa fa-download"> </i> TFBSs in BED</button>
                             </a>
 
-                          <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.{{ model|lower }}.fa">
+                          <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.{% if model == 'DiMO' %}pwm{% else %}{{ model|lower }}{% endif %}.fa">
                               <button type="button" class="btn btn-success"><i class="fa fa-download"> </i> TFBSs in FASTA</button>
                             </a>
 
@@ -301,14 +301,14 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                         <i class="fa fa-image"></i>
                         <h3 class="box-title">Summary plots</h3>
                         <div class="box-tools pull-right">
-                        <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.{{ model|lower }}.png" download target="_blank">
+                        <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.{% if model == 'DiMO' %}pwm{% else %}{{ model|lower }}{% endif %}.png" download target="_blank">
                           <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> </button>
                         </a>
                         </div>
                       </div>
                       <!-- /.box-header -->
                       <div class="box-body">                      
-                      <img class="img-responsive" src="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.{{ model|lower }}.png">
+                      <img class="img-responsive" src="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.{% if model == 'DiMO' %}pwm{% else %}{{ model|lower }}{% endif %}.png">
                       <!-- /.box-body -->
                     </div>
                     </div>
