@@ -155,7 +155,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                         <p>
                           {% if model == 'DNAshaped' %}
 
-                           <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.{{ model }}.bed">
+                           <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.{{ model }}4bits.bed">
                               <button type="button" class="btn btn-info"><i class="fa fa-download"> </i> TFBSs 4bits (BED)</button>
                             </a>
 
@@ -237,7 +237,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                             </h4>
 
                             <div class="box-tools pull-right">
-                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ peak_caller }}_{{ factor.tf_name }}_{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}_4bits.png" download target="_blank">
+                            <a href="{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}_{{ model }}4bits.png" download target="_blank">
                               <button type="button" class="btn btn-warning"><i class="fa fa-download"> </i> </button>
                             </a>
                             </div>
