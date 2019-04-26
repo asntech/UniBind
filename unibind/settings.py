@@ -57,13 +57,13 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'portal.apps.PortalConfig',
     'debug_toolbar',
-    #'rest_framework',
+    'rest_framework',
     'django_filters',
     'bootstrapform',
-    #'restapi.v1',
+    'restapi.v1',
     #'rest_framework_docs',
     #'compressor',
-    #'rest_framework_swagger',
+    'rest_framework_swagger',
     #'corsheaders',
 ]
 
