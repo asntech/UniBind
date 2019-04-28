@@ -32,7 +32,6 @@ urlpatterns = [
     # #url(r'^v1/species/(?P<tax_id>\w+)/matrix$', views.SpeciesMatrixListViewSet.as_view(), name='specie-detail'),
     
     # url(r'^v1/infer/(?P<sequence>\w+)/$', cache_page(CACHE_TIMEOUT)(views.MatrixInferenceViewSet.as_view()), name='matrix-infer'),
-    # #url(r'^align/(?P<sequence>\w+)/$', views.MatrixAlignViewSet.as_view(), name='matrix-align'),
     
     # url(r'^v1/tffm/?$', cache_page(CACHE_TIMEOUT)(views.TFFMListViewSet.as_view()), name='tffm-list'),
     # url(r'^v1/tffm/(?P<tffm_id>.+)/$', cache_page(CACHE_TIMEOUT)(views.TFFMDetailsViewSet.as_view()), name='tffm-detail'),

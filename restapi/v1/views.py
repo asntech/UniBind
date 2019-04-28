@@ -397,25 +397,24 @@ class CelllineFactorListViewSet(ListAPIView):
     parser_classes = (YAMLParser,)
     renderer_classes = [ renderers.JSONRenderer, JSONPRenderer, YAMLRenderer, renderers.BrowsableAPIRenderer]
 
-    def get_queryset(self):
+    def get(self, request, cell_line, format=None):
         """
-        List all Datasets
+        List all TFs in cell-lines
         """
 
         setattr(self.request, 'view', 'api-browsable')
 
         queryset = Factor.objects.all().order_by('tf_name')
 
-        cell_line = self.kwargs['cell_line']
+        #cell_line = self.kwargs['cell_line']
 
         #if tax group is set then filter queryset
         if cell_line and cell_line !='':
-            
-            queryset = queryset.filter(cell_line=cell_line).order_by('name')
+            queryset = queryset.values_list().filter(cell_line=cell_line).order_by('tf_name')
         else:
             queryset = None
 
-        return queryset
+        return Response(queryset)
 
 
 
