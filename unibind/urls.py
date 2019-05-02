@@ -44,11 +44,6 @@ admin.site.site_header = 'UniBind Admin'
 from rest_framework_swagger.views import get_swagger_view
 swagger_schema_view = get_swagger_view(title='UniBind Live API')
 
-from rest_framework.schemas import get_schema_view
-schema_view = get_schema_view(
-    title='UniBind REST API',
-    #url='/api/v1'
-)
 
 docs_view = get_docs_view(title=API_TITLE,
     description=API_DESCRIPTION
@@ -62,15 +57,14 @@ urlpatterns = [
     url(r'^api/', include('restapi.v1.urls', namespace='v1')),
 
     url(r'^api/v1/docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
-    url(r'^api/v1/docs', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION, schema_url='')),
+    #url(r'^api/v1/docs', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION, schema_url='')),
 
-    url(r'^api/v1/', schema_view),
 
-    url(r'^api/v1/docs/', include('restapi.v1.urls', namespace='api-docs')), 
+    #url(r'^api/v1/docs/', include('restapi.v1.urls', namespace='api-docs')), 
 
     url(r'^api/v1/live/', swagger_schema_view),
 
-    url(r'^api/v1/$', APIRoot.as_view(), name='api-root'),
+    #url(r'^api/v1/$', APIRoot.as_view(), name='api-root'),
       
     url(r'^api/auth/', include('rest_framework.urls', namespace='rest_framework')),
 

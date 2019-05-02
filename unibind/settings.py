@@ -64,7 +64,8 @@ INSTALLED_APPS = [
     #'rest_framework_docs',
     #'compressor',
     'rest_framework_swagger',
-    #'corsheaders',
+    'corsheaders',
+
 ]
 
 

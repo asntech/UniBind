@@ -313,6 +313,13 @@ def about(request):
 	return render(request, 'portal/about.html', context)
 
 @cache_page(CACHE_TIMEOUT)
+def genome_tracks(request):
+
+	setattr(request, 'view', 'tracks')
+
+	return render(request, 'portal/genome_tracks.html')
+	
+@cache_page(CACHE_TIMEOUT)
 def post_details(request, year, month, day, slug):
 	'''
 	Show individual news/update

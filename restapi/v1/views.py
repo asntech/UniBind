@@ -88,18 +88,13 @@ def _get_tffm_url(request, base_id, version, trained_order):
     else:
         return None
 
-
 def _get_cellline_url(request, cell_line):
     host_name = request.build_absolute_uri(location='/')
-    return  str(host_name)+'api/v1/celltypes/'+cell_line+'/'
+    return  str(host_name)+'api/v1/datasets?cell_line='+cell_line
 
 def _get_tf_url(request, tf_name):
     host_name = request.build_absolute_uri(location='/')
-    return  str(host_name)+'api/v1/tfs/'+tf_name+'/'
-
-def _get_taxon_url(request, tax_group):
-    host_name = request.build_absolute_uri(location='/')
-    return  str(host_name)+'api/v1/taxon/'+tax_group+'/'
+    return  str(host_name)+'api/v1/datasets?tf_name='+tf_name
 
 
 
@@ -127,9 +122,8 @@ class BEDListRenderer(renderers.BaseRenderer):
 
 class TranscriptionFactorDetailsViewSet(APIView):
     """
-    API endpoint that returns the matrix profile detail information.
+    API endpoint that returns the tfbs detail information.
     """
-    #queryset = Matrix.objects.all()
 
     parser_classes = (YAMLParser,)
     renderer_classes = [renderers.JSONRenderer, JSONPRenderer, YAMLRenderer, renderers.BrowsableAPIRenderer]
@@ -137,12 +131,11 @@ class TranscriptionFactorDetailsViewSet(APIView):
     #@view_config(response_serializer=MatrixSerializer)
     def get(self, request, tf_id, format=None):
         """
-        Gets profile detail information
+        Gets tfbs detail information
         """
 
         setattr(request, 'view', 'api-browsable')
 
-        #split base_id and version
         
         data_dict = {}
 
@@ -162,8 +155,6 @@ class TranscriptionFactorDetailsViewSet(APIView):
                 'jaspar_id': factor.jaspar_id+'.'+str(factor.jaspar_version),
                 "tf_id": factor.folder,
                 "total_peaks": factor.total_peaks,
-                #'sequence_logo': _get_sequence_logo(request, base_id, version),
-                #'versions_url': _get_versions_url(request, base_id),
                 'peaks_url': _get_peaks_url(request, tf_id),
             }
         
@@ -220,6 +211,15 @@ class UniBindFilterBackend(BaseFilterBackend):
             required=False,
             type='string'),
         coreapi.Field(
+            name='data_source',
+            location='query',
+            schema=coreschema.String(
+                description= 'Transcription factor class. For example: Zipper-Type',
+                title= 'data source',
+                ),
+            required=False,
+            type='string'),
+        coreapi.Field(
             name='jaspar_id',
             location='query',
             schema=coreschema.String(
@@ -233,82 +233,54 @@ class UniBindFilterBackend(BaseFilterBackend):
     def filter_queryset(self, request, queryset, view):
 
         query_string = request.GET.get('search', None)
-        collection = request.GET.get('collection', None)
-        tax_group = request.GET.get('tax_group', None)
-        tax_id = request.GET.get('tax_id', None)
-        tf_class = request.GET.get('tf_class', None)
-        tf_family = request.GET.get('tf_family', None)
-        data_type = request.GET.get('data_type', None)
-        version = request.GET.get('version', None)
-        name = request.GET.get('name', None)
+        tf_name = request.GET.get('tf_name', None)
+        cell_line = request.GET.get('cell_line', None)
+        biological_condition = request.GET.get('biological_condition', None)
+        identifier = request.GET.get('identifier', None)
+        jaspar_id = request.GET.get('jaspar_id', None)
+        data_source = request.GET.get('data_source', None)
 
-        #if collection is set then filter queryset
-        if collection and collection !='':
-            queryset = queryset.filter(collection=collection.upper())
+        #if tf_name is set then filter queryset
+        if tf_name and tf_name !='':
+            queryset = queryset.filter(tf_name__iexact=tf_name)
 
-        #if name is set then filter queryset
-        if name and name !='':
-            queryset = queryset.filter(name=name)
+        #if cell_line is set then filter queryset
+        if cell_line and cell_line !='':
+            queryset = queryset.filter(cell_line__iexact=cell_line)
 
-        #if tax_group is set then filter queryset
-        if tax_group and tax_group !='':
-            matrix_ids = MatrixAnnotation.objects.values_list('matrix_id', flat=True).filter(tag='tax_group',val=tax_group.lower())
-            queryset = queryset.filter(id__in=matrix_ids)
+        #if biological_condition is set then filter queryset
+        if biological_condition and biological_condition !='':
+            queryset = queryset.filter(biological_condition__iexact=biological_condition)
 
-        #if tax id is set then filter queryset
-        if tax_id and tax_id !='':
-            tax_ids = tax_id.split(',')
-            queryset = queryset.filter(id__in = MatrixSpecies.objects.values_list('matrix_id', flat=True).filter(tax_id__in=tax_ids))
-     
-        #if tf_class is set then filter queryset
-        if tf_class and tf_class !='':
-            matrix_ids = MatrixAnnotation.objects.values_list('matrix_id', flat=True).filter(tag='class', val__icontains=tf_class)
-            queryset = queryset.filter(id__in=matrix_ids)
+        #if identifier is set then filter queryset
+        if identifier and identifier !='':
+            queryset = queryset.filter(identifier__iexact=identifier)
 
-        #if tf_family is set then filter queryset
-        if tf_family and tf_family !='':
-            matrix_ids = MatrixAnnotation.objects.values_list('matrix_id', flat=True).filter(tag='family', val__icontains=tf_family)
-            queryset = queryset.filter(id__in=matrix_ids)
+        #if jaspar_id is set then filter queryset
+        if jaspar_id and jaspar_id !='':
+            jaspar_id = str(jaspar_id).split('.')[0]
+            queryset = queryset.filter(jaspar_id__iexact=jaspar_id)
 
-        #if data_type is set then filter queryset
-        if data_type and data_type !='':
-            matrix_ids = MatrixAnnotation.objects.values_list('matrix_id', flat=True).filter(tag='type', val__icontains=data_type)
-            queryset = queryset.filter(id__in=matrix_ids)
+        #if data_source is set then filter queryset
+        if data_source and data_source !='':
+            queryset = queryset.filter(data_source__iexact=data_source)
 
-        #if query string is set then filter queryset
-        if query_string and query_string != '':
-            queryset = queryset.filter(
-            Q(name__icontains=query_string) | 
-            Q(base_id__icontains=query_string) |
-            Q(collection__icontains=query_string)).distinct()
 
-        #if version is latest
-        if version in ['latest', 'current']:
-            #latest_versions = queryset.values('base_id').annotate(Max('version'))
-            #queryset = queryset.filter(version=latest_versions.values('version__max'))#.order_by('version')
-            Q_statement = Q()
-            latest_versions = queryset.values('base_id').annotate(latest_version=Max('version')).order_by()
-            for version in latest_versions:
-                Q_statement |=(Q(base_id__exact=version['base_id']) & Q(version=version['latest_version']))
+        return queryset.order_by('tf_name')
 
-            queryset = queryset.filter(Q_statement)
-
-        return queryset.order_by('name')
-
-class TranscriptionFactorListViewSet(ListAPIView):
+class TranscriptionFactorsListViewSet(ListAPIView):
     """
     API endpoint that returns a list of all transcription factors.
     """
 
-    filter_backends = [SearchFilter, OrderingFilter,]
-    search_fileds = ['folder','tf_name', 'cell_line','biological_condition','data_source','jaspar_id']
-    filter_fileds = ['folder','tf_name', 'cell_line','biological_condition','data_source','jaspar_id']
+    queryset = Factor.objects.values_list('tf_name', flat=True).distinct()
+    throttle_classes = (UserRateThrottle,)
     parser_classes = (YAMLParser,)
     renderer_classes = [renderers.JSONRenderer, JSONPRenderer, YAMLRenderer, renderers.BrowsableAPIRenderer]
 
     def get(self, request, format=None):
       """
-      List all the collections are available in JASPAR.
+      List all the transcription factors available in UniBind.
       """
       setattr(self.request, 'view', 'api-browsable')
 
@@ -327,17 +299,16 @@ class TranscriptionFactorListViewSet(ListAPIView):
       return Response(data_dict)
 
 
-class DatasetListViewSet(ListAPIView):
+class DatasetsListViewSet(ListAPIView):
     """
     REST API endpoint that returns a list of all the datasets used.
-    """
-    
+    """   
     serializer_class = FactorSerializer
     pagination_class = FactorResultsSetPagination
     throttle_classes = (UserRateThrottle,)
-    filter_backends = [SearchFilter, OrderingFilter, ]
-    search_fileds = ['folder','tf_name', 'cell_line','biological_condition','data_source','jaspar_id']
-    filter_fileds = ['folder','tf_name', 'cell_line','biological_condition','data_source','jaspar_id']
+    filter_backends = [SearchFilter, OrderingFilter, UniBindFilterBackend]
+    search_fileds = ['tf_name', 'cell_line','biological_condition','identifier','jaspar_id']
+    filter_fileds = ['tf_name', 'cell_line','biological_condition','identifier','jaspar_id']
     parser_classes = (YAMLParser,)
     renderer_classes = [ renderers.JSONRenderer, JSONPRenderer, YAMLRenderer, renderers.BrowsableAPIRenderer]
 
@@ -352,20 +323,20 @@ class DatasetListViewSet(ListAPIView):
         return queryset
 
 
-class CelllineListViewSet(ListAPIView):
+class CellTypesListViewSet(ListAPIView):
     """
-    API endpoint that returns a list of all collection names.
+    API endpoint that returns a list of all cell-lines/tissue names.
     """
-
-    filter_backends = [SearchFilter, OrderingFilter,]
-    search_fileds = ['folder','tf_name', 'cell_line','biological_condition','data_source','jaspar_id']
-    filter_fileds = ['folder','tf_name', 'cell_line','biological_condition','data_source','jaspar_id']
+    queryset = Factor.objects.values_list('cell_line', flat=True).distinct()
+    filter_backends = [SearchFilter,]
+    search_fileds = ['folder','tf_name','cell_line','biological_condition','data_source',]
+    filter_fileds = ['folder','tf_name', 'cell_line','biological_condition','data_source',]
     parser_classes = (YAMLParser,)
     renderer_classes = [renderers.JSONRenderer, JSONPRenderer, YAMLRenderer, renderers.BrowsableAPIRenderer]
 
-    def get(self, request, format=None):
+    def get(self, request):
       """
-      List all the collections are available in JASPAR.
+      List all the cell-lines/tissue names available in UniBind.
       """
       setattr(self.request, 'view', 'api-browsable')
 
@@ -375,46 +346,49 @@ class CelllineListViewSet(ListAPIView):
       results = []
       for cell_line in queryset:
         results.append({
-        'cell_line': cell_line,
-        'url': _get_cellline_url(request, cell_line)
+        'name': cell_line,
+        'url': _get_cellline_url(self.request, cell_line)
         })
 
       data_dict.update({'results': results})
 
       return Response(data_dict)
 
-class CelllineFactorListViewSet(ListAPIView):
-    """
-    REST API endpoint that returns a list of all the transcription factors.
-    """
+    #def get_serializer_class(self):
+
+
+# class CelllineFactorListViewSet(ListAPIView):
+#     """
+#     REST API endpoint that returns a list of all the transcription factors.
+#     """
     
-    serializer_class = FactorSerializer
-    pagination_class = FactorResultsSetPagination
-    throttle_classes = (UserRateThrottle,)
-    filter_backends = [SearchFilter, OrderingFilter, ]
-    search_fileds = ['folder','tf_name', 'cell_line','biological_condition','data_source','jaspar_id']
-    filter_fileds = ['folder','tf_name', 'cell_line','biological_condition','data_source','jaspar_id']
-    parser_classes = (YAMLParser,)
-    renderer_classes = [ renderers.JSONRenderer, JSONPRenderer, YAMLRenderer, renderers.BrowsableAPIRenderer]
+#     serializer_class = FactorSerializer
+#     pagination_class = FactorResultsSetPagination
+#     throttle_classes = (UserRateThrottle,)
+#     filter_backends = [SearchFilter, OrderingFilter, ]
+#     search_fileds = ['folder','tf_name', 'cell_line','biological_condition','data_source','jaspar_id']
+#     filter_fileds = ['folder','tf_name', 'cell_line','biological_condition','data_source','jaspar_id']
+#     parser_classes = (YAMLParser,)
+#     renderer_classes = [ renderers.JSONRenderer, JSONPRenderer, YAMLRenderer, renderers.BrowsableAPIRenderer]
 
-    def get(self, request, cell_line, format=None):
-        """
-        List all TFs in cell-lines
-        """
+#     def get(self, request, cell_line, format=None):
+#         """
+#         List all TFs in cell-lines
+#         """
 
-        setattr(self.request, 'view', 'api-browsable')
+#         setattr(self.request, 'view', 'api-browsable')
 
-        queryset = Factor.objects.all().order_by('tf_name')
+#         queryset = Factor.objects.all().order_by('tf_name')
 
-        #cell_line = self.kwargs['cell_line']
+#         #cell_line = self.kwargs['cell_line']
 
-        #if tax group is set then filter queryset
-        if cell_line and cell_line !='':
-            queryset = queryset.values_list().filter(cell_line=cell_line).order_by('tf_name')
-        else:
-            queryset = None
+#         #if tax group is set then filter queryset
+#         if cell_line and cell_line !='':
+#             queryset = queryset.values_list().filter(cell_line=cell_line).order_by('tf_name')
+#         else:
+#             queryset = None
 
-        return Response(queryset)
+#         return Response(queryset)
 
 
 
@@ -427,8 +401,11 @@ class APIRoot(APIView):
     def get(self, request, format=format):
         setattr(request, 'view', 'api-browsable')
         return Response({
-            'tf': reverse('v1:tf-list', request=request),
-            #'tffm': reverse('v1:tffm-list', request=request),
+            'tfs': reverse('v1:tf-list', request=request),
+            'datasets': reverse('v1:dataset-list', request=request),
+            'celltypes': reverse('v1:cellline-list', request=request),
+
+            
         })
 
 def api_homepage(request):
@@ -481,9 +458,9 @@ def api_clients(request):
 
     return render(request, 'rest_framework/api_clients.html')
 
-
 def _get_api_root_url(request):
     return request.build_absolute_uri(location='/')+'api/v1/'
+
 
 def _get_host_name(request):
     return request.build_absolute_uri(location='/')

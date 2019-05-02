@@ -20,25 +20,17 @@ urlpatterns = [
 
     url(r'^v1/$', views.APIRoot.as_view(), name='api-root'),
 
-    url(r'^v1/tfs/?$', cache_page(CACHE_TIMEOUT)(views.TranscriptionFactorListViewSet.as_view()), name='tf-list'),
-    url(r'^v1/tfs/(?P<tf_id>.+)/$', cache_page(CACHE_TIMEOUT)(views.TranscriptionFactorDetailsViewSet.as_view()), name='tf-detail'),
+    #url(r'^v1/tfs/?$', cache_page(CACHE_TIMEOUT)(views.TranscriptionFactorsListViewSet.as_view()), name='tf-list'),
     #url(r'^v1/tfs/(?P<tf_name>\w+)/(?P<tf_id>\w+)/$', cache_page(CACHE_TIMEOUT)(views.TranscriptionFactorDetailsViewSet.as_view()), name='tf-list'),
 
 
-    url(r'^v1/datasets/?$', cache_page(CACHE_TIMEOUT)(views.DatasetListViewSet.as_view()), name='dataset-list'),    
+    url(r'^v1/datasets/?$', cache_page(CACHE_TIMEOUT)(views.DatasetsListViewSet.as_view()), name='dataset-list'),
+    url(r'^v1/datasets/(?P<tf_id>.+)/$', cache_page(CACHE_TIMEOUT)(views.TranscriptionFactorDetailsViewSet.as_view()), name='tf-detail'),
 
-    url(r'^v1/celltypes/?$', cache_page(CACHE_TIMEOUT)(views.CelllineListViewSet.as_view()), name='cellline-list'),
-    url(r'^v1/celltypes/(?P<cell_line>\w+)/$', cache_page(CACHE_TIMEOUT)(views.CelllineFactorListViewSet.as_view()), name='cellline-detail'),
-    # #url(r'^v1/species/(?P<tax_id>\w+)/matrix$', views.SpeciesMatrixListViewSet.as_view(), name='specie-detail'),
+
+    url(r'^v1/celltypes/?$', cache_page(CACHE_TIMEOUT)(views.CellTypesListViewSet.as_view()), name='cellline-list'),
+    #url(r'^v1/celltypes/(?P<cell_line>\w+)/$', cache_page(CACHE_TIMEOUT)(views.CelllineFactorListViewSet.as_view()), name='cellline-detail'),
     
-    # url(r'^v1/infer/(?P<sequence>\w+)/$', cache_page(CACHE_TIMEOUT)(views.MatrixInferenceViewSet.as_view()), name='matrix-infer'),
-    
-    # url(r'^v1/tffm/?$', cache_page(CACHE_TIMEOUT)(views.TFFMListViewSet.as_view()), name='tffm-list'),
-    # url(r'^v1/tffm/(?P<tffm_id>.+)/$', cache_page(CACHE_TIMEOUT)(views.TFFMDetailsViewSet.as_view()), name='tffm-detail'),
-
-    # url(r'^v1/releases/?$', cache_page(CACHE_TIMEOUT)(views.ReleaseListViewSet.as_view()), name='release-list'),
-    # url(r'^v1/releases/(?P<release_number>.+)/$', cache_page(CACHE_TIMEOUT)(views.ReleaseDetailsViewSet.as_view()), name='release-detail'),
-
     #url(r'^v1/docs', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION), name='api-docs'),
 
     url(r'^home/?$', views.api_homepage, name='api-homepage'),

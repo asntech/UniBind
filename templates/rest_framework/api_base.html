@@ -12,20 +12,19 @@
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@khanaziz84" />
     <meta name="twitter:creator" content="@khanaziz84" />
-    <meta name="twitter:title" content="JASPAR RESTful API" />
-    <meta name="twitter:url" content="http://jaspar.genereg.net/api" />
-    <meta name="twitter:description" content="A RESTful API to access the latest version of JASPAR database programmatically." />
-    <meta name="twitter:image" content="http://hfaistos.uio.no:8000/static/img/jaspar_logo_2018.png" />
+    <meta name="twitter:title" content="UniBind RESTful API" />
+    <meta name="twitter:url" content="https://unibind.uio.no/api" />
+    <meta name="twitter:description" content="A RESTful API to access the latest version of UniBind database programmatically." />
     
     <!-- for Facebook -->          
-    <meta property="og:title" content="JASPAR RESTful API" />
+    <meta property="og:title" content="UniBind RESTful API" />
     <meta property="og:type" content="article" />
     <meta property="og:image" content="http://hfaistos.uio.no:8000/static/img/jaspar_logo_2018.png" />
-    <meta property="og:url" content="http://jaspar.genereg.net/api" />
-    <meta property="og:description" content="A RESTful API to access the latest version of JASPAR database programmatically." />
+    <meta property="og:url" content="https://unibind.uio.no/api" />
+    <meta property="og:description" content="A RESTful API to access the latest version of UniBind database programmatically." />
 
 
-    <meta name="description" content="A RESTful API to access the latest version of JASPAR database programmatically.">
+    <meta name="description" content="A RESTful API to access the latest version of UniBind database programmatically.">
     <meta name="author" content="Aziz Khan">
 
     <title>{% block title %} {% endblock %}</title>
@@ -137,25 +136,20 @@ code {
             <li class="{% if request.view == 'api-home' %}active{% endif %}"><a href="/api/">Home</a></li>
             <li class="dropdown {% if request.view == 'api-browsable' %}active{% endif %}">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Browsable API <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="/api/v1/tfs">Transcription Factor</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="/api/v1/celltypes">Cell lines</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="/api/v1/datasets">Datasets</a></li>               
-                 <li role="separator" class="divider"></li>  
+              <ul class="dropdown-menu"> <li><a href="/api/v1/datasets">Datasets</a></li>               
+                <li role="separator" class="divider"></li> 
+                <li><a href="/api/v1/celltypes">Cell types</a></li>
+                <li role="separator" class="divider"></li> 
+                <li><a href="/api/v1/tfs">Transcription Factors</a></li>               
+               
               </ul>
             </li>
-
-            <!--
 
             <li class="{% if request.view == 'overview' %}active{% endif %}"><a href="/api/overview">API Overview</a></li>
             <li class="{% if request.view == 'apidocs' %}active{% endif %}"><a href="/api/v1/docs" target="_blank">Documentation</a></li>
             <li class="{% if request.view == 'apilive' %}active{% endif %}"><a href="/api/v1/live-api">Live API</a></li>
 
             <li class="{% if request.view == 'clients' %}active{% endif %}"><a href="/api/clients">API Clients</a></li>
-
-          -->
                         
             <li class="{% if request.view == 'contactus' %}active{% endif %}"><a href="/api/contact-us">Contact Us</a></li>
             

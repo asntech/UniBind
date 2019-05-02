@@ -1,0 +1,159 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% block title %}
+Genome track data hub for UCSC and Ensembl 
+{% endblock %}
+
+{% block content_header %}
+UniBind Genome Browser tracks
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">Genome tracks</li>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="row" id="top">
+
+
+    <div class="col-md-9 col-lg-9 col-xs-12" id="ucsc_tracks">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-map-marker"></i> UCSC tracks</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+              </div>
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <p><strong>1. Direct link</strong></p>
+              <p> 
+
+              View the tracks directly in the UCSC Genome Browser for the following species and genome assemblies:
+              
+              <ul>
+                <li>Human: <a href="http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&hubUrl=https://unibind.uio.no/static/UniBind_hubs/hub.txt"  target="_blank">hg38</a></li>          
+              </ul>
+  
+              </p>
+              <p><img class="img img-responsive" src="{% static 'img/2.png' %}" width="100%"></p>
+
+              <p><strong>2. Public track hub</strong></p>
+              <p>Connect to the UniBind track data Public Hub on the UCSC Genome Browser via <i>"MyData => Track Hubs"</i> by first searching for UniBind, and then adding the hub to your session using <i>"Connect"</i> .</p>
+
+              <p><img class="img img-responsive" src="{% static 'img/AddHub1.png' %}" width="80%"></p>
+              <p><img class="img img-responsive" src="{% static 'img/AddHub2.png' %}" width="80%"></p>
+
+              <p class="pull-right"> <a href="#top"> <i class="fa fa-arrow-circle-up"></i> Back to top </a> </p>
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+    </div>
+
+    <div class="col-md-3 col-lg-3 col-xs-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-list"></i> Table of contents</h3>
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <ul>
+                <li> <a href="#ucsc_tracks"> UCSC tracks </a></li>
+                <li> <a href="#ensembl_tracks">Ensembl tracks </a></li>
+                <li> <a href="#track_hub">Track Hub Registry </a></li>
+                <li> <a href="#further_information">Further information</a> </li>
+              </ul>
+            
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+    </div>
+
+    <div class="col-md-9 col-lg-9 col-xs-12" id="ensembl_tracks">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-map-marker"></i> Ensembl tracks</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+              </div>
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <p><strong>1. Direct link</strong></p>
+              <p> View the tracks directly in the Ensembl Genome Browser: <a href="http://www.ensembl.org/Trackhub?url=https://unibind.uio.no/static/UniBind_hubs/hub.txt" target="_blank">http://www.ensembl.org/Trackhub?url=https://unibind.uio.no/static/UniBind_hubs/hub.txt</a>
+              </p>
+
+              <p><strong>2. Attach track hub</strong></p>
+              <p>You can attach the UniBind track hub to Ensembl via “Configure this page”. Then search the Track Hub Repository for UniBind and attach the hub.</p>
+
+              <p><img class="img img-responsive" src="{% static 'img/Ensembl_UniBind_track_4.png' %}" width="40%"></p>
+              <p><img class="img img-responsive" src="{% static 'img/Ensembl_UniBind_track_5.png' %}" width="80%"></p>
+              <p>Note that while the UniBind UCSC tracks by default show predicted TF binding sites with scores of 500 or greater (P < 10-5), the Ensembl tracks show all predicted binding sites. Ensembl colors predictions according to their score, from yellow (low scores) to green (medium) and blue (high). Please refer to the UniBind hub help page (see below).</p>
+
+
+              <p class="pull-right"> <a href="#top"> <i class="fa fa-arrow-circle-up"></i> Back to top </a> </p>
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+    </div>
+
+    <div class="col-md-9 col-lg-9 col-xs-12" id="track_hub">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-folder"></i> Track Hub Registry</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+              </div>
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <p> UniBind genome tracks are also available in Track Hub Registry. Use this link <a href="https://www.trackhubregistry.org/search?q=UniBind" target="_blank">https://www.trackhubregistry.org/search?q=UniBind</a> and select the track for the assembly of interest.</p>
+              <p><img class="img img-responsive" src="{% static 'img/Ensembl_UniBind_track_1.png' %}" width="100%"></p>
+              
+              <p class="pull-right"> <a href="#top"> <i class="fa fa-arrow-circle-up"></i> Back to top </a> </p>
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+    </div>
+
+    <div class="col-md-9 col-lg-9 col-xs-12" id="further_information">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-info"></i> Further information</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+              </div>
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              Click on the UniBind track details within the UCSC Genome browser to view the track help <a href="http://genome.ucsc.edu/cgi-bin/hgTrackUi?hgsid=724278797_u43iAA8JQOvEOa8gM1UV03PGyjiq&c=chr1&g=hub_1098543_UniBind" target="_blank">page</a>:
+
+              <p><img class="img img-responsive" src="{% static 'img/3.png' %}" width="100%"></p>
+              <ul>
+                <li>For more information on the use of UCSC track data hubs, see <a href='http://genome.ucsc.edu/goldenPath/help/hgTrackHubHelp.html'  target="_blank">Using UCSC Genome Browser Track Hubs </a></li>
+
+                <li>For more information on the use of track hubs in Ensembl, see <a href="http://www.ensembl.org/info/website/adding_trackhubs.html" target="_blank">http://www.ensembl.org/info/website/adding_trackhubs.html</a> </li>
+
+              </ul>
+
+              <p class="pull-right"> <a href="#top"> <i class="fa fa-arrow-circle-up"></i> Back to top </a> </p>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+    </div>
+</div>
+
+{% endblock %}

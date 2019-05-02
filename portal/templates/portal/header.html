@@ -16,18 +16,19 @@
             <li class="{% if request.view == 'index' %}active{% endif %}">
             <a href="/"><i class="fa fa-home"></i> <span>Home</span></a>
         </li>
-        <li class="{% if request.view == 'about' %}active{% endif %}">
-            <a href="{% url 'about' %}"><i class="fa fa-info-circle"></i> <span>About</span></a>
-            </li>
+    
         <li class="{% if request.view == 'search' %}active{% endif %}"">
           <a href="/search?advanced=true"><i class="fa fa-search"></i><span> Search</span> </a>
         </li>
         
         <li class="{% if request.view == 'downloads' %}active{% endif %}>"> <a href="/downloads"><i class="fa fa-download"></i> <span>Download</span></a></li>
-     
+        <li class="{% if request.view == 'downloads' %}active{% endif %}>"> <a href="/genome-tracks"><i class="fa fa-map"></i> <span>Genome tracks</span></a></li>
         <li class="{% if request.view == 'docs' %}active{% endif %}"><a href="/docs"><i class="fa fa-book"></i> <span>Doc</span></a></li>
+         <li class="{% if request.view == 'about' %}active{% endif %}">
+            <a href="{% url 'about' %}"><i class="fa fa-info-circle"></i> <span>About</span></a>
+            </li>
         <li class="{% if request.view == 'changelog' %}active{% endif %}"><a href="/changelog"><i class="fa fa-history"></i> <span>Changelog</span></a></li>         
-          </ul>
+        </ul>
           
         </div>
         <!-- /.navbar-collapse -->

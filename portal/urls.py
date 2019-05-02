@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^about/$', views.about, name='about'),
     url(r'^faq/$', views.faq, name='faq'),
     url(r'^changelog/$', views.changelog, name='changelog'),
+    url(r'^genome-tracks/$', views.genome_tracks, name='genome_tracks'),
     
     #API documentation
     url(r'^api/$', views.api_documentation, name='api_documentation'),
