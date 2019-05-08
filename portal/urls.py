@@ -24,10 +24,12 @@ urlpatterns = [
 
     url(r'^factor/(?P<factor_id>[\w.\-]+)/$', views.factor_detail, name='factor_detail'),
 
-    url(r'^blog/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[0-9]{2})/(?P<slug>[\w-]+)$', views.post_details, name='post_details'),
-    url(r'^blog/$', views.post_list, name='post_list'),
+    #url(r'^blog/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[0-9]{2})/(?P<slug>[\w-]+)$', views.post_details, name='post_details'),
+    #url(r'^blog/$', views.post_list, name='post_list'),
 
-    url(r'^tour/$', views.tour_video, name='tour_video'),
+    #url(r'^tour/$', views.tour_video, name='tour_video'),
+    url(r'^enrichment/$', views.enrichment, name='enrichment'),
+    url(r'^enrichment/(?P<enrichment_id>[\w.\-]+)/$', views.enrichment_results, name='enrichment_results'),
 
     url(r'^downloads/$', views.download_data, name='download_data'),
 
@@ -41,5 +43,4 @@ urlpatterns = [
 
 handler404 = 'portal.views.page_not_found'
 handler500 = 'portal.views.server_error'
-
 

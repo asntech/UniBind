@@ -16,6 +16,18 @@ class ContactForm(forms.Form):
     message = forms.CharField(label='Your message/feedback', required=True, widget=forms.Textarea)
 
 
+ANALYSIS_TYPES = [('oneSetBg','Enrichment with a background'),
+		('oneSetNoBg','Enrichment when no background is provided'),
+         ('twoSets','Differential enrichment')]
+
+class EnrichmentForm(forms.Form):
+    '''
+	Form for Enrichment page
+    '''
+    #analysis_type = forms.ChoiceField(choices=ANALYSIS_TYPES, label='Select analysis type', widget=forms.RadioSelect)
+    analysis_name = forms.CharField(label='Enter analysis title', required=True, max_length=100)
+    bed_file = forms.FileField(label='BED file 1', required=True)
+
 class SearchForm(forms.Form):
 	
 	'''

@@ -1,0 +1,116 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% load bootstrap %}
+
+{% block title %}
+    UniBind Enrichment Analysis
+{% endblock %}
+
+{% block content_header %}
+ UniBind Enrichment Analysis
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">Enrichment</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+            
+        <div class="col-md-4">
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <i class="fa fa-download"></i>
+                <h3 class="box-title">Download Enrichment results</h3>
+
+              </div>
+            <div class="box-body">
+
+                {% if processing %}
+                  <meta http-equiv="refresh" content="60" >
+                  <div class="alert alert-info alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    Please wait, results are computing...
+                    <img src="{% static 'img/ajax-loader.gif' %}">
+                </div>
+                  
+
+                {% else %}
+
+                 <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    Your results are ready to be downloaded!
+                </div>
+                <hr>
+                <a href="/temp/{{ enrichment_id }}.tar.gz">
+                <button type="button" class="pull-right btn btn-info" name="performEnrichment">  <i class="fa fa-download"></i> Download Enrichment Results </button></a>
+
+                {% endif %}
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-8">
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-image"> </i> Enrichment Analysis Results</h3>
+
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+            <p class="lead"> Here is the URL for your results, you can save it and share with colleagues. We keep these results for 15 days.
+
+              <hr>
+
+            <a href="{{ request.build_absolute_uri }}"> {{ request.build_absolute_uri }}</a></p>
+            
+          
+
+           {% if analysis_type %}
+              <p><b>Analysis type</b>: {{ analysis_type }}</p>
+           {% endif %}
+
+           {% if file_a %}
+            <p>BED file 1: <a href="{{ file_a }}">{{ file_a }}</a></p>
+           {% endif %}
+
+           {% if file_b %}
+            <p>BED file 2: <a href="{{ file_b }}">{{ file_b }}</a></p>
+           {% endif %}
+           
+           {% if file_bg %}
+            <p>Background file: <a href="{{ file_bg }}">{{ file_bg }}</a></p>
+           {% endif %}
+
+           {{ output_dir_name }}
+
+
+           <hr>
+
+          {% if processing %}
+            <p class="lead">Please wait, UniBind Enrichment Analysis is running &nbsp;&nbsp;
+            <img src="{% static 'img/ajax-loader.gif' %}"></p>
+
+          {% else %}
+
+           <img src="/temp/{{ enrichment_id }}/allEnrichments_swarm.pdf.png">
+
+          {% endif %}
+
+          
+  
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+    </div>
+
+{% endblock %}

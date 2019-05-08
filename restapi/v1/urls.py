@@ -20,7 +20,7 @@ urlpatterns = [
 
     url(r'^v1/$', views.APIRoot.as_view(), name='api-root'),
 
-    #url(r'^v1/tfs/?$', cache_page(CACHE_TIMEOUT)(views.TranscriptionFactorsListViewSet.as_view()), name='tf-list'),
+    url(r'^v1/tfs/?$', cache_page(CACHE_TIMEOUT)(views.TranscriptionFactorsListViewSet.as_view()), name='tf-list'),
     #url(r'^v1/tfs/(?P<tf_name>\w+)/(?P<tf_id>\w+)/$', cache_page(CACHE_TIMEOUT)(views.TranscriptionFactorDetailsViewSet.as_view()), name='tf-list'),
 
 

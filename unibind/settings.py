@@ -178,17 +178,20 @@ MAX_PAGINATION_LIMIT = 250
 
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 #path for temp folder
 TEMP_DIR = os.path.join(BASE_DIR, "temp")
 
 #Number of days to keep temp files
-TEMP_LIFE = 5
+TEMP_LIFE = 10
 
 DOWNLOAD_DIR = os.path.join(BASE_DIR, "download")
 
 #absolute path for analysis tools (stamp, pwm randomizer, matrix aligner) 
 BIN_DIR = os.path.join(BASE_DIR, "bin")
-#BIN_DIR = '/home/laziz/unibind_bin'
+BIN_DIR = '/Users/azizk/postdoc/Projects/UniBind/unibind_enrichment/'
 
 STATICFILES_DIRS = [
     BASE_DIR + "/static/",

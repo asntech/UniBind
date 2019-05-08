@@ -9,10 +9,11 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q, Max
 from .models import Factor, FactorData, Post
 from itertools import chain
-from .forms import SearchForm, ContactForm
+from .forms import SearchForm, ContactForm, EnrichmentForm
 import os, sys, re
 from django.core.mail import send_mail, BadHeaderError
 from django.urls import reverse
+from django.core.files.storage import FileSystemStorage
 
 from unibind.settings import BASE_DIR, BIN_DIR, TEMP_DIR, TEMP_LIFE, SEND_TO_EMAIL, MAX_PAGINATION_LIMIT, PAGINATION_DEFAULT
 
@@ -171,6 +172,145 @@ def factor_detail(request, factor_id):
 	}
 
 	return render(request, 'portal/factor_detail.html', context)					
+
+@cache_page(CACHE_TIMEOUT)
+def enrichment(request):
+	'''
+	UniBind enrichment analysis
+	'''
+	setattr(request, 'view', 'enrichment')
+
+	#delete older temp files
+	_delete_temp_files(path=TEMP_DIR, days=TEMP_LIFE)
+
+	#Bed file 1 is mendatory
+	if request.method == 'POST' and request.FILES['bed_file_1']:
+		fs = FileSystemStorage()
+		bed_file_1 = request.FILES['bed_file_1']
+		filename = fs.save(bed_file_1.name, bed_file_1)
+		file_a = BASE_DIR+fs.url(filename)
+
+		analysis_type = request.POST.get('analysis_type')
+
+		#Get second bed file differential analysis
+		if analysis_type == 'twoSets' and request.FILES['bed_file_2']:
+			bed_file_2 = request.FILES['bed_file_2']
+			filename = fs.save(bed_file_2.name, bed_file_2)
+			file_b = BASE_DIR+fs.url(filename)
+		else:
+			file_b = None
+
+		#Get background file if exist
+		if analysis_type == 'oneSetBg' and request.FILES['bed_file_background']:
+			bed_file_background = request.FILES['bed_file_background']
+			filename = fs.save(bed_file_background.name, bed_file_background)
+			file_bg = BASE_DIR+fs.url(filename)
+		else:
+			file_bg = None
+		
+		output_dir_name = 'UniBind_'+ analysis_type + '_' + _get_current_date()+ '_' + str(os.getpid())
+
+		output_dir_path = TEMP_DIR + "/" + output_dir_name
+		
+		os.system('mkdir -p '+output_dir_path)
+		
+		if unibind_enrichment_analysis(analysis_type, file_a, output_dir_path, file_b, file_bg):
+			return HttpResponseRedirect('/enrichment/'+output_dir_name)
+			return render(request, 'portal/enrichment_result.html', {
+	            'analysis_type': analysis_type,
+	            'file_a': file_a,
+	            'file_b': file_b,
+	            'file_bg': file_bg,
+	            'results_path': output_dir_name,
+	            'enrichment_id': output_dir_name,
+
+	            })
+		else:
+			return render(request, 'portal/enrichment.html', {
+	            'analysis_type': analysis_type,
+	            'file_a': file_a,
+	            'file_b': file_b,
+	            'file_bg': file_bg,
+	            'output_dir_name': output_dir_name,
+	            'message_type': 'error',
+	            'message': 'Something went wrong, please try again and make sure your input files are in BED format.',
+
+	            })
+	else:
+		return render(request, 'portal/enrichment.html', {
+		            })
+
+
+def unibind_enrichment_analysis(analysis_type, file_a, output_dir_path, file_b=None, file_bg=None):
+	'''
+	This function perform the enrichment analysis
+	'''
+	
+	# Enrichment against a given background set of genomic regions
+	# bash UniBind_enrichment.sh oneSetBg <LOLA db> <S bed> <B bed> <output dir>
+
+	import subprocess
+
+	if analysis_type == "oneSetBg":
+		if file_a == None or file_bg == None:
+			return False
+		else:
+			cmd = "bash "+BIN_DIR+"bin/UniBind_enrich.sh oneSetBg "+BIN_DIR+"data/20190423_UniBind_LOLAdb.RDS "+file_a+" "+file_bg+" "+output_dir_path
+			subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
+			#os.system(cmd)
+			return True
+
+	#Differential enrichment
+	#bash UniBind_enrichment.sh twoSets <LOLA db> <S1 bed> <S2 bed> <output dir>
+	if analysis_type == "twoSets":
+		if file_a == None or file_b == None:
+			return False
+		else:
+			cmd = "bash "+BIN_DIR+"bin/UniBind_enrich.sh twoSets "+BIN_DIR+"data/20190423_UniBind_LOLAdb.RDS "+file_a+" "+file_b+" "+output_dir_path
+			subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
+			#os.system(cmd)
+			return True
+
+	#Enrichment when no background is provided
+	# bash UniBind_enrichment.sh oneSetNoBg <LOLA db> <S bed> <output dir>
+	if analysis_type == "oneSetNoBg":
+		if file_a  == None:
+			return False
+		else:
+			cmd = "bash "+BIN_DIR+"bin/UniBind_enrich.sh oneSetNoBg "+BIN_DIR+"data/20190423_UniBind_LOLAdb.RDS "+BIN_DIR+"data/20190423_UniBind_LOLAuniverse.RDS "+file_a+" "+output_dir_path
+			subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
+			#os.system(cmd)
+			return True
+
+
+@cache_page(CACHE_TIMEOUT)
+def enrichment_results(request, enrichment_id):
+	'''
+	UniBind enrichment analysis results
+	'''
+	setattr(request, 'view', 'enrichment')
+	results_path = TEMP_DIR + '/'+ enrichment_id 
+	if os.path.exists(results_path):
+
+		if os.path.exists(results_path+"/allEnrichments_swarm.pdf.png"):
+			processing = False
+			if not os.path.exists(results_path+".tar.gz"):
+				cmd = "tar -C "+TEMP_DIR+" -czvf "+TEMP_DIR + '/'+enrichment_id+'.tar.gz '+enrichment_id
+				os.system(cmd)
+		else:
+			processing = True
+
+		results_path = 'enrichment/'+enrichment_id
+		return render(request, 'portal/enrichment_result.html', {
+            'results_path': results_path,
+            'enrichment_id': enrichment_id,
+            'processing': processing,
+            })
+	else:
+		return render(request, 'portal/enrichment.html', {
+            'message_type': "error",
+            'message': "Results not found!!"
+            })
 
 def _get_current_date():
 	
@@ -359,6 +499,30 @@ def server_error(request):
 	'''
 	return render(request, '500.html', status=500)
 
+def _get_current_date():
+	
+	import datetime
+	
+	now = datetime.datetime.now()
+
+	return str(str(now.year)+str(now.month).zfill(2)+str(now.day).zfill(2))
+
+def _delete_temp_files(path=TEMP_DIR, days=TEMP_LIFE):
+	'''
+	Delete older temp files based on TEMP_DIR and TEMP_LIFE.
+	Please change the number of days in the unibind.settings files
+
+	@input
+	path{string}, days{integer}
+	'''
+	import time
+
+	current_time = time.time()
+
+	for f in os.listdir(path):
+		f = os.path.join(path, f)
+		if os.stat(f).st_mtime < current_time - days * 86400:
+			os.remove(f)
 
 def _get_advanced_search_data():
 	'''

@@ -28,18 +28,19 @@ class FactorSerializer(serializers.HyperlinkedModelSerializer):
 		
 	jaspar_id = serializers.SerializerMethodField()
 	url = serializers.SerializerMethodField()
-	prediction_models = serializers.SerializerMethodField()
-	pwm = serializers.SerializerMethodField()
-	tffm = serializers.SerializerMethodField()
-	dnashaped = serializers.SerializerMethodField()
-	bem = serializers.SerializerMethodField()
+	#prediction_models = serializers.SerializerMethodField()
+	#pwm = serializers.SerializerMethodField()
+	#tffm = serializers.SerializerMethodField()
+	#dnashaped = serializers.SerializerMethodField()
+	#bem = serializers.SerializerMethodField()
 
 	#url = serializers.HyperlinkedIdentityField(view_name='tf-detail', lookup_field='folder')
   	
 	class Meta:
 		model = Factor
 		#fields = ('__all__')
-		fields = ('tf_name', 'cell_line','biological_condition','data_source','jaspar_id','total_peaks','url','prediction_models','pwm','tffm','dnashaped','bem')
+		#fields = ('tf_name', 'cell_line','biological_condition','data_source','jaspar_id','total_peaks','url','prediction_models','pwm','tffm','dnashaped','bem')
+		fields = ('tf_name', 'cell_line','biological_condition','data_source','jaspar_id','total_peaks','url',)
 		ordering = ['tf_name','cell_line','total_peaks']
 
 
@@ -49,7 +50,7 @@ class FactorSerializer(serializers.HyperlinkedModelSerializer):
 		return obj.jaspar_id+'.'+str(obj.jaspar_version)
 
 	def get_prediction_models(self, obj):
-		return ['pwm','dnashaped','tffm','bem']
+		return ['PWM','DNAshaped','TFFM','BEM']
 
 	def get_url(self, obj):
 
@@ -58,7 +59,7 @@ class FactorSerializer(serializers.HyperlinkedModelSerializer):
 		return  str(host_name)+'api/v1/datasets/'+obj.folder+'/'
 
 	def get_pwm(self, obj):
-		return FactorDataSerializer(obj.folders.filter(prediction_model='DiMO'), many=True).data[0]
+		return FactorDataSerializer(obj.folders.filter(prediction_model='PWM'), many=True).data[0]
 
 	def get_tffm(self, obj):
 		return FactorDataSerializer(obj.folders.filter(prediction_model='TFFM'), many=True).data[0]

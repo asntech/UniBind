@@ -48,45 +48,22 @@ import coreschema
 class FactorResultsSetPagination(PageNumberPagination):
     page_size = 10
     page_size_query_param = 'page_size'
-    max_page_size = 1000
+    max_page_size = 500
 
 
-def _get_sequence_logo(request, base_id, version):
-    host_name = request.build_absolute_uri(location='/')
-    return  str(host_name)+'static/logos/svg/'+base_id+'.'+str(version)+'.svg'
-
-def _get_matrix_url(request, base_id, version):
-
-    host_name = request.build_absolute_uri(location='/')
-    return  str(host_name)+'api/v1/matrix/'+base_id+'.'+str(version)
-
-def _get_sites_fasta_url(request, base_id, version):
-
-    if os.path.isfile(BASE_DIR+'/download/sites/'+base_id+'.'+str(version)+'.sites'):
-        host_name = request.build_absolute_uri(location='/')
-        return  str(host_name)+'download/sites/'+base_id+'.'+str(version)+'.sites'
+def _get_tfbs_url(request, factor_id, model_name,jaspar_id,jaspar_version, file_extension, model_detail=""):
+    hostname = request.build_absolute_uri(location='/')
+    if model_name == 'PWM':
+        model_name = 'DiMO'
+    if model_name == 'DNAshaped':
+        model_detail = model_name+model_detail
     else:
-        return None
-
-def _get_sites_bed_url(request, base_id, version):
-
-    if os.path.isfile(BASE_DIR+'/download/bed_files/'+base_id+'.'+str(version)+'.bed'):
-        host_name = request.build_absolute_uri(location='/')
-        return  str(host_name)+'download/bed_files/'+base_id+'.'+str(version)+'.bed'
-    else:
-        return None
+        model_detail = model_name.lower()
+    return  str(hostname)+'static/data/macs/'+model_name+'/'+factor_id+'/'+factor_id+'.'+jaspar_id+'.'+jaspar_version+'.'+model_detail+'.'+file_extension
 
 def _get_peaks_url(request, factor_id):
     return  str(request.build_absolute_uri(location='/'))+'static/data/peaks/macs/'+factor_id+'/'+factor_id+'.narrowPeak'
 
-
-def _get_tffm_url(request, base_id, version, trained_order):
-
-    if os.path.isfile(BASE_DIR+'/static/TFFM/'+base_id+'.'+str(version)+'/TFFM_'+trained_order+'_trained.xml'):
-        host_name = request.build_absolute_uri(location='/')
-        return  str(host_name)+'static/TFFM/'+base_id+'.'+str(version)+'/TFFM_'+trained_order+'_trained'
-    else:
-        return None
 
 def _get_cellline_url(request, cell_line):
     host_name = request.build_absolute_uri(location='/')
@@ -143,11 +120,14 @@ class TranscriptionFactorDetailsViewSet(APIView):
         factor = Factor.objects.get(folder=tf_id)
         #factor = Factor.objects.values().get(folder=factor_id)
 
+        dataqueryset = FactorData.objects.filter(folder=tf_id)
+
+        #for dataqueryset in FactorData.objects.filter(folder=tf_id):
+        #    dataqueryset.tfbs_url = "unibind/"
+
         factordata = FactorData.objects.values().filter(folder=tf_id)
-        #factordata = FactorData.objects.filter(folder=tf_id)
 
         data_dict = {
-                
                 'tf_name': factor.tf_name,
                 "cell_line": factor.cell_line,
                 "biological_condition": factor.biological_condition,
@@ -158,14 +138,24 @@ class TranscriptionFactorDetailsViewSet(APIView):
                 'peaks_url': _get_peaks_url(request, tf_id),
             }
         
-        prediction_models = ['PWM','DNAshaped','TFFM','DiMo']
-
-        #factordata.values('prediction_model').distinct()
+        prediction_models = ['PWM','DNAshaped','TFFM','BEM']
 
         data_dict.update({'prediction_models': prediction_models})
-        #data_dict.update(factor)
 
-        data_dict.update({'tfbs': factordata})
+        tfbs = []
+        for model_name in factordata.values_list('prediction_model', flat=True).distinct():
+            tfbs_list = []
+            for i in list(dataqueryset.values('model_detail','total_tfbs','score_threshold','distance_threshold','adj_centrimo_pvalue','jaspar_id','jaspar_version').filter(folder=tf_id, prediction_model=model_name)):
+                i.update(bed_url=_get_tfbs_url(request, tf_id, 'DNAshaped',i['jaspar_id'],i['jaspar_version'], 'bed', i['model_detail']),
+                    fasta_url=_get_tfbs_url(request, tf_id, 'DNAshaped',i['jaspar_id'],i['jaspar_version'], 'fa', i['model_detail']),
+                    summary_plot_url=_get_tfbs_url(request, tf_id, 'DNAshaped', i['jaspar_id'], i['jaspar_version'], 'png',i['model_detail']))
+                tfbs_list.append(i)
+
+            tfbs.append({model_name: tfbs_list})
+
+        data_dict.update({'tfbs': tfbs})
+        
+        #data_dict.update({'tfbs': factordata})
 
     	#serializer = MatrixSerializer(matrix, context={'request': request})
         
@@ -187,7 +177,7 @@ class UniBindFilterBackend(BaseFilterBackend):
             name='cell_line',
             location='query',
             schema=coreschema.String(
-                description= 'Taxonomic group. For example: Vertebrates',
+                description= 'Cell line or tissue name. For example: MCF7',
                 title= 'Cell line',
                 ),
             required=False,
@@ -196,8 +186,8 @@ class UniBindFilterBackend(BaseFilterBackend):
             name='biological_condition',
             location='query',
             schema=coreschema.String(
-                description= 'Taxa ID. For example: 9606 for Human & 10090 for Mus musculus. Multiple IDs can be added separated by commas (e.g. tax_id=9606,10090).',
-                title= 'biological condition',
+                description= 'Biological condition or source (e.g. dht).',
+                title= 'Biological condition',
                 ),
             required=False,
             type='string'),
@@ -205,7 +195,7 @@ class UniBindFilterBackend(BaseFilterBackend):
             name='identifier',
             location='query',
             schema=coreschema.String(
-                description= 'Transcription factor class. For example: Zipper-Type',
+                description= 'The dataset identifier, such ENCODE or GEO dataset ID. For example: GSE60130',
                 title= 'Identifier',
                 ),
             required=False,
@@ -214,8 +204,8 @@ class UniBindFilterBackend(BaseFilterBackend):
             name='data_source',
             location='query',
             schema=coreschema.String(
-                description= 'Transcription factor class. For example: Zipper-Type',
-                title= 'data source',
+                description= 'Source of the data, such as ENCODE, GEO, AE(Array Express)',
+                title= 'Data source',
                 ),
             required=False,
             type='string'),
@@ -223,8 +213,8 @@ class UniBindFilterBackend(BaseFilterBackend):
             name='jaspar_id',
             location='query',
             schema=coreschema.String(
-                description= 'If set to latest, return latest version',
-                title= 'jaspar id',
+                description= 'JASPAR database profile matrix ID. For example: MA0492.1',
+                title= 'JASPAR ID',
                 ),
             required=False,
             type='string')
@@ -329,6 +319,7 @@ class CellTypesListViewSet(ListAPIView):
     """
     queryset = Factor.objects.values_list('cell_line', flat=True).distinct()
     filter_backends = [SearchFilter,]
+    throttle_classes = (UserRateThrottle,)
     search_fileds = ['folder','tf_name','cell_line','biological_condition','data_source',]
     filter_fileds = ['folder','tf_name', 'cell_line','biological_condition','data_source',]
     parser_classes = (YAMLParser,)

@@ -1,0 +1,229 @@
+{% extends 'portal/base.html' %}
+
+{% load static %}
+
+{% load bootstrap %}
+
+{% block title %}
+    UniBind Enrichment Analysis
+{% endblock %}
+
+{% block content_header %}
+ UniBind Enrichment Analysis
+{% endblock %}
+      
+{% block breadcrumb %}
+  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+  <li class="active">Enrichment</li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+            
+        <div class="col-md-4">
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <i class="fa fa-upload"></i>
+                <h3 class="box-title">Upload your BED file(s)</h3>
+
+              </div>
+            <div class="box-body">
+
+
+                <p>Note: All the input file(s) should be genomic regions as <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1" target="_blank">BED file</a>. </p>
+
+                <form id="enrichment_form" action="/enrichment/" method="post" enctype="multipart/form-data">
+                 {% csrf_token %}
+
+                <hr>
+              <div class="form-group">
+                <label class="control-label">Select analysis type</label>
+                      <div class="">
+                        <div class="radio">
+                          <label><input type="radio" name="analysis_type" value="oneSetBg" required id="id_analysis_type_0" checked="checked" />
+                          Enrichment with a background</label>
+                        </div>
+                        <div class="radio">
+                          <label>
+                            <input type="radio" name="analysis_type" value="oneSetNoBg" required id="id_analysis_type_1" />
+                            Enrichment when no background is provided
+                          </label>
+                        </div>
+                        <div class="radio">
+                          <label>
+                            <input type="radio" name="analysis_type" value="twoSets" required id="id_analysis_type_2" />
+                            Differential enrichment
+                          </label>
+                        </div>
+                      </div>
+              </div>  
+              <hr>                        
+                  
+                <div class="form-group">
+                  <label class="control-label" for="id_bed_file_1">BED file 1</label>
+                  <div class="">
+                    <input type="file" name="bed_file_1" required id="id_bed_file_1" />
+                     <span style="color: #d86e3e">This is required.</span>
+                  </div>
+                </div>
+                <hr>
+               
+                <div class="form-group">
+                  <label class="control-label" for="id_bed_file_2">BED file 2</label>
+                  <div class="">
+                    <input type="file" name="bed_file_2" id="id_bed_file_2" />
+                     <span style="color: #d86e3e">Required for differential enrichment.</span>
+                  </div>
+                </div>
+                <hr>
+
+                 <div class="form-group">
+                  <label class="control-label" for="id_bed_file_background">Background BED file</label>
+                  <div class="">
+                    <input type="file" name="bed_file_background" required id="id_bed_file_background" />
+                    <span style="color: #d86e3e">Required for Enrichment with a background.</span>
+                  </div>
+                </div> 
+                      
+
+                  <div class="form-group">
+                  <div class="box-footer clearfix">
+                  <button type="submit" class="pull-right btn btn-success" name="performEnrichment" id="performEnrichment">Perform Enrichment  <i class="fa fa-arrow-circle-right"></i></button>
+                  </div>
+                  </div>
+               </form>
+
+               {% if message %}
+                <div class="alert alert-{{ message_type }} alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {{ message }}
+                </div>
+                {% endif %}
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-8">
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title"><i class="fa fa-info"> </i> About UniBind TFBS sets enrichment</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+              </div>
+
+              </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+            <p>The <em>UniBind enrichment</em> tool predicts which sets of TFBSs from the
+            <a href="unibind.uio.no">UniBind</a> database are enriched in a set of given genomic
+            regions. Enrichment computations are performed using the <a href="http://code.databio.org/LOLA/">LOLA
+            tool</a>. For more information about the underlying
+            enrichment computations, read the <a href="http://code.databio.org/LOLA/">LOLA
+            documentation</a>.
+            The tool allows for three types of computations:</p>
+
+            <ul>
+            <li>Enrichment of TFBSs in a set of genomic regions compared to background
+            regions.</li>
+
+            <li>Differential TFBS enrichment when comparing one set of genomic regions (set1)
+            to another (set2).</li>
+
+            <li>Enrichment of TFBSs in a set of genomic regions compared to all TFBS sets
+            stored in UniBind.</li>
+            </ul>
+
+            <h4> 1. Enrichment against a given background set of genomic regions</h4>
+
+            <p>To compute which sets of TFBSs from UniBind are enriched in a set <em>S</em> of
+            genomic regions compared to a background <em>B</em> of genomic regions, you can use
+            the <em>oneSetBg</em> subcommand as follows.</p>
+
+
+            <p>This will compute the enrichment of TFBS sets from UniBind in the genomic regions provided as
+            a BED file when compared to the genomic regions provided as a BED file 2.
+
+            <h4>2. Differential enrichment</h4>
+
+            <p>To compute which sets of TFBSs from UniBind are enriched in a set <em>S1</em> of
+            genomic regions compared to another set <em>S2</em> of genomic regions, you can use
+            the <em>twoSets</em> subcommand as follows.</p>
+
+            <p>This will compute the enrichment of TFBS sets from UniBind in the genomic regions provided as
+            a BED file 1 when compared to the genomic regions provided as a BED file 2.
+
+            <h4> 3. Enrichment when no background is provided</h4>
+
+            <p>When no background is provided, one can compute which sets of TFBSs from
+            UniBind are enriched in a set of genomic regions. In this case, the enrichment will be computed against a
+            default background corresponding to the genomic regions of all TFBSs stored in
+            UniBind. <strong>WARNING</strong> We encourage users to provide an adequate background set
+            of genomic regions whenever possible.</p>
+
+            <p>This will compute the enrichment of TFBS sets from UniBind in the genomic regions provided as
+            a BED file.</p>
+
+            <h4>Output</h4>
+
+            <p>The output directory will contain the <em>allEnrichments.tsv</em> file provide the
+            enrichment score for each TFBS set from UniBind along with their metadata
+            information. Similar files (following the template <em>col_<TF>.tsv</em>) are
+            created for each TF with all data sets available for that TF.</p>
+
+            <p>A visual representation of the enrichment analysis is provided in the output
+            directory in the plot file <em>allEnrichments_swarm.pdf</em>. It corresponds to a
+            swarm plot using the log10(p-value) of the enrichment for each TFBS set on the
+            y-axis. The data sets for the top 10 TFs showing a log10(p-value)&lt;2 are
+            highlighted with dedicated colors (one color per TF). Data sets with
+            log10(p-value)>2 are provided with a color for N.S. (non-significant).</p>
+
+            <h4><a href="/enrichment/UniBind_oneSetBg_20190506_18579/"> Example </a></h4>
+
+            <p>As an example of application, we provide data derived from the publication <a href="https://www.nature.com/articles/s41467-017-00510-x">DNA
+            methylation at enhancers identifies distinct breast cancer lineages,
+            Fleischer, Tekpli, <em>et al</em>, <em>Nature Communications</em>,
+            2017</a>. The genomic regions
+            of interest correspond to 200bp-long regions around CpGs from cluster 2A
+            described in the publication. These regions around CpGs of interest are shown
+            to be associated with FOXA1, GATA, and ESR1 binding. We applied the following
+            command to compute TFBS enrichment using all the CpG probes from the Illumina
+            Infinium HumanMethylation450 microarray:</p>
+
+            <p>We observe a clear enrichment for TFBSs associated with the expected TFs. The
+            corresponding swarm plot is:</p>
+
+            <p><img src="https://bitbucket.org/CBGR/unibind_enrichment/raw/6b4eb9e1113d690eb546a8542e0f14ca543baa1a/data/example_Fleischer_et_al/allEnrichments_swarm.png" alt="swarm plot" /></p>
+          
+            
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+  $('input[type=radio][name=analysis_type]').on('change', function() {
+  switch ($(this).val()) {
+    case 'oneSetNoBg':
+      $('#id_bed_file_background').removeAttr('required');
+      $('#id_bed_file_2').removeAttr('required');
+      break;
+    case 'oneSetBg':
+      $("#id_bed_file_background").attr("required","required");
+      $('#id_bed_file_2').removeAttr('required');
+      break;
+    case 'twoSets':
+      $("#id_bed_file_2").attr("required","required");
+      $('#id_bed_file_background').removeAttr('required');
+      break;
+  }
+});
+</script>
+{% endblock %}
