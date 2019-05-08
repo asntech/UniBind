@@ -53,8 +53,8 @@ class FactorResultsSetPagination(PageNumberPagination):
 
 def _get_tfbs_url(request, factor_id, model_name,jaspar_id,jaspar_version, file_extension, model_detail=""):
     hostname = request.build_absolute_uri(location='/')
-    if model_name == 'PWM':
-        model_name = 'DiMO'
+    #if model_name == 'PWM':
+    #    model_name = 'DiMO'
     if model_name == 'DNAshaped':
         model_detail = model_name+model_detail
     else:
@@ -138,12 +138,13 @@ class TranscriptionFactorDetailsViewSet(APIView):
                 'peaks_url': _get_peaks_url(request, tf_id),
             }
         
-        prediction_models = ['PWM','DNAshaped','TFFM','BEM']
+        #prediction_models = ['PWM','DNAshaped','TFFM','BEM']
+        prediction_models = factordata.values_list('prediction_model', flat=True).distinct()
 
         data_dict.update({'prediction_models': prediction_models})
 
         tfbs = []
-        for model_name in factordata.values_list('prediction_model', flat=True).distinct():
+        for model_name in prediction_models:
             tfbs_list = []
             for i in list(dataqueryset.values('model_detail','total_tfbs','score_threshold','distance_threshold','adj_centrimo_pvalue','jaspar_id','jaspar_version').filter(folder=tf_id, prediction_model=model_name)):
                 i.update(bed_url=_get_tfbs_url(request, tf_id, model_name,i['jaspar_id'],i['jaspar_version'], 'bed', i['model_detail']),
