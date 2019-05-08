@@ -146,9 +146,9 @@ class TranscriptionFactorDetailsViewSet(APIView):
         for model_name in factordata.values_list('prediction_model', flat=True).distinct():
             tfbs_list = []
             for i in list(dataqueryset.values('model_detail','total_tfbs','score_threshold','distance_threshold','adj_centrimo_pvalue','jaspar_id','jaspar_version').filter(folder=tf_id, prediction_model=model_name)):
-                i.update(bed_url=_get_tfbs_url(request, tf_id, 'DNAshaped',i['jaspar_id'],i['jaspar_version'], 'bed', i['model_detail']),
-                    fasta_url=_get_tfbs_url(request, tf_id, 'DNAshaped',i['jaspar_id'],i['jaspar_version'], 'fa', i['model_detail']),
-                    summary_plot_url=_get_tfbs_url(request, tf_id, 'DNAshaped', i['jaspar_id'], i['jaspar_version'], 'png',i['model_detail']))
+                i.update(bed_url=_get_tfbs_url(request, tf_id, model_name,i['jaspar_id'],i['jaspar_version'], 'bed', i['model_detail']),
+                    fasta_url=_get_tfbs_url(request, tf_id, model_name,i['jaspar_id'],i['jaspar_version'], 'fa', i['model_detail']),
+                    summary_plot_url=_get_tfbs_url(request, tf_id, model_name, i['jaspar_id'], i['jaspar_version'], 'png',i['model_detail']))
                 tfbs_list.append(i)
 
             tfbs.append({model_name: tfbs_list})
