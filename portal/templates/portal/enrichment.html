@@ -117,86 +117,111 @@
             <!-- /.box-header -->
             <div class="box-body">
 
-            <p>The <em>UniBind enrichment</em> tool predicts which sets of TFBSs from the
-            <a href="unibind.uio.no">UniBind</a> database are enriched in a set of given genomic
-            regions. Enrichment computations are performed using the <a href="http://code.databio.org/LOLA/">LOLA
-            tool</a>. For more information about the underlying
-            enrichment computations, read the <a href="http://code.databio.org/LOLA/">LOLA
-            documentation</a>.
-            The tool allows for three types of computations:</p>
+              <p>The <em>UniBind_enrichment</em> tool predicts which sets of TFBSs from the
+              <a href="unibind.uio.no">UniBind</a> database are enriched in a set of given genomic
+              regions. Enrichment computations are performed using the <a href="http://code.databio.org/LOLA/">LOLA
+              tool</a>. For more information about the underlying
+              enrichment computations, read the <a href="http://code.databio.org/LOLA/">LOLA
+              documentation</a>. The underlying database of TFBS
+              sets from UniBind in provided in the RDS file <em>data/20190423_UniBind_LOLA.RDS</em>
+              (provided here), which has been precomputed using LOLA. The tool allows for
+              three types of computations:</p>
 
-            <ul>
-            <li>Enrichment of TFBSs in a set of genomic regions compared to background
-            regions.</li>
+              <ul>
+              <li>Enrichment of TFBSs in a set of genomic regions compared to background
+              regions.</li>
 
-            <li>Differential TFBS enrichment when comparing one set of genomic regions (set1)
-            to another (set2).</li>
+              <li>Differential TFBS enrichment when comparing one set of genomic regions (set1)
+              to another (set2).</li>
 
-            <li>Enrichment of TFBSs in a set of genomic regions compared to all TFBS sets
-            stored in UniBind.</li>
-            </ul>
+              <li>Enrichment of TFBSs in a set of genomic regions compared to all TFBS sets
+              stored in UniBind.</li>
+              </ul>
 
-            <h4> 1. Enrichment against a given background set of genomic regions</h4>
+              <h2 id="enrichmentagainstagivenbackgroundsetofgenomicregions">Enrichment against a given background set of genomic regions</h2>
 
-            <p>To compute which sets of TFBSs from UniBind are enriched in a set <em>S</em> of
-            genomic regions compared to a background <em>B</em> of genomic regions, you can use
-            the <em>oneSetBg</em> subcommand as follows.</p>
+              <p><img src="https://bitbucket.org/CBGR/unibind_enrichment/raw/a47afce484c2d60e469f5bd8e3553b332b84f0ee/img/oneSetBg.png" alt="oneSetBg img" /></p>
 
+              <p>To compute which sets of TFBSs from UniBind are enriched in a set <em>S</em> of
+              genomic regions compared to a background <em>B</em> of genomic regions, you can use
+              the <em>oneSetBg</em> subcommand as follows.</p>
 
-            <p>This will compute the enrichment of TFBS sets from UniBind in the genomic regions provided as
-            a BED file when compared to the genomic regions provided as a BED file 2.
+              <pre><code class="shell language-shell">bash bin/UniBind_enrich.sh oneSetBg &lt;LOLA db&gt; &lt;S bed&gt; &lt;B bed&gt; &lt;output dir&gt;
+              </code></pre>
 
-            <h4>2. Differential enrichment</h4>
+              <p>This will compute the enrichment of TFBS sets from UniBind (using
+              <em>data/20190423_UniBind_LOLA.RDS</em>) in the genomic regions from <em>S</em> (provided as
+              a BED file) when compared to the genomic regions in <em>B</em> (provided as a BED
+              file). All result files will be provided in the <code>&lt;output dir&gt;</code> directory.</p>
 
-            <p>To compute which sets of TFBSs from UniBind are enriched in a set <em>S1</em> of
-            genomic regions compared to another set <em>S2</em> of genomic regions, you can use
-            the <em>twoSets</em> subcommand as follows.</p>
+              <h2 id="differentialenrichment">Differential enrichment</h2>
 
-            <p>This will compute the enrichment of TFBS sets from UniBind in the genomic regions provided as
-            a BED file 1 when compared to the genomic regions provided as a BED file 2.
+              <p><img src="https://bitbucket.org/CBGR/unibind_enrichment/raw/a47afce484c2d60e469f5bd8e3553b332b84f0ee/img/oneTwoSets.png" alt="twoSets_img" /></p>
 
-            <h4> 3. Enrichment when no background is provided</h4>
+              <p>To compute which sets of TFBSs from UniBind are enriched in a set <em>S1</em> of
+              genomic regions compared to another set <em>S2</em> of genomic regions, you can use
+              the <em>twoSets</em> subcommand as follows.</p>
 
-            <p>When no background is provided, one can compute which sets of TFBSs from
-            UniBind are enriched in a set of genomic regions. In this case, the enrichment will be computed against a
-            default background corresponding to the genomic regions of all TFBSs stored in
-            UniBind. <strong>WARNING</strong> We encourage users to provide an adequate background set
-            of genomic regions whenever possible.</p>
+              <pre><code class="shell language-shell">bash bin/UniBind_enrich.sh twoSets &lt;LOLA db&gt; &lt;S1 bed&gt; &lt;S2 bed&gt; &lt;output dir&gt;
+              </code></pre>
 
-            <p>This will compute the enrichment of TFBS sets from UniBind in the genomic regions provided as
-            a BED file.</p>
+              <p>This will compute the enrichment of TFBS sets from UniBind (using
+              <em>data/20190423_UniBind_LOLA.RDS</em>) in the genomic regions from <em>S1</em> (provided as
+              a BED file) when compared to the genomic regions in <em>S2</em> (provided as a BED
+              file). All result files will be provided in the <code>&lt;output dir&gt;</code> directory.</p>
 
-            <h4>Output</h4>
+              <h2 id="enrichmentwhennobackgroundisprovided">Enrichment when no background is provided</h2>
 
-            <p>The output directory will contain the <em>allEnrichments.tsv</em> file provide the
-            enrichment score for each TFBS set from UniBind along with their metadata
-            information. Similar files (following the template <em>col_<TF>.tsv</em>) are
-            created for each TF with all data sets available for that TF.</p>
+              <p><img src="https://bitbucket.org/CBGR/unibind_enrichment/raw/a47afce484c2d60e469f5bd8e3553b332b84f0ee/img/oneSetNoBg.png" alt="oneSetNoBg img" /></p>
 
-            <p>A visual representation of the enrichment analysis is provided in the output
-            directory in the plot file <em>allEnrichments_swarm.pdf</em>. It corresponds to a
-            swarm plot using the log10(p-value) of the enrichment for each TFBS set on the
-            y-axis. The data sets for the top 10 TFs showing a log10(p-value)&lt;2 are
-            highlighted with dedicated colors (one color per TF). Data sets with
-            log10(p-value)>2 are provided with a color for N.S. (non-significant).</p>
+              <p>When no background is provided, one can compute which sets of TFBSs from
+              UniBind are enriched in a set <em>S</em> of genomic regions using the <em>oneSetNoBg</em>
+              subcommand as follows. In this case, the enrichment will be computed against a
+              default background corresponding to the genomic regions of all TFBSs stored in
+              UniBind. <strong>WARNING</strong> We encourage users to provide an adequate background set
+              of genomic regions whenever possible using the <em>oneSetBg</em> subcommand.</p>
 
-            <h4><a href="/enrichment/UniBind_oneSetBg_20190506_18579/"> Example </a></h4>
+              <pre><code class="shell language-shell">bash bin/UniBind_enrich.sh oneSetNoBg &lt;LOLA db&gt; &lt;LOLA universe&gt; &lt;S bed&gt; &lt;output dir&gt;
+              </code></pre>
 
-            <p>As an example of application, we provide data derived from the publication <a href="https://www.nature.com/articles/s41467-017-00510-x">DNA
-            methylation at enhancers identifies distinct breast cancer lineages,
-            Fleischer, Tekpli, <em>et al</em>, <em>Nature Communications</em>,
-            2017</a>. The genomic regions
-            of interest correspond to 200bp-long regions around CpGs from cluster 2A
-            described in the publication. These regions around CpGs of interest are shown
-            to be associated with FOXA1, GATA, and ESR1 binding. We applied the following
-            command to compute TFBS enrichment using all the CpG probes from the Illumina
-            Infinium HumanMethylation450 microarray:</p>
+              <p>This will compute the enrichment of TFBS sets from UniBind (using
+              <em>data/20190423_UniBind_LOLA.RDS</em> and <em>data/20190423_UniBind_LOLAuniverse.RDS</em>)
+              in the genomic regions from <em>S</em> (provided as a BED file). All result files will
+              be provided in the <code>&lt;output dir&gt;</code> directory.</p>
 
-            <p>We observe a clear enrichment for TFBSs associated with the expected TFs. The
-            corresponding swarm plot is:</p>
+              <h2 id="output">Output</h2>
 
-            <p><img src="https://bitbucket.org/CBGR/unibind_enrichment/raw/6b4eb9e1113d690eb546a8542e0f14ca543baa1a/data/example_Fleischer_et_al/allEnrichments_swarm.png" alt="swarm plot" /></p>
-          
+              <p>The output directory will contain the <em>allEnrichments.tsv</em> file provide the
+              enrichment score for each TFBS set from UniBind along with their metadata
+              information. Similar files (following the template <em>col_<TF>.tsv</em>) are
+              created for each TF with all data sets available for that TF.</p>
+
+              <p>A visual representation of the enrichment analysis is provided in the output
+              directory in the plot file <em>allEnrichments_swarm.pdf</em>. It corresponds to a
+              swarm plot using the log10(p-value) of the enrichment for each TFBS set on the
+              y-axis. The data sets for the top 10 TFs showing a log10(p-value)&lt;2 are
+              highlighted with dedicated colors (one color per TF). Data sets with
+              log10(p-value)>2 are provided with a color for N.S. (non-significant).</p>
+
+              <h2 id="example">Example</h2>
+
+              <p>As an example of application, we provide data derived from the publication <a href="https://www.nature.com/articles/s41467-017-00510-x">DNA
+              methylation at enhancers identifies distinct breast cancer lineages,
+              Fleischer, Tekpli, <em>et al</em>, <em>Nature Communications</em>,
+              2017</a>. The genomic regions
+              of interest correspond to 200bp-long regions around CpGs from cluster 2A
+              described in the publication. These regions around CpGs of interest are shown
+              to be associated with FOXA1, GATA, and ESR1 binding. We applied the following
+              command to compute TFBS enrichment using all the CpG probes from the Illumina
+              Infinium HumanMethylation450 microarray:</p>
+
+              <pre><code>bash bin/UniBind_enrich.sh oneSetBg data/20190423_UniBind_LOLAdb.RDS data/example_Fleischer_et_al/clusterA_200bp_hg38.bed data/example_Fleischer_et_al/450k_probes_hg38_200bp.bed ub_enrichment
+              </code></pre>
+
+              <p>We observe a clear enrichment for TFBSs associated with the expected TFs. The
+              corresponding swarm plot is:</p>
+
+              <p><img src="https://bitbucket.org/CBGR/unibind_enrichment/raw/6b4eb9e1113d690eb546a8542e0f14ca543baa1a/data/example_Fleischer_et_al/allEnrichments_swarm.png" alt="swarm plot" /></p>
             
             </div>
             <!-- /.box-body -->
