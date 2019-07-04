@@ -209,13 +209,18 @@ def enrichment(request):
 			file_bg = None
 		
 		#output_dir_name = 'UniBind_'+ analysis_type + '_' + _get_current_date()+ '_' + str(os.getpid())
-		import uuid
+		#import uuid
+		import tempfile
+
+		output_dir_path = tempfile.mkdtemp(suffix='_' + _get_current_date(), prefix='UniBind_'+ analysis_type+'_', dir=TEMP_DIR)
+
+		output_dir_name = output_dir_path.split(TEMP_DIR+'/')[1]
 		
-		output_dir_name = 'UniBind_'+ analysis_type + '_' + _get_current_date()+ '_'+str(uuid.uuid4())
+		#output_dir_name = 'UniBind_'+ analysis_type + '_' + _get_current_date()+ '_'+str(uuid.uuid4())
 
 		#output_dir_path = str(os.system('mktemp -p '+ TEMP_DIR + output_dir_name ))
 
-		output_dir_path = TEMP_DIR + "/" + output_dir_name
+		#output_dir_path = TEMP_DIR + "/" + output_dir_name
 		os.system('mkdir -p '+output_dir_path)
 		
 		if unibind_enrichment_analysis(analysis_type, file_a, output_dir_path, file_b, file_bg):
