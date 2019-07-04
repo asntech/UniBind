@@ -32,7 +32,7 @@
             <div class="box-body">
 
 
-                <p>Note: All the input file(s) should be genomic regions as <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1" target="_blank">BED file</a>. </p>
+                <p>Note: All the input file(s) should be genomic regions as <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1" target="_blank">BED file</a> in hg38 version of the human genome.</p>
 
                 <form id="enrichment_form" action="/enrichment/" method="post" enctype="multipart/form-data">
                  {% csrf_token %}
@@ -143,7 +143,7 @@
               stored in UniBind.</li>
               </ul>
 
-              <h2 id="enrichmentagainstagivenbackgroundsetofgenomicregions">Enrichment against a given background set of genomic regions</h2>
+              <h4 id="enrichmentagainstagivenbackgroundsetofgenomicregions">Enrichment against a given background set of genomic regions</h4>
 
               <p><img src="https://bitbucket.org/CBGR/unibind_enrichment/raw/a47afce484c2d60e469f5bd8e3553b332b84f0ee/img/oneSetBg.png" alt="oneSetBg img" width="100%" /></p>
 
@@ -159,7 +159,7 @@
               a BED file) when compared to the genomic regions in <em>B</em> (provided as a BED
               file). All result files will be provided in the <code>&lt;output dir&gt;</code> directory.</p>
 
-              <h2 id="differentialenrichment">Differential enrichment</h2>
+              <h4 id="differentialenrichment">Differential enrichment</h4>
 
               <p><img src="https://bitbucket.org/CBGR/unibind_enrichment/raw/a47afce484c2d60e469f5bd8e3553b332b84f0ee/img/oneTwoSets.png" alt="twoSets_img" width="100%"/></p>
 
@@ -175,7 +175,7 @@
               a BED file) when compared to the genomic regions in <em>S2</em> (provided as a BED
               file). All result files will be provided in the <code>&lt;output dir&gt;</code> directory.</p>
 
-              <h2 id="enrichmentwhennobackgroundisprovided">Enrichment when no background is provided</h2>
+              <h4 id="enrichmentwhennobackgroundisprovided">Enrichment when no background is provided</h4>
 
               <p><img src="https://bitbucket.org/CBGR/unibind_enrichment/raw/a47afce484c2d60e469f5bd8e3553b332b84f0ee/img/oneSetNoBg.png" alt="oneSetNoBg img" width="100%"/></p>
 
@@ -194,7 +194,7 @@
               in the genomic regions from <em>S</em> (provided as a BED file). All result files will
               be provided in the <code>&lt;output dir&gt;</code> directory.</p>
 
-              <h2 id="output">Output</h2>
+              <h4 id="output">Output</h4>
 
               <p>The output directory will contain the <em>allEnrichments.tsv</em> file provide the
               enrichment score for each TFBS set from UniBind along with their metadata
@@ -208,7 +208,7 @@
               highlighted with dedicated colors (one color per TF). Data sets with
               log10(p-value)>2 are provided with a color for N.S. (non-significant).</p>
 
-              <h2 id="example">Example</h2>
+              <h4 id="example">Example</h4>
 
               <p>As an example of application, we provide data derived from the publication <a href="https://www.nature.com/articles/s41467-017-00510-x">DNA
               methylation at enhancers identifies distinct breast cancer lineages,
