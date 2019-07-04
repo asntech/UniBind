@@ -522,7 +522,8 @@ def _delete_temp_files(path=TEMP_DIR, days=TEMP_LIFE):
 	for f in os.listdir(path):
 		f = os.path.join(path, f)
 		if os.stat(f).st_mtime < current_time - days * 86400:
-			os.remove(f)
+			#os.remove(f)
+			os.system('rm -rf '+f)
 
 def _get_advanced_search_data():
 	'''
