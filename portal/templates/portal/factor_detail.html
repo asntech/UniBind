@@ -233,24 +233,24 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                         <p>
                           {% if model == 'DNAshaped' %}
 
-                           <a href="http://genome.ucsc.edu/cgi-bin/hgTracks?org=Human&pix=1000&db=hg38&hgt.customText=https://unibind.uio.no{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.{{ model }}4bits.bed">
+                           <a href="http://genome.ucsc.edu/cgi-bin/hgTracks?org=Human&pix=1000&db=hg38&hgt.customText=https://unibind.uio.no{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.{{ model }}4bits.bed" target="_blank">
                               <button type="button" class="btn btn-info"><i class="fa fa-external-link"> </i> TFBSs 4bits (BED)</button>
                             </a>
                            
 
                             <br><br>
-                            <a href="http://genome.ucsc.edu/cgi-bin/hgTracks?org=Human&pix=1000&db=hg38&hgt.customText=https://unibind.uio.no{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.{{ model }}PSSM.bed">
+                            <a href="http://genome.ucsc.edu/cgi-bin/hgTracks?org=Human&pix=1000&db=hg38&hgt.customText=https://unibind.uio.no{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.{{ model }}PSSM.bed" target="_blank">
                               <button type="button" class="btn btn-info"><i class="fa fa-external-link"> </i> TFBSs PWM (BED)</button>
                             </a>
                            
                             <br><br>
-                            <a href="http://genome.ucsc.edu/cgi-bin/hgTracks?org=Human&pix=1000&db=hg38&hgt.customText=https://unibind.uio.no{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.{{ model }}TFFM.bed">
+                            <a href="http://genome.ucsc.edu/cgi-bin/hgTracks?org=Human&pix=1000&db=hg38&hgt.customText=https://unibind.uio.no{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.{{ model }}TFFM.bed" target="_blank">
                               <button type="button" class="btn btn-info"><i class="fa fa-external-link"> </i> TFBSs TFFM (BED)</button>
                             </a>
                           
                           {% else %}
 
-                          <a href="http://genome.ucsc.edu/cgi-bin/hgTracks?org=Human&pix=1000&db=hg38&hgt.customText=https://unibind.uio.no{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.{% if model == 'DiMO' %}pwm{% else %}{{ model|lower }}{% endif %}.bed">
+                          <a href="http://genome.ucsc.edu/cgi-bin/hgTracks?org=Human&pix=1000&db=hg38&hgt.customText=https://unibind.uio.no{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.{% if model == 'DiMO' %}pwm{% else %}{{ model|lower }}{% endif %}.bed" target="_blank">
                               <button type="button" class="btn btn-info"><i class="fa fa-external-link"> </i> TFBSs in BED</button>
                             </a>
 
