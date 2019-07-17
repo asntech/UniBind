@@ -66,13 +66,33 @@ close proximity of detected MACS2 peaks. Even if treated as individual
 peaks, in some cases the top scoring TFBS sequence was the same, 
 resulting in duplicated entries.
               </p>
+
+
+               <h3>July 17, 20199</h3>
+                <p>
+               1. The computational model scores for each TFBS are now added in the BED 
+files as the 5th column.</p>
+ <p>
+2. Bug fix: for the BEM model, non-DiMO-optimized PWMs were used, which 
+is now fixed and the corresponding files were updated.</p>
+ <p>
+3. For some data sets, the enrichment zone heatmap plots failed due to 
+errors in the bandwidth calculation and consequently the other plots 
+failed for that data set. Where possible, this error was fixed, if not 
+the text "Not available" is present instead of the plot(s). </p>
+        
+
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
         </div>
 
-        
+
+
+
+
+
 
     </div>
 
