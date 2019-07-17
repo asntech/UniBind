@@ -200,6 +200,7 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                       </div>
                       <!-- /.box-body -->
                     </div>
+
                     <div class="box box-solid">
                       <div class="box-header with-border">
                         <i class="fa fa-download"></i>
@@ -215,6 +216,46 @@ Detailed information of <b>{{ factor.tf_name }} </b>
                             </a>
                         </p>
                         
+                        </div>
+                      </div>
+                      <!-- /.box-body -->
+                    </div>
+
+                    <div class="box box-solid">
+                      <div class="box-header with-border">
+                        <i class="fa fa-bar-chart-o"></i>
+                        <h3 class="box-title"> Visualize TFBSs in UCSC</h3>
+                      </div>
+                      <!-- /.box-header -->
+                      <div class="box-body">
+                        <div class="box-body table-responsive no-padding">
+                          <p>Send TFBSs BED file to UCSC genome browser</p>
+                        <p>
+                          {% if model == 'DNAshaped' %}
+
+                           <a href="http://genome.ucsc.edu/cgi-bin/hgTracks?org=Human&pix=1000&db=hg38&hgt.customText=https://unibind.uio.no{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.{{ model }}4bits.bed">
+                              <button type="button" class="btn btn-info"><i class="fa fa-external-link"> </i> TFBSs 4bits (BED)</button>
+                            </a>
+                           
+
+                            <br><br>
+                            <a href="http://genome.ucsc.edu/cgi-bin/hgTracks?org=Human&pix=1000&db=hg38&hgt.customText=https://unibind.uio.no{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.{{ model }}PSSM.bed">
+                              <button type="button" class="btn btn-info"><i class="fa fa-external-link"> </i> TFBSs PWM (BED)</button>
+                            </a>
+                           
+                            <br><br>
+                            <a href="http://genome.ucsc.edu/cgi-bin/hgTracks?org=Human&pix=1000&db=hg38&hgt.customText=https://unibind.uio.no{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.{{ model }}TFFM.bed">
+                              <button type="button" class="btn btn-info"><i class="fa fa-external-link"> </i> TFBSs TFFM (BED)</button>
+                            </a>
+                          
+                          {% else %}
+
+                          <a href="http://genome.ucsc.edu/cgi-bin/hgTracks?org=Human&pix=1000&db=hg38&hgt.customText=https://unibind.uio.no{% static "" %}data/{{ peak_caller|lower }}/{{ model }}/{{ folder_name }}/{{ folder_name }}.{{ factor.jaspar_id }}.{{ factor.jaspar_version }}.{% if model == 'DiMO' %}pwm{% else %}{{ model|lower }}{% endif %}.bed">
+                              <button type="button" class="btn btn-info"><i class="fa fa-external-link"> </i> TFBSs in BED</button>
+                            </a>
+
+                        {% endif %}
+                       
                         </div>
                       </div>
                       <!-- /.box-body -->
