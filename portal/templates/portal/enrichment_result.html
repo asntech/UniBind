@@ -96,11 +96,16 @@
 
           {% else %}
 
+          <h4>Unibind enrichment swarm plot</h4>
+
            <img src="/temp/{{ enrichment_id }}/allEnrichments_swarm.pdf.png">
 
-          {% endif %}
+           <h4>Unibind enrichment interactive beeswarmplot</h4>
+           <iframe src="/temp/{{ enrichment_id }}/Unibind_enrichment_interactive_beeswarmplot.html" frameborder="0" height="500" width="100%"></iframe>
+           <h4>Unibind enrichment interactive ranking</h4>
+           <iframe src="/temp/{{ enrichment_id }}/Unibind_enrichment_interactive_ranking.html" frameborder="0" height="500" width="100%"></iframe>
 
-          
+          {% endif %}          
   
             </div>
             <!-- /.box-body -->
