@@ -14,6 +14,7 @@ import os, sys, re
 from django.core.mail import send_mail, BadHeaderError
 from django.urls import reverse
 from django.core.files.storage import FileSystemStorage
+from django.views.decorators.clickjacking import xframe_options_exempt
 
 from unibind.settings import BASE_DIR, BIN_DIR, TEMP_DIR, TEMP_LIFE, SEND_TO_EMAIL, MAX_PAGINATION_LIMIT, PAGINATION_DEFAULT
 
@@ -291,8 +292,7 @@ def unibind_enrichment_analysis(analysis_type, file_a, output_dir_path, file_b=N
 			#os.system(cmd)
 			return True
 
-
-@cache_page(CACHE_TIMEOUT)
+@xframe_options_exempt
 def enrichment_results(request, enrichment_id):
 	'''
 	UniBind enrichment analysis results
