@@ -1,9 +1,12 @@
-django==1.11.15
+django==1.11.23
 bootstrap-admin==0.3.7.1
 markdown==2.6.8
 pygments
+djangorestframework==3.9.1
 django-filter==1.0.4
 django-bootstrap-form==3.2.1
 django_compressor==2.1.1
 django-debug-toolbar==1.8
 python-memcached==1.58
+coreapi==2.3.1
+django-rest-swagger
